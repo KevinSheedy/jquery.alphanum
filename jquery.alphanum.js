@@ -5,8 +5,12 @@
 	 ********************************/
 	$.fn.alphanum = function(options) {
 		
-		var combinedOptions = getCombinedOptions(options);
-		
+		var combinedOptions = getCombinedOptionsAlphaNum(options);
+		this.keyup(function(){
+			var input = this.value;
+			var output = trimAlphaNum(input, combinedOptions);
+			this.value = output;
+		});
 		
 	};
 	
