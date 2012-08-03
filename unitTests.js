@@ -78,7 +78,7 @@ jQuery(document).ready(function(){
 	}
 	
 	function runTest(inputString, options){
-		return $.fn.alphanum.trim(inputString, options);
+		return $.fn.alphanum.backdoorAlphaNum(inputString, options);
 	}
 	
 	runTestSuite();

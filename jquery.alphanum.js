@@ -4,22 +4,66 @@
 	 * API goes here
 	 ********************************/
 	$.fn.alphanum = function(options) {
-
+		
+		var combinedOptions = getCombinedOptions(options);
+		
+		
 	};
+	
+	$.fn.alpha = function(options) {
+		
+		var combinedOptions = getCombinedOptions(options);
+		
+		
+	};
+	
+	$.fn.numeric = function(options) {
+		
+		var combinedOptions = getCombinedOptions(options);
+		
+		
+	};
+	
+	function getCombinedOptionsAlphaNum(options){
+		var userOptions, combinedOptions = {};
+		if(typeof options === "string")
+			userOptions = COMMON_OPTIONS[options];
+		else
+			userOptions = options;
+		
+		$.extend(combinedOptions, DEFAULT_OPTIONS_ALPHANUM, userOptions);
+		
+		if(typeof combinedOptions.blacklist == 'undefined')
+			combinedOptions.blacklist = getBlacklist(combinedOptions.allow, combinedOptions.disallow);
+		
+		return combinedOptions;
+	}
+	
+	function getCombinedOptionsNum(options){
+		var userOptions, combinedOptions = {};
+		if(typeof options === "string")
+			userOptions = COMMON_OPTIONS[options];
+		else
+			userOptions = options;
+		
+		$.extend(combinedOptions, DEFAULT_OPTIONS_NUM, userOptions);
+		
+		return combinedOptions;
+	}
 	
 	var COMMON_OPTIONS = {
 		"alphanum"   : {},
 		"alpha"      : {
-			allowDigits: false
+			allowNum   : false
 		},
 		"upper"      : {
-			allowDigits:   false,
+			allowNum   :   false,
 			allowUpper:    true,
 			allowLower:    false,
 			allowCaseless: true
 		},
 		"lower"      : {
-			allowDigits:   false,
+			allowNum   :   false,
 			allowUpper:    false,
 			allowLower:    true,
 			allowCaseless: true
@@ -32,26 +76,89 @@
 	/********************************
 	 * Implementation goes here
 	 ********************************/
-	var BLACKLIST      = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
+	var BLACKLIST   = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
+	var THOU_SEP    = ",";
+	var DEC_SEP     = ".";
+	var DIGITS      = getDigitsMap();
+	var LATIN_CHARS = getLatinCharsMap();
 	
-	var defaultOptions = {
-		allow          : '',
-		disallow       : '',
-		allowDigits    : true,
-		allowUpper     : true,
-		allowLower     : true,
-		allowCaseless  : true, //eg Arabic or Chinese chars don't have upper / lower
-		allowPosNeg    : false,
-		allowPos       : false,
-		allowNeg       : false,
-		onlyLatin      : false
+	var DEFAULT_OPTIONS_ALPHANUM = {
+		allow             : '',
+		disallow          : '',
+		allowSpace        : true,
+		allowNumeric      : true,
+		allowUpper        : true,
+		allowLower        : true,
+		allowCaseless     : true, //eg Arabic or Chinese chars don't have upper / lower
+		allowLatin        : true, //a-Z A-Z
+		allowOtherCharSets: true  //eg é, Á, Arabic, Chinese etc
+	}
+	
+	function allowChar(Char, options){
+		if(options.blacklist[Char])
+			return false;
+		
+		if(options.allowSpace && (Char == " "))
+			return true;
+		
+		if(!options.allowNumeric && DIGITS[Char])
+			return false;
+			
+		if(!options.allowUpper && isUpper(Char))
+			return false;
+			
+		if(!options.allowLower && isLower(Char))
+			return false;
+			
+		if(!options.allowCaseless && isCaseless(Char))
+			return false;
+		
+		if(!options.AllowLatin && LATIN_CHARS[Char])
+			return false;
+		
+		
+		if(!options.allowOtherCharSets){
+			if(DIGITS[Char] || LATIN_CHARS[Char])
+				return true;
+			else
+				return false;
+		}
+		
+		return true;
+	}
+	
+	var DEFAULT_OPTIONS_NUMERIC = {
+		allowPlus         : false,
+		allowMinus        : true,
+		allowThouSep      : true,
+		allowDecSep       : true,
+		allowLeadingSpaces: false
 	}
 	
 	/********************************
 	 * Trims a string according to the options provided
 	 ********************************/
-	function trim(inputString, options){
+	function trimAlphaNum(inputString, options){
 		
+		if(typeof inputString != "string")
+			return inputString;
+		
+		var inChars = inputString.split("");
+		var outChars = [];
+		var i = 0;
+		var Char;
+		
+		for(i=0; i<inChars.length; i++){
+			Char = inChars[i];
+			if(allowChar(Char, options))
+				outChars.push(Char);
+		}
+		
+		return outChars.join("");
+	}
+	
+	function trimNum(inputString, options){
+	
 	}
 	
 	function removeUpperCase(inputString){
@@ -89,6 +196,77 @@
 			return false;
 	}
 	
+	function isCaseless(Char){
+		if(Char.toUpperCase() == Char.toLowerCase())
+			return true;
+		else
+			return false;
+	}
+	
+	function getBlacklist(allow, disallow){
+		var blacklist = {};
+		
+		var badChars = BLACKLIST + disallow;
+		badChars = badChars.split("");
+		var i = 0;
+		var badChar;
+		var goodChar;
+		
+		for (i=0; i<badChars.length; i++){
+			badChar = badChars[i];
+			blacklist[badChar] = true;
+		}
+		
+		allow = allow.split("");
+		
+		for (i=0; i<allow.length; i++){
+			goodChar = allow[i];
+			
+			if(blacklist[goodChar])
+				delete blacklist[goodChar];
+		}
+		
+		return blacklist;
+	}
+	
+	function getDigitsMap(){
+		var array = "0123456789".split("");
+		var map = {};
+		var i = 0;
+		var digit;
+		
+		for(i=0; i<array.length; i++){
+			digit = array[i];
+			map[digit] = true;
+		}
+	}
+	
+	function getLatinCharsMap(){
+		var lower = "abcdefghijklmnopqrstuvwxyz";
+		var upper = lower.toUpperCase();
+		var azAZ = (lower + upper).split("");
+		var map = {};
+		var i = 0;
+		var Char;
+		
+		for (i=0; i<azAZ; i++){
+			Char = azAZ[i];
+			map[Char] = true;
+		}
+		
+		return map;
+	}
+	
 	// Backdoor for testing
-	$.fn.alphanum.trim = trim;
+	$.fn.alphanum.backdoorAlphaNum = function(inputString, options){
+		var combinedOptions = getCombinedOptionsAlphaNum(options);
+		
+		return trimAlphaNum(inputString, combinedOptions);
+	};
+	
+	$.fn.alphanum.backdoorNum = function(inputString, options){
+		var combinedOptions = getCombinedOptionsNum(options);
+		
+		return trimNum(inputString, combinedOptions);
+	};
 })( jQuery );
