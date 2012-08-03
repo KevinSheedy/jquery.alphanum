@@ -6,12 +6,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
 	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="jquery.alphanum.js"></script>
 	<script type="text/javascript" src="unitTests.js"></script>
 	<script type="text/javascript">
 	</script>
 
-	<link rel="stylesheet" type="text/css" href="../browserReset.css"></link>
-	<link rel="stylesheet" type="text/css" href="template.css"></link>
+	<link rel="stylesheet" type="text/css" href="browserReset.css"></link>
+	<link rel="stylesheet" type="text/css" href="unitTests.css"></link>
 	<style type="text/css">
 	</style>
 	
@@ -21,21 +22,27 @@
 <body>
 	
 	
-	<table input="testResultsTemplate">
-		<tr>
-			<th>Input</th>
-			<th>Expected</th>
-			<th>Actual</th>
-			<th>Pass/Fail</th>
-		</tr>
+	<table id="testResultsTemplate">
+		<thead>
+			<tr>
+				<th>Input</th>
+				<th>Expected</th>
+				<th>Actual</th>
+				<th>Pass/Fail</th>
+			</tr>
+		</thead>
+	</table>
 		
-		<tr id="recordTemplate">
+	<table id="rowTemplateContainer">
+		<tr id="rowTemplate">
 			<td class="input"></td>
 			<td class="expected"></td>
 			<td class="actual"></td>
 			<td class="result"></td>
 		</tr>
 	</table>
+	
+	<div id="resultsContainer"></div>
 	
 </body>
 

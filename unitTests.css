@@ -1,0 +1,16 @@
+#testResultsTemplate,
+#rowTemplateContainer{
+	display: none;
+}
+
+th{
+	font-size: 30px;
+}
+
+table{
+	text-align: left;
+}
+
+td {
+	width: 200px;
+}

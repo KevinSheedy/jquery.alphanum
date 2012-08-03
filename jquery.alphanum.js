@@ -8,6 +8,7 @@
 	};
 	
 	var COMMON_OPTIONS = {
+		"alphanum"   : {},
 		"alpha"      : {
 			allowDigits: false
 		},
@@ -34,16 +35,16 @@
 	var BLACKLIST      = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
 	
 	var defaultOptions = {
-		allow          = '',
-		disallow       = '',
-		allowDigits    = true,
-		allowUpper     = true,
-		allowLower     = true,
-		allowCaseless  = true, //eg Arabic or Chinese chars don't have upper / lower
-		allowPosNeg    = false,
-		allowPos       = false,
-		allowNeg       = false,
-		onlyLatin      = false
+		allow          : '',
+		disallow       : '',
+		allowDigits    : true,
+		allowUpper     : true,
+		allowLower     : true,
+		allowCaseless  : true, //eg Arabic or Chinese chars don't have upper / lower
+		allowPosNeg    : false,
+		allowPos       : false,
+		allowNeg       : false,
+		onlyLatin      : false
 	}
 	
 	/********************************
@@ -87,4 +88,7 @@
 		else
 			return false;
 	}
+	
+	// Backdoor for testing
+	$.fn.alphanum.trim = trim;
 })( jQuery );
