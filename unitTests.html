@@ -21,26 +21,27 @@
 
 <body>
 	
-	
-	<table id="testResultsTemplate">
-		<thead>
-			<tr>
-				<th>Input</th>
-				<th>Expected</th>
-				<th>Actual</th>
-				<th>Pass/Fail</th>
-			</tr>
-		</thead>
-	</table>
-		
-	<table id="rowTemplateContainer">
-		<tr id="rowTemplate">
-			<td class="input"></td>
-			<td class="expected"></td>
-			<td class="actual"></td>
-			<td class="result"></td>
-		</tr>
-	</table>
+	<div id="testResultsTemplate" class="testSuiteContainer">
+		<h2 class="testSuiteTitle"></h2>
+		<table class="testResultsTable">
+			<thead>
+				<tr>
+					<th>Input</th>
+					<th>Expected</th>
+					<th>Actual</th>
+					<th>Pass/Fail</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="rowTemplate">
+					<td class="input"></td>
+					<td class="expected"></td>
+					<td class="actual"></td>
+					<td class="result"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	
 	<div id="resultsContainer"></div>
 	

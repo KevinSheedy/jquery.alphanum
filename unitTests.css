@@ -3,8 +3,12 @@
 	display: none;
 }
 
+.testSuiteTitle{
+	font-size: 26px;
+}
+
 th{
-	font-size: 30px;
+	font-size: 20px;
 }
 
 table{
@@ -13,4 +17,8 @@ table{
 
 td {
 	width: 200px;
+}
+
+.testSuiteContainer{
+	margin-bottom: 22px;
 }
