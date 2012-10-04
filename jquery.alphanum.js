@@ -10,43 +10,52 @@
 	$.fn.alphanum = function(settings) {
 		
 		var combinedSettings = getCombinedSettingsAlphaNum(settings);
-		$this = $(this);
+		var $textbox = $(this);
 		this.keyup(function(){
-			var caretPos = $this.caret();
-			var input = this.value;
-			var output = trimAlphaNum(input, combinedSettings);
-			this.value = output;
-			
-			//Reset the caret position
-			if(input.length ==(output.length + 1))
-				$this.caret(caretPos - 1);
-			else
-				$this.caret(caretPos);
+			handleKeyup($textbox, trimAlphaNum, combinedSettings);
 		});
 		
 	};
 	
 	$.fn.alpha = function(settings) {
 		
-		var combinedSettings = getCombinedSettingsAlphaNum(settings);
-		
-		
+		var defaultAlphaSettings = getCombinedSettingsAlphaNum("alpha");
+		var combinedSettings = getCombinedSettingsAlphaNum(settings, defaultAlphaSettings);
+		var $textbox = $(this);
+		this.keyup(function(){
+			handleKeyup($textbox, trimAlphaNum, combinedSettings);
+		});
 	};
 	
 	$.fn.numeric = function(settings) {
 		
 		var combinedSettings = getCombinedSettingsNum(settings);
+		var $textbox = $(this);
 		this.keyup(function(){
-			var input = this.value;
-			var output = trimNum(input, combinedSettings);
-			this.value = output;
+			handleKeyup($textbox, trimNum, combinedSettings);
 		});
 		
 	};
 	
+	function handleKeyup($textBox, trimFunction, settings){
+		
+		var caretPos = $textBox.caret();
+		var inputString = $textBox.val();
+		var outputString = trimFunction(inputString, settings);
+		$textBox.val(outputString);
+		
+		//Reset the caret position
+		if(inputString.length ==(outputString.length + 1))
+			$textBox.caret(caretPos - 1);
+		else
+			$textBox.caret(caretPos);
+	}
+	
 	// End of API /////////////////////////////////////////////////////////////
 	
-	function getCombinedSettingsAlphaNum(settings){
+	function getCombinedSettingsAlphaNum(settings, defaultSettings){
+		if(typeof defaultSettings == "undefined")
+			defaultSettings = DEFAULT_SETTINGS_ALPHANUM;
 		var userSettings, combinedSettings = {};
 		if(typeof settings === "string")
 			userSettings = COMMON_SETTINGS[settings];
@@ -55,12 +64,10 @@
 		else
 			userSettings = settings;
 		
-		$.extend(combinedSettings, DEFAULT_SETTINGS_ALPHANUM, userSettings);
+		$.extend(combinedSettings, defaultSettings, userSettings);
 		
 		if(typeof combinedSettings.blacklist == 'undefined')
-			combinedSettings.blacklist = getBlacklist(combinedSettings.allow, combinedSettings.disallow);
-		else
-			combinedSettings.blacklist = stringToMap(combinedSettings.blacklist);
+			combinedSettings.blacklistSet = getBlacklistSet(combinedSettings.allow, combinedSettings.disallow);
 		
 		return combinedSettings;
 	}
@@ -82,16 +89,16 @@
 	var COMMON_SETTINGS = {
 		"alphanum"   : {},
 		"alpha"      : {
-			allowNum   : false
+			allowNumeric   : false
 		},
 		"upper"      : {
-			allowNum   :   false,
+			allowNumeric   :   false,
 			allowUpper:    true,
 			allowLower:    false,
 			allowCaseless: true
 		},
 		"lower"      : {
-			allowNum   :   false,
+			allowNumeric   :   false,
 			allowUpper:    false,
 			allowLower:    true,
 			allowCaseless: true
@@ -127,7 +134,7 @@
 		if(settings.allowSpace && (Char == " "))
 			return true;
 			
-		if(settings.blacklist[Char])
+		if(settings.blacklistSet.contains(Char))
 			return false;
 		
 		if(!settings.allowNumeric && DIGITS[Char])
@@ -257,44 +264,14 @@
 			return false;
 	}
 	
-	function getBlacklist(allow, disallow){
-		var blacklist = {};
+	function getBlacklistSet(allow, disallow){
 		
-		var badChars = BLACKLIST + disallow;
-		badChars = badChars.split("");
-		var i = 0;
-		var badChar;
-		var goodChar;
+		var setOfBadChars  = new Set(BLACKLIST + disallow);
+		var setOfGoodChars = new Set(allow);
 		
-		for (i=0; i<badChars.length; i++){
-			badChar = badChars[i];
-			blacklist[badChar] = true;
-		}
+		var blacklistSet   = setOfBadChars.subtract(setOfGoodChars);
 		
-		allow = allow.split("");
-		
-		for (i=0; i<allow.length; i++){
-			goodChar = allow[i];
-			
-			if(blacklist[goodChar])
-				delete blacklist[goodChar];
-		}
-		
-		return blacklist;
-	}
-	
-	function stringToMap(string){
-		var map = {};
-		var array = string.split("");
-		var i=0;
-		var Char;
-		
-		for(i=0; i<array.length; i++){
-			Char = array[i];
-			map[Char] = true;
-		}
-		
-		return map;
+		return blacklistSet;
 	}
 	
 	function getDigitsMap(){
@@ -321,6 +298,63 @@
 		
 		for (i=0; i<azAZ; i++){
 			Char = azAZ[i];
+			map[Char] = true;
+		}
+		
+		return map;
+	}
+	
+	function Set(elems){
+		if(typeof elems == "string")
+			this.map = stringToMap(elems);
+		else
+			this.map = {};
+	}
+	
+	Set.prototype.add = function(set){
+	
+		var newSet = this.clone();
+		
+		for(key in set.map)
+			newSet.map[key] = true;
+		
+		return newSet;
+	}
+	
+	Set.prototype.subtract = function(set){
+		
+		var newSet = this.clone();
+		
+		for(key in set.map)
+			delete this.map[key];
+			
+		return newSet;
+	}
+	
+	Set.prototype.contains = function(key){
+		if(this.map[key])
+			return true;
+		else
+			return false;
+	}
+	
+	Set.prototype.clone = function(){
+		var newSet = new Set();
+		
+		for(key in this.map)
+			newSet.map[key] = true;
+		
+		return newSet;
+	}
+	
+	function stringToMap(string){
+		var map = {};
+		var array = string.split("");
+		var i=0;
+		var Char;
+		
+		for(i=0; i<array.length; i++){
+			Char = array[i];
 			map[Char] = true;
 		}
 		

@@ -22,14 +22,18 @@
 <body>
 	
 	<h1>alphanum()</h1>
-	<input id="firstName"></input>
+	<input id="inputAlphaNum"></input>
+	
+	<h1>alpha()</h1>
+	<input id="inputAlpha"></input>
 	
 	<h1>numeric()</h1>
-	<input id="accountBalance"></input>
+	<input id="inputNumeric"></input>
 
 	<script type="text/javascript">
-		$('#firstName')     .alphanum();
-		$('#accountBalance').numeric();
+		$('#inputAlphaNum').alphanum();
+		$('#inputAlpha')   .alpha();
+		$('#inputNumeric') .numeric();
 	</script>
 	
 	<div id="testResultsTemplate" class="testSuiteContainer">
