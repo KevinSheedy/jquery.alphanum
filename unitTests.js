@@ -1,7 +1,3 @@
-/***************************************************************
-* This file is encoded in UTF-8
-***************************************************************/
-
 jQuery(document).ready(function(){
 
 	var testSuiteCounter = 0;

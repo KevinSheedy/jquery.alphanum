@@ -1,3 +1,7 @@
+/***************************************************************
+* This file is encoded in UTF-8
+***************************************************************/
+
 var getTestData = function(){
 	var testData = [
 		
@@ -13,21 +17,21 @@ var getTestData = function(){
 		},
 		
 		{
-		    name    : "Allow & Disallow",
+		    name    : "allow = '*+'     \t disallow = 'xy'",
 			type    : "alphanum",
 			options : {
-				allow:    "*=",
+				allow:    "*+",
 				disallow: "xy"
 			},
 			data    : [
-				[ "*=", "*=" ],
+				[ "*+", "*+" ],
 				[ "xy",         ""      ],
 				[ "",          ""      ]
 			]
 		},
 		
 		{
-		    name    : "Allow Space = false",
+		    name    : "allowSpace = false",
 			type    : "alphanum",
 			options : {
 				allowSpace:    false
@@ -38,7 +42,7 @@ var getTestData = function(){
 		},
 		
 		{
-		    name    : "Allow Numeric = false",
+		    name    : "allowNumeric = false",
 			type    : "alphanum",
 			options : {
 				allowNumeric: false
@@ -47,6 +51,65 @@ var getTestData = function(){
 				[ "a123z", "az" ]
 			]
 		},
+		
+		{
+		    name    : "allowUpper = false",
+			type    : "alphanum",
+			options : {
+				allowUpper: false
+			},
+			data    : [
+				[ "abcABC", "abc" ]
+			]
+		},
+		
+		{
+		    name    : "allowLower = false",
+			type    : "alphanum",
+			options : {
+				allowLower: false
+			},
+			data    : [
+				[ "abcABC", "ABC" ]
+			]
+		},
+		
+		{
+		    name    : "allowCaseless = false",
+			type    : "alphanum",
+			options : {
+				allowCaseless: false
+			},
+			data    : [
+				[ "الصغرى", "" ]
+			]
+		},
+		
+		{
+		    name    : "allowLatin = false",
+			type    : "alphanum",
+			options : {
+				allowLatin: false
+			},
+			data    : [
+				[ "abcABCáéó", "áéó" ]
+			]
+		},
+		
+		{
+		    name    : "allowOtherCharSets = false",
+			type    : "alphanum",
+			options : {
+				allowOtherCharSets: false
+			},
+			data    : [
+				[ "aáéób", "ab" ],
+				[ "الصغرى", "" ],
+				[ "维基百科关于中文维基百科", "" ]
+			]
+		},
+		
+		
 		
 		{
 			name: "Alphabetic",
