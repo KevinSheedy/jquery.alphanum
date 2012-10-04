@@ -1,3 +1,7 @@
+/***************************************************************
+* This file is encoded in UTF-8
+***************************************************************/
+
 jQuery(document).ready(function(){
 
 	var testSuiteCounter = 0;
@@ -9,7 +13,7 @@ jQuery(document).ready(function(){
 			type    : "alphanum",
 			options : "alphanum",
 			data    : [
-				[ " aAzZ09é.,$", " aAzZ09é" ],
+				[ " aAzZ09Ã©.,$", " aAzZ09Ã©" ],
 				[ " ",         " "      ],
 				[ "",          ""      ]
 			]
@@ -30,7 +34,7 @@ jQuery(document).ready(function(){
 			type    : "numeric",
 			options:  "numeric",
 			data : [
-				[ "a1Az,Z094$.()4€5",   "1,094.45"   ],
+				[ "a1Az,Z094$.()4â‚¬5",   "1,094.45"   ],
 				[ " ",         " "    ]
 			]
 		}

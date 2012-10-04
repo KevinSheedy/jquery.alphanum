@@ -45,6 +45,8 @@
 		
 		if(typeof combinedOptions.blacklist == 'undefined')
 			combinedOptions.blacklist = getBlacklist(combinedOptions.allow, combinedOptions.disallow);
+		else
+			combinedOptions.blacklist = stringToMap(combinedOptions.blacklist);
 		
 		return combinedOptions;
 	}
@@ -265,6 +267,20 @@
 		}
 		
 		return blacklist;
+	}
+	
+	function stringToMap(string){
+		var map = {};
+		var array = string.split("");
+		var i=0;
+		var Char;
+		
+		for(i=0; i<array.length; i++){
+			Char = array[i];
+			map[Char] = true;
+		}
+		
+		return map;
 	}
 	
 	function getDigitsMap(){

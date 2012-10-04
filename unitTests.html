@@ -5,9 +5,9 @@
 	<title>The W3C Markup Validation Service</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	
-	<script type="text/javascript" src="jquery.js"></script>
-	<script type="text/javascript" src="jquery.alphanum.js"></script>
-	<script type="text/javascript" src="unitTests.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="jquery.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="jquery.alphanum.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="unitTests.js"></script>
 	<script type="text/javascript">
 	</script>
 
@@ -20,6 +20,17 @@
 </head>
 
 <body>
+	
+	<h1>alphanum()</h1>
+	<input id="firstName"></input>
+	
+	<h1>numeric()</h1>
+	<input id="accountBalance"></input>
+
+	<script type="text/javascript">
+		$('#firstName')     .alphanum();
+		$('#accountBalance').numeric();
+	</script>
 	
 	<div id="testResultsTemplate" class="testSuiteContainer">
 		<h2 class="testSuiteTitle"></h2>
