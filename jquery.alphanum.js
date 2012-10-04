@@ -3,69 +3,69 @@
 	/********************************
 	 * API goes here
 	 ********************************/
-	$.fn.alphanum = function(options) {
+	$.fn.alphanum = function(settings) {
 		
-		var combinedOptions = getCombinedOptionsAlphaNum(options);
+		var combinedSettings = getCombinedSettingsAlphaNum(settings);
 		this.keyup(function(){
 			var input = this.value;
-			var output = trimAlphaNum(input, combinedOptions);
+			var output = trimAlphaNum(input, combinedSettings);
 			this.value = output;
 		});
 		
 	};
 	
-	$.fn.alpha = function(options) {
+	$.fn.alpha = function(settings) {
 		
-		var combinedOptions = getCombinedOptionsAlphaNum(options);
+		var combinedSettings = getCombinedSettingsAlphaNum(settings);
 		
 		
 	};
 	
-	$.fn.numeric = function(options) {
+	$.fn.numeric = function(settings) {
 		
-		var combinedOptions = getCombinedOptionsNum(options);
+		var combinedSettings = getCombinedSettingsNum(settings);
 		this.keyup(function(){
 			var input = this.value;
-			var output = trimNum(input, combinedOptions);
+			var output = trimNum(input, combinedSettings);
 			this.value = output;
 		});
 		
 	};
 	
-	function getCombinedOptionsAlphaNum(options){
-		var userOptions, combinedOptions = {};
-		if(typeof options === "string")
-			userOptions = COMMON_OPTIONS[options];
-		else if(typeof options == "undefined")
-			userOptions = {};
+	function getCombinedSettingsAlphaNum(settings){
+		var userSettings, combinedSettings = {};
+		if(typeof settings === "string")
+			userSettings = COMMON_SETTINGS[settings];
+		else if(typeof settings == "undefined")
+			userSettings = {};
 		else
-			userOptions = options;
+			userSettings = settings;
 		
-		$.extend(combinedOptions, DEFAULT_OPTIONS_ALPHANUM, userOptions);
+		$.extend(combinedSettings, DEFAULT_SETTINGS_ALPHANUM, userSettings);
 		
-		if(typeof combinedOptions.blacklist == 'undefined')
-			combinedOptions.blacklist = getBlacklist(combinedOptions.allow, combinedOptions.disallow);
+		if(typeof combinedSettings.blacklist == 'undefined')
+			combinedSettings.blacklist = getBlacklist(combinedSettings.allow, combinedSettings.disallow);
 		else
-			combinedOptions.blacklist = stringToMap(combinedOptions.blacklist);
+			combinedSettings.blacklist = stringToMap(combinedSettings.blacklist);
 		
-		return combinedOptions;
+		return combinedSettings;
 	}
 	
-	function getCombinedOptionsNum(options){
-		var userOptions, combinedOptions = {};
-		if(typeof options === "string")
-			userOptions = COMMON_OPTIONS[options];
-		else if(typeof options == "undefined")
-			userOptions = {};
+	function getCombinedSettingsNum(settings){
+		var userSettings, combinedSettings = {};
+		if(typeof settings === "string")
+			userSettings = COMMON_SETTINGS[settings];
+		else if(typeof settings == "undefined")
+			userSettings = {};
 		else
-			userOptions = options;
+			userSettings = settings;
 		
-		$.extend(combinedOptions, DEFAULT_OPTIONS_NUM, userOptions);
+		$.extend(combinedSettings, DEFAULT_SETTINGS_NUM, userSettings);
 		
-		return combinedOptions;
+		return combinedSettings;
 	}
 	
-	var COMMON_OPTIONS = {
+	var COMMON_SETTINGS = {
 		"alphanum"   : {},
 		"alpha"      : {
 			allowNum   : false
@@ -96,7 +96,7 @@
 	var DIGITS      = getDigitsMap();
 	var LATIN_CHARS = getLatinCharsMap();
 	
-	var DEFAULT_OPTIONS_ALPHANUM = {
+	var DEFAULT_SETTINGS_ALPHANUM = {
 		allow             : '',
 		disallow          : '',
 		allowSpace        : true,
@@ -108,31 +108,31 @@
 		allowOtherCharSets: true  //eg é, Á, Arabic, Chinese etc
 	}
 	
-	function alphanum_allowChar(Char, options){
+	function alphanum_allowChar(Char, settings){
 		
-		if(options.allowSpace && (Char == " "))
+		if(settings.allowSpace && (Char == " "))
 			return true;
 			
-		if(options.blacklist[Char])
+		if(settings.blacklist[Char])
 			return false;
 		
-		if(!options.allowNumeric && DIGITS[Char])
+		if(!settings.allowNumeric && DIGITS[Char])
 			return false;
 			
-		if(!options.allowUpper && isUpper(Char))
+		if(!settings.allowUpper && isUpper(Char))
 			return false;
 			
-		if(!options.allowLower && isLower(Char))
+		if(!settings.allowLower && isLower(Char))
 			return false;
 			
-		if(!options.allowCaseless && isCaseless(Char))
+		if(!settings.allowCaseless && isCaseless(Char))
 			return false;
 		
-		if(!options.AllowLatin && LATIN_CHARS[Char])
+		if(!settings.AllowLatin && LATIN_CHARS[Char])
 			return false;
 		
 		
-		if(!options.allowOtherCharSets){
+		if(!settings.allowOtherCharSets){
 			if(DIGITS[Char] || LATIN_CHARS[Char])
 				return true;
 			else
@@ -142,7 +142,7 @@
 		return true;
 	}
 	
-	var DEFAULT_OPTIONS_NUM = {
+	var DEFAULT_SETTINGS_NUM = {
 		allowPlus         : false,
 		allowMinus        : true,
 		allowThouSep      : true,
@@ -150,7 +150,7 @@
 		allowLeadingSpaces: false
 	}
 	
-	function numeric_allowChar(Char, options){
+	function numeric_allowChar(Char, settings){
 		if(DIGITS[Char])
 			return true;
 		if(Char == THOU_SEP)
@@ -162,9 +162,9 @@
 	}
 	
 	/********************************
-	 * Trims a string according to the options provided
+	 * Trims a string according to the settings provided
 	 ********************************/
-	function trimAlphaNum(inputString, options){
+	function trimAlphaNum(inputString, settings){
 		
 		if(typeof inputString != "string")
 			return inputString;
@@ -176,14 +176,14 @@
 		
 		for(i=0; i<inChars.length; i++){
 			Char = inChars[i];
-			if(alphanum_allowChar(Char, options))
+			if(alphanum_allowChar(Char, settings))
 				outChars.push(Char);
 		}
 		
 		return outChars.join("");
 	}
 	
-	function trimNum(inputString, options){
+	function trimNum(inputString, settings){
 		if(typeof inputString != "string")
 			return inputString;
 		
@@ -194,7 +194,7 @@
 		
 		for(i=0; i<inChars.length; i++){
 			Char = inChars[i];
-			if(numeric_allowChar(Char, options))
+			if(numeric_allowChar(Char, settings))
 				outChars.push(Char);
 		}
 		
@@ -314,15 +314,15 @@
 	}
 	
 	// Backdoor for testing
-	$.fn.alphanum.backdoorAlphaNum = function(inputString, options){
-		var combinedOptions = getCombinedOptionsAlphaNum(options);
+	$.fn.alphanum.backdoorAlphaNum = function(inputString, settings){
+		var combinedSettings = getCombinedSettingsAlphaNum(settings);
 		
-		return trimAlphaNum(inputString, combinedOptions);
+		return trimAlphaNum(inputString, combinedSettings);
 	};
 	
-	$.fn.alphanum.backdoorNumeric = function(inputString, options){
-		var combinedOptions = getCombinedOptionsNum(options);
+	$.fn.alphanum.backdoorNumeric = function(inputString, settings){
+		var combinedSettings = getCombinedSettingsNum(settings);
 		
-		return trimNum(inputString, combinedOptions);
+		return trimNum(inputString, combinedSettings);
 	};
 })( jQuery );
