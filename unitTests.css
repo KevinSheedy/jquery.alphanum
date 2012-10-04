@@ -23,10 +23,25 @@ td {
 	margin-bottom: 22px;
 }
 
-tr.Pass{
+.Pass{
 	background-color: lightgreen;
 }
 
-tr.Fail{
+.Fail{
 	background-color: red;
+}
+
+div#resultsCounterContainer{
+	width: 200px;
+	font-size: 48px;
+	
+	float: right;
+}
+
+div#leftPanel{
+	float: left;
+}
+
+#resultsContainer{
+	float: right;
 }

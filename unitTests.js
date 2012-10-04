@@ -6,75 +6,7 @@ jQuery(document).ready(function(){
 
 	var testSuiteCounter = 0;
 
-	var MASTER_TEST_DATA = [
-		
-		{
-		    name    : "Alpha Numeric",
-			type    : "alphanum",
-			options : "alphanum",
-			data    : [
-				[ " aAzZ09é.,$£€", " aAzZ09é" ],
-				[ " ",         " "      ],
-				[ "",          ""      ]
-			]
-		},
-		
-		{
-		    name    : "Allow & Disallow",
-			type    : "alphanum",
-			options : {
-				allow:    "*=",
-				disallow: "xy"
-			},
-			data    : [
-				[ "*=", "*=" ],
-				[ "xy",         ""      ],
-				[ "",          ""      ]
-			]
-		},
-		
-		{
-		    name    : "Allow Space = false",
-			type    : "alphanum",
-			options : {
-				allowSpace:    false
-			},
-			data    : [
-				[ "   ", "" ]
-			]
-		},
-		
-		{
-		    name    : "Allow Numeric = false",
-			type    : "alphanum",
-			options : {
-				allowNumeric: false
-			},
-			data    : [
-				[ "a123z", "az" ]
-			]
-		},
-		
-		{
-			name: "Alphabetic",
-			options: "alpha",
-			type    : "alphanum",
-			data: [
-				[ "aAzZ09.,$", "aAzZ" ],
-				[ " ",         " "    ]
-			]
-		},
-		
-		{
-			name: "Numeric",
-			type    : "numeric",
-			options:  "numeric",
-			data : [
-				[ "a1Az,Z094$.()4€5",   "1,094.45"   ],
-				[ " ",         " "    ]
-			]
-		}
-	];
+	var MASTER_TEST_DATA = getTestData();
 	
 	
 	function runTestSuite(){
@@ -84,6 +16,17 @@ jQuery(document).ready(function(){
 			testGroup = MASTER_TEST_DATA[i];
 			runTestGroup(testGroup);
 		}
+		
+		$("#numTestsPassed").text(passCounter);
+		$("#numTestsTotal") .text(testCounter);
+		
+		if(passCounter == testCounter)
+			result = "Pass";
+		else
+			result = "Fail";
+		
+		$("#resultsCounterContainer").addClass(result);
+		$("#resultText").text(result);
 	}
 	
 	function runTestGroup(testGroup){
@@ -132,11 +75,25 @@ jQuery(document).ready(function(){
 		return $div;
 	}
 	
+	var testCounter = 0;
+	var passCounter = 0;
+	var failCounter = 0;
+	
 	function createResultsRow(input, expected, actual){
 		var $row = $("#rowTemplate").clone();
 		$row.removeAttr("id");
 		
-		var result = (expected == actual) ? "Pass" : "Fail";
+		var result;
+		testCounter++;
+		
+		if(expected == actual){
+			result = "Pass";
+			passCounter++;
+		}
+		else {
+			result = "Fail";
+			failCounter++
+		}
 		
 		$row.children(".input")   .html("[" + input    + "]");
 		$row.children(".expected").html("[" + expected + "]");

@@ -7,6 +7,7 @@
 	
 	<script type="text/javascript" charset="UTF-8" src="jquery.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="jquery.alphanum.js"></script>
+	<script type="text/javascript" charset="UTF-8" src="testData.js"></script>
 	<script type="text/javascript" charset="UTF-8" src="unitTests.js"></script>
 	<script type="text/javascript">
 	</script>
@@ -20,21 +21,36 @@
 </head>
 
 <body>
+	<div id="leftPanel">
 	
-	<h1>alphanum()</h1>
-	<input id="inputAlphaNum"></input>
-	
-	<h1>alpha()</h1>
-	<input id="inputAlpha"></input>
-	
-	<h1>numeric()</h1>
-	<input id="inputNumeric"></input>
+		<div id="resultsCounterContainer">
+			<span id="numTestsPassed"></span>
+			/
+			<span id="numTestsTotal"></span>
+			<span id="resultText" />
+		</div>
+		
+		
+		<h1>alphanum()</h1>
+		<input id="inputAlphaNum"></input>
+		
+		<h1>alpha()</h1>
+		<input id="inputAlpha"></input>
+		
+		<h1>numeric()</h1>
+		<input id="inputNumeric"></input>
 
-	<script type="text/javascript">
-		$('#inputAlphaNum').alphanum();
-		$('#inputAlpha')   .alpha();
-		$('#inputNumeric') .numeric();
-	</script>
+		<script type="text/javascript">
+			$('#inputAlphaNum').alphanum();
+			$('#inputAlpha')   .alpha();
+			$('#inputNumeric') .numeric();
+		</script>
+		
+		
+	
+	</div>
+	
+	
 	
 	<div id="testResultsTemplate" class="testSuiteContainer">
 		<h2 class="testSuiteTitle"></h2>
