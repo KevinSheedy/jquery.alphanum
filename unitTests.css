@@ -22,3 +22,11 @@ td {
 .testSuiteContainer{
 	margin-bottom: 22px;
 }
+
+tr.Pass{
+	background-color: lightgreen;
+}
+
+tr.Fail{
+	background-color: red;
+}

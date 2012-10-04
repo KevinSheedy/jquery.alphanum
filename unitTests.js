@@ -13,9 +13,45 @@ jQuery(document).ready(function(){
 			type    : "alphanum",
 			options : "alphanum",
 			data    : [
-				[ " aAzZ09é.,$", " aAzZ09é" ],
+				[ " aAzZ09é.,$£€", " aAzZ09é" ],
 				[ " ",         " "      ],
 				[ "",          ""      ]
+			]
+		},
+		
+		{
+		    name    : "Allow & Disallow",
+			type    : "alphanum",
+			options : {
+				allow:    "*=",
+				disallow: "xy"
+			},
+			data    : [
+				[ "*=", "*=" ],
+				[ "xy",         ""      ],
+				[ "",          ""      ]
+			]
+		},
+		
+		{
+		    name    : "Allow Space = false",
+			type    : "alphanum",
+			options : {
+				allowSpace:    false
+			},
+			data    : [
+				[ "   ", "" ]
+			]
+		},
+		
+		{
+		    name    : "Allow Numeric = false",
+			type    : "alphanum",
+			options : {
+				allowNumeric: false
+			},
+			data    : [
+				[ "a123z", "az" ]
 			]
 		},
 		
@@ -106,6 +142,8 @@ jQuery(document).ready(function(){
 		$row.children(".expected").html("[" + expected + "]");
 		$row.children(".actual")  .html("[" + actual   + "]");
 		$row.children(".result")  .html(result);
+		
+		$row.addClass(result);
 		
 		return $row;
 	}

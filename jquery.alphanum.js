@@ -37,6 +37,84 @@
 		
 	};
 	
+	// End of API /////////////////////////////////////////////////////////////
+	
+	
+	// Start Settings ////////////////////////////////////////////////////////
+	
+	var DEFAULT_SETTINGS_ALPHANUM = {
+		allow             : '',
+		disallow          : '',
+		allowSpace        : true,
+		allowNumeric      : true,
+		allowUpper        : true,
+		allowLower        : true,
+		allowCaseless     : true, //eg Arabic or Chinese chars don't have upper / lower
+		allowLatin        : true, //a-Z A-Z
+		allowOtherCharSets: true  //eg é, Á, Arabic, Chinese etc
+	}
+	
+	var DEFAULT_SETTINGS_NUM = {
+		allowPlus         : false,
+		allowMinus        : true,
+		allowThouSep      : true,
+		allowDecSep       : true,
+		allowLeadingSpaces: false
+	}
+	
+	// Some pre-defined groups of settings for convenience
+	var COMMON_SETTINGS = {
+		"alphanum"   : {},
+		"alpha"      : {
+			allowNumeric : false
+		},
+		"upper"      : {
+			allowNumeric : false,
+			allowUpper   : true,
+			allowLower   : false,
+			allowCaseless: true
+		},
+		"lower"      : {
+			allowNumeric : false,
+			allowUpper   : false,
+			allowLower   : true,
+			allowCaseless: true
+		},
+		"numeric"    : {},
+		"integer"    : {},
+		"posInteger" : {}
+	};
+	
+	
+	var BLACKLIST   = getBlacklistAscii() + getBlacklistNonAscii();
+	var THOU_SEP    = ",";
+	var DEC_SEP     = ".";
+	var DIGITS      = getDigitsMap();
+	var LATIN_CHARS = getLatinCharsSet();
+	
+	// Return the blacklisted special chars that are encodable using 7-bit ascii
+	function getBlacklistAscii(){
+		return '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
+	}
+	
+	// Return the blacklisted special chars that are NOT encodable using 7-bit ascii
+	// We want this .js file to be encoded using 7-bit ascii so it can reach the widest possible audience
+	// Higher order chars must be escaped eg "\xAC"
+	// Not too worried about comments containing higher order characters for now (let's wait and see if it becomes a problem)
+	function getBlacklistNonAscii(){
+		var blacklist = 
+			  "\xAC"     // ¬
+			+ "\u20AC"   // €
+			+ "\xA3"     // £
+			;
+		return blacklist;
+	}
+	
+	// End Settings ////////////////////////////////////////////////////////
+	
+	
+	// Implementation details go here ////////////////////////////////////////////////////////
+	
 	function handleKeyup($textBox, trimFunction, settings){
 		
 		var caretPos = $textBox.caret();
@@ -50,8 +128,6 @@
 		else
 			$textBox.caret(caretPos);
 	}
-	
-	// End of API /////////////////////////////////////////////////////////////
 	
 	function getCombinedSettingsAlphaNum(settings, defaultSettings){
 		if(typeof defaultSettings == "undefined")
@@ -86,49 +162,8 @@
 		return combinedSettings;
 	}
 	
-	var COMMON_SETTINGS = {
-		"alphanum"   : {},
-		"alpha"      : {
-			allowNumeric   : false
-		},
-		"upper"      : {
-			allowNumeric   :   false,
-			allowUpper:    true,
-			allowLower:    false,
-			allowCaseless: true
-		},
-		"lower"      : {
-			allowNumeric   :   false,
-			allowUpper:    false,
-			allowLower:    true,
-			allowCaseless: true
-		},
-		"numeric"    : {},
-		"integer"    : {},
-		"posInteger" : {}
-	};
 	
-	/********************************
-	 * Implementation goes here
-	 ********************************/
-	var BLACKLIST   = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
-	var THOU_SEP    = ",";
-	var DEC_SEP     = ".";
-	var DIGITS      = getDigitsMap();
-	var LATIN_CHARS = getLatinCharsMap();
-	
-	var DEFAULT_SETTINGS_ALPHANUM = {
-		allow             : '',
-		disallow          : '',
-		allowSpace        : true,
-		allowNumeric      : true,
-		allowUpper        : true,
-		allowLower        : true,
-		allowCaseless     : true, //eg Arabic or Chinese chars don't have upper / lower
-		allowLatin        : true, //a-Z A-Z
-		allowOtherCharSets: true  //eg é, Á, Arabic, Chinese etc
-	}
-	
+	// This is the heart of the algorithm
 	function alphanum_allowChar(Char, settings){
 		
 		if(settings.allowSpace && (Char == " "))
@@ -149,26 +184,18 @@
 		if(!settings.allowCaseless && isCaseless(Char))
 			return false;
 		
-		if(!settings.AllowLatin && LATIN_CHARS[Char])
+		if(!settings.allowLatin && LATIN_CHARS.contains(Char))
 			return false;
 		
 		
 		if(!settings.allowOtherCharSets){
-			if(DIGITS[Char] || LATIN_CHARS[Char])
+			if(DIGITS[Char] || LATIN_CHARS.contains(Char))
 				return true;
 			else
 				return false;
 		}
 		
 		return true;
-	}
-	
-	var DEFAULT_SETTINGS_NUM = {
-		allowPlus         : false,
-		allowMinus        : true,
-		allowThouSep      : true,
-		allowDecSep       : true,
-		allowLeadingSpaces: false
 	}
 	
 	function numeric_allowChar(Char, settings){
@@ -288,20 +315,12 @@
 		return map;
 	}
 	
-	function getLatinCharsMap(){
+	function getLatinCharsSet(){
 		var lower = "abcdefghijklmnopqrstuvwxyz";
 		var upper = lower.toUpperCase();
-		var azAZ = (lower + upper).split("");
-		var map = {};
-		var i = 0;
-		var Char;
+		var azAZ = new Set(lower + upper);
 		
-		for (i=0; i<azAZ; i++){
-			Char = azAZ[i];
-			map[Char] = true;
-		}
-		
-		return map;
+		return azAZ;
 	}
 	
 	function Set(elems){
@@ -326,7 +345,7 @@
 		var newSet = this.clone();
 		
 		for(key in set.map)
-			delete this.map[key];
+			delete newSet.map[key];
 			
 		return newSet;
 	}
@@ -374,6 +393,9 @@
 		return trimNum(inputString, combinedSettings);
 	};
 })( jQuery );
+
+
+//Include the 3rd party lib: jquery.caret.js
 
 
 // Set caret position easily in jQuery
