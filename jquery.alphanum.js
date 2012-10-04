@@ -115,11 +115,21 @@
 	
 	// Implementation details go here ////////////////////////////////////////////////////////
 	
+	// One way to prevent a character being entered is to cancel the keypress event.
+	// However, this gets messy when you have to deal with things like copy paste which isn't a keypress.
+	// Which event gets fired first, keypress or keyup? What about IE6 etc etc?
+	// Instead, it's easier to allow the 'bad' character to be entered and then to delete it immediately after.
+	
 	function handleKeyup($textBox, trimFunction, settings){
 		
-		var caretPos = $textBox.caret();
 		var inputString = $textBox.val();
 		var outputString = trimFunction(inputString, settings);
+		
+		if(inputString == outputString)
+			return;
+		
+		var caretPos = $textBox.caret();
+		
 		$textBox.val(outputString);
 		
 		//Reset the caret position
