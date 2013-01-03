@@ -132,7 +132,7 @@ var getTestData = function(){
 		},
 		
 		{
-			name: "Numeric",
+			name: "Numeric Max Digits / Decimals",
 			type    : "numeric",
 			options:  {
 				maxDigits: 5,
@@ -142,6 +142,49 @@ var getTestData = function(){
 				[ "1.1234",   "1.12"  ],
 				[ "1234567",  "12345" ],
 				[ "1234.567", "1234.5"]
+			]
+		},
+		
+		{
+			name: "Disallow Plus & Minus signs",
+			type    : "numeric",
+			options:  {
+				allowPlus:  false,
+				allowMinus: false
+			},
+			data : [
+				[ "+-",   ""  ],
+				[ "+123", "123" ],
+				[ "-123", "123"]
+			]
+		},
+		
+		{
+			name: "Allow Plus & Minus signs",
+			type    : "numeric",
+			options:  {
+				allowPlus:  true,
+				allowMinus: true
+			},
+			data : [
+				[ "+-",   "+"  ],
+				[ "-+",   "-"  ],
+				[ "+123", "+123" ],
+				[ "-123", "-123"]
+			]
+		},
+		
+		{
+			name: "Allow Plus, Disallow Minus",
+			type    : "numeric",
+			options:  {
+				allowPlus:  false,
+				allowMinus: true
+			},
+			data : [
+				[ "+-",   "-"  ],
+				[ "+123", "123" ],
+				[ "-123", "-123"]
 			]
 		}
 	];

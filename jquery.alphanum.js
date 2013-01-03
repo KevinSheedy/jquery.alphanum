@@ -223,6 +223,12 @@
 			return true;
 		}
 
+		if(settings.allowPlus && Char == '+' && validatedStringFragment == '')
+			return true;
+
+		if(settings.allowMinus && Char == '-' && validatedStringFragment == '')
+			return true;
+
 		if(Char == THOU_SEP)
 			return true;
 
