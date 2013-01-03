@@ -15,7 +15,7 @@
 
 		$collection.each(function(){
 			var $textbox = $(this);
-			$textbox.keyup(function(){
+			$textbox.bind("keyup change", function(){
 				handleKeyup($textbox, trimAlphaNum, combinedSettings);
 			});
 		});
@@ -31,7 +31,7 @@
 
 		$collection.each(function(){
 			var $textbox = $(this);
-			$textbox.keyup(function(){
+			$textbox.bind("keyup change", function(){
 				handleKeyup($textbox, trimAlphaNum, combinedSettings);
 			});
 		});
@@ -44,7 +44,7 @@
 
 		$collection.each(function(){
 			var $textbox = $(this);
-			$textbox.keyup(function(){
+			$textbox.bind("keyup change", function(){
 				handleKeyup($textbox, trimNum, combinedSettings);
 			});
 		});
@@ -79,8 +79,7 @@
 	}
 	
 	// Some pre-defined groups of settings for convenience
-	var COMMON_SETTINGS = {
-		"alphanum"   : {},
+	var CONVENIENCE_SETTINGS_ALPHANUM = {
 		"alpha"      : {
 			allowNumeric : false
 		},
@@ -95,10 +94,23 @@
 			allowUpper   : false,
 			allowLower   : true,
 			allowCaseless: true
+		}
+	};
+
+	// Some pre-defined groups of settings for convenience
+	var CONVENIENCE_SETTINGS_NUMERIC = {
+		"integer"         : {
+			allowPlus:    false,
+			allowMinus:   true,
+			allowThouSep: false,
+			allowDecSep:  false
 		},
-		"numeric"    : {},
-		"integer"    : {},
-		"posInteger" : {}
+		"positiveInteger" : {
+			allowPlus:    false,
+			allowMinus:   false,
+			allowThouSep: false,
+			allowDecSep:  false
+		}
 	};
 	
 	
@@ -160,7 +172,7 @@
 			defaultSettings = DEFAULT_SETTINGS_ALPHANUM;
 		var userSettings, combinedSettings = {};
 		if(typeof settings === "string")
-			userSettings = COMMON_SETTINGS[settings];
+			userSettings = CONVENIENCE_SETTINGS_ALPHANUM[settings];
 		else if(typeof settings == "undefined")
 			userSettings = {};
 		else
@@ -177,7 +189,7 @@
 	function getCombinedSettingsNum(settings){
 		var userSettings, combinedSettings = {};
 		if(typeof settings === "string")
-			userSettings = COMMON_SETTINGS[settings];
+			userSettings = CONVENIENCE_SETTINGS_NUMERIC[settings];
 		else if(typeof settings == "undefined")
 			userSettings = {};
 		else
