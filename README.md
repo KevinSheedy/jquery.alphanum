@@ -46,12 +46,12 @@ var DEFAULT_SETTINGS_ALPHANUM = {
 }
 ```
 
-Convenience values for commonly used options
+Convenience values for commonly used settings
 ```bash
 $("#username").alphanum("upper");
 ```
+is equivalent to
 ```bash
-Equivalent to
 $("#username").alphanum({
 	allowNumeric  : false,
 	allowUpper    : true,
@@ -86,12 +86,12 @@ numeric
 
 Restrict the input to numeric characters
 ```bash
-$("#weight").alphanum();
+$("#weight").numeric();
 ```
 
 Override some of the default settings
 ```bash
-$("#weight").alphanum({
+$("#weight").numeric({
 	allowMinus   : false,
 	allowThouSep : false
 });
@@ -110,7 +110,7 @@ var DEFAULT_SETTINGS_NUM = {
 }
 ```
 
-Convenience values for commonly used options
+Convenience values for commonly used settings
 ```bash
 $("#age").numeric("integer");
 ```
