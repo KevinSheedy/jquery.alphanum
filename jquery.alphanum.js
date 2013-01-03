@@ -59,7 +59,9 @@
 		allowMinus        : true,
 		allowThouSep      : true,
 		allowDecSep       : true,
-		allowLeadingSpaces: false
+		allowLeadingSpaces: false,
+		maxDigits         : '',     // No max
+		maxDecimalPlaces  : ''      // No max
 	}
 	
 	// Some pre-defined groups of settings for convenience
@@ -208,14 +210,70 @@
 		return true;
 	}
 	
-	function numeric_allowChar(Char, settings){
-		if(DIGITS[Char])
+	function numeric_allowChar(validatedStringFragment, Char, settings){
+
+		if(DIGITS[Char]) {
+
+			if(isMaxDigitsReached(validatedStringFragment, settings))
+				return false;
+
+			if(isMaxDecimalsReached(validatedStringFragment, settings))
+				return false;
+
 			return true;
+		}
+
 		if(Char == THOU_SEP)
 			return true;
+
 		if(Char == DEC_SEP)
 			return true;
 		
+		return false;
+	}
+
+	function countDigits(string) {
+
+		// Error handling, nulls etc
+		string = string + "";
+
+		// Count the digits
+		return string.replace(/[^0-9]/g,"").length;
+	}
+
+	function isMaxDigitsReached(string, settings) {
+
+		var maxDigits = settings.maxDigits;
+
+		if(maxDigits == "" || isNaN(maxDigits))
+			return false; // In this case, there is no maximum
+
+		var numDigits = countDigits(string);
+
+		if(numDigits >= maxDigits)
+			return true;
+
+		return false;
+	}
+
+	function isMaxDecimalsReached(string, settings) {
+
+		var maxDecimalPlaces = settings.maxDecimalPlaces;
+
+		if(maxDecimalPlaces == "" || isNaN(maxDecimalPlaces))
+			return false; // In this case, there is no maximum
+
+		var indexOfDecimalPoint = string.indexOf(DEC_SEP);
+
+		if(indexOfDecimalPoint == -1)
+			return false;
+
+		var decimalSubstring = string.substring(indexOfDecimalPoint);
+		var numDecimals = countDigits(decimalSubstring);
+
+		if(numDecimals >= maxDecimalPlaces)
+			return true;
+
 		return false;
 	}
 	
@@ -252,7 +310,8 @@
 		
 		for(i=0; i<inChars.length; i++){
 			Char = inChars[i];
-			if(numeric_allowChar(Char, settings))
+			var validatedStringFragment = outChars.join("");
+			if(numeric_allowChar(validatedStringFragment, Char, settings))
 				outChars.push(Char);
 		}
 		

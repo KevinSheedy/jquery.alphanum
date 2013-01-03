@@ -113,8 +113,8 @@ var getTestData = function(){
 		
 		{
 			name: "Alphabetic",
-			options: "alpha",
 			type    : "alphanum",
+			options: "alpha",
 			data: [
 				[ "aAzZ09.,$", "aAzZ" ],
 				[ " ",         " "    ]
@@ -128,6 +128,20 @@ var getTestData = function(){
 			data : [
 				[ "a1Az,Z094$.()4€5",   "1,094.45"   ],
 				[ ".,",         ".,"    ]
+			]
+		},
+		
+		{
+			name: "Numeric",
+			type    : "numeric",
+			options:  {
+				maxDigits: 5,
+				maxDecimalPlaces: 2
+			},
+			data : [
+				[ "1.1234",   "1.12"  ],
+				[ "1234567",  "12345" ],
+				[ "1234.567", "1234.5"]
 			]
 		}
 	];
