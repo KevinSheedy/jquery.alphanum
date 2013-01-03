@@ -10,9 +10,14 @@
 	$.fn.alphanum = function(settings) {
 		
 		var combinedSettings = getCombinedSettingsAlphaNum(settings);
-		var $textbox = $(this);
-		this.keyup(function(){
-			handleKeyup($textbox, trimAlphaNum, combinedSettings);
+
+		var $collection = this;
+
+		$collection.each(function(){
+			var $textbox = $(this);
+			$textbox.keyup(function(){
+				handleKeyup($textbox, trimAlphaNum, combinedSettings);
+			});
 		});
 		
 	};
@@ -21,18 +26,27 @@
 		
 		var defaultAlphaSettings = getCombinedSettingsAlphaNum("alpha");
 		var combinedSettings = getCombinedSettingsAlphaNum(settings, defaultAlphaSettings);
-		var $textbox = $(this);
-		this.keyup(function(){
-			handleKeyup($textbox, trimAlphaNum, combinedSettings);
+
+		var $collection = this;
+
+		$collection.each(function(){
+			var $textbox = $(this);
+			$textbox.keyup(function(){
+				handleKeyup($textbox, trimAlphaNum, combinedSettings);
+			});
 		});
 	};
 	
 	$.fn.numeric = function(settings) {
 		
 		var combinedSettings = getCombinedSettingsNum(settings);
-		var $textbox = $(this);
-		this.keyup(function(){
-			handleKeyup($textbox, trimNum, combinedSettings);
+		var $collection = this;
+
+		$collection.each(function(){
+			var $textbox = $(this);
+			$textbox.keyup(function(){
+				handleKeyup($textbox, trimNum, combinedSettings);
+			});
 		});
 		
 	};
