@@ -147,10 +147,10 @@ alpha
 
 Restrict the input to alphabetic characters
 ```bash
-$("#weight").alpha();
+$("#first_name").alpha();
 ```
 
 Equivalent to the convenience option
 ```bash
-$("#weight").alphanum("alpha");
+$("#first_name").alphanum("alpha");
 ```
