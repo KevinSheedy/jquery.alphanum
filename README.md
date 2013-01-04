@@ -41,7 +41,7 @@ var DEFAULT_SETTINGS_ALPHANUM = {
 	allowUpper         : true, // Allow upper case characters
 	allowLower         : true, // Allow lower case characters
 	allowCaseless      : true, // Allow characters that don't have both upper & lower variants - eg Arabic or Chinese
-	allowLatin         : true, // a-Z A-Z
+	allowLatin         : true, // a-z A-Z
 	allowOtherCharSets : true  // eg é, Á, Arabic, Chinese etc
 }
 ```
@@ -153,4 +153,30 @@ $("#first_name").alpha();
 Equivalent to the convenience option
 ```bash
 $("#first_name").alphanum("alpha");
+```
+
+Blacklist
+===============
+jquery.alphanum works by maintaining a blacklist of non-alphanumeric characters. There is no whitelist. It is assumed that all unicode characters are permissable unless there is a specific rule that disallows them.
+
+These are the blacklisted characters that can be encodable using 7-bit ascii
+```bash
+var blacklist = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
+```
+
+These are the blacklisted unicode characters that can't be encoded using 7-bit ascii
+```bash
+var blacklist = 
+	  "\xAC"     // ¬
+	+ "\u20AC"   // €
+	+ "\xA3"     // £
+	;
+```
+
+The blacklist may be extended or reduced using the 'allow' and 'disallow' settings
+```bash
+$("#password").alphanumeric({
+	allow :    '&,;', // Removed from the blacklist
+	disallow : 'xyz'  // Added to the blacklist
+});
 ```

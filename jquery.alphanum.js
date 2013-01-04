@@ -57,59 +57,59 @@
 	// Start Settings ////////////////////////////////////////////////////////
 	
 	var DEFAULT_SETTINGS_ALPHANUM = {
-		allow             : '',
-		disallow          : '',
-		allowSpace        : true,
-		allowNumeric      : true,
-		allowUpper        : true,
-		allowLower        : true,
-		allowCaseless     : true, //eg Arabic or Chinese chars don't have upper / lower
-		allowLatin        : true, //a-Z A-Z
-		allowOtherCharSets: true  //eg é, Á, Arabic, Chinese etc
+		allow              : '',   // Allow extra characters
+		disallow           : '',   // Disallow extra characters
+		allowSpace         : true, // Allow the space character
+		allowNumeric       : true, // Allow digits 0-9
+		allowUpper         : true, // Allow upper case characters
+		allowLower         : true, // Allow lower case characters
+		allowCaseless      : true, // Allow characters that don't have both upper & lower variants - eg Arabic or Chinese
+		allowLatin         : true, // a-z A-Z
+		allowOtherCharSets : true  // eg é, Á, Arabic, Chinese etc
 	}
 	
 	var DEFAULT_SETTINGS_NUM = {
-		allowPlus         : false,
-		allowMinus        : true,
-		allowThouSep      : true,
-		allowDecSep       : true,
-		allowLeadingSpaces: false,
-		maxDigits         : '',     // No max
-		maxDecimalPlaces  : ''      // No max
+		allowPlus          : false, // Allow the + sign
+		allowMinus         : true,  // Allow the - sign
+		allowThouSep       : true,  // Allow the thousands separator, default is the comma eg 12,000
+		allowDecSep        : true,  // Allow the decimal separator, default is the fullstop eg 3.141
+		allowLeadingSpaces : false,
+		maxDigits          : '',    // The max number of digits or '' for no max
+		maxDecimalPlaces   : ''     // The max number of decimal places or '' for no max
 	}
 	
 	// Some pre-defined groups of settings for convenience
 	var CONVENIENCE_SETTINGS_ALPHANUM = {
-		"alpha"      : {
-			allowNumeric : false
+		"alpha" : {
+			allowNumeric  : false
 		},
-		"upper"      : {
-			allowNumeric : false,
-			allowUpper   : true,
-			allowLower   : false,
-			allowCaseless: true
+		"upper" : {
+			allowNumeric  : false,
+			allowUpper    : true,
+			allowLower    : false,
+			allowCaseless : true
 		},
-		"lower"      : {
-			allowNumeric : false,
-			allowUpper   : false,
-			allowLower   : true,
-			allowCaseless: true
+		"lower" : {
+			allowNumeric  : false,
+			allowUpper    : false,
+			allowLower    : true,
+			allowCaseless : true
 		}
 	};
 
 	// Some pre-defined groups of settings for convenience
 	var CONVENIENCE_SETTINGS_NUMERIC = {
-		"integer"         : {
-			allowPlus:    false,
-			allowMinus:   true,
-			allowThouSep: false,
-			allowDecSep:  false
+		"integer" : {
+			allowPlus    : false,
+			allowMinus   : true,
+			allowThouSep : false,
+			allowDecSep  : false
 		},
 		"positiveInteger" : {
-			allowPlus:    false,
-			allowMinus:   false,
-			allowThouSep: false,
-			allowDecSep:  false
+			allowPlus    : false,
+			allowMinus   : false,
+			allowThouSep : false,
+			allowDecSep  : false
 		}
 	};
 	
@@ -122,7 +122,8 @@
 	
 	// Return the blacklisted special chars that are encodable using 7-bit ascii
 	function getBlacklistAscii(){
-		return '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
+		var blacklist = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
+		return blacklist;
 	}
 	
 	// Return the blacklisted special chars that are NOT encodable using 7-bit ascii
@@ -424,6 +425,9 @@
 		return azAZ;
 	}
 	
+	////////////////////////////////////////////////////////////////////////////////////
+	// Implementation of a Set
+	////////////////////////////////////////////////////////////////////////////////////
 	function Set(elems){
 		if(typeof elems == "string")
 			this.map = stringToMap(elems);
@@ -466,6 +470,7 @@
 		
 		return newSet;
 	}
+	////////////////////////////////////////////////////////////////////////////////////
 	
 	function stringToMap(string){
 		var map = {};

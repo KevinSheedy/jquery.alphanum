@@ -175,7 +175,7 @@ var getTestData = function(){
 		},
 		
 		{
-			name: "Allow Plus, Disallow Minus",
+			name: "Allow Minus, Disallow Plus",
 			type    : "numeric",
 			options:  {
 				allowPlus:  false,
