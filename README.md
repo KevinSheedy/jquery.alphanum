@@ -15,7 +15,7 @@ Restricts the characters that may be entered into a text field.
 ```
 
 
-alphanum
+.alphanum()
 ===============
 
 Restrict the input to alphanumeric characters
@@ -26,8 +26,8 @@ $("#username").alphanum();
 Override some of the default settings
 ```bash
 $("#username").alphanum({
-	allowSpace: false,
-	allowUpper: false
+	allowSpace: false, // Allow the space character
+	allowUpper: false  // Allow Upper Case characters
 });
 ```
 
@@ -81,7 +81,7 @@ var CONVENIENCE_SETTINGS_ALPHANUM = {
 };
 ```
 
-numeric
+.numeric()
 ===============
 
 Restrict the input to numeric characters
@@ -142,7 +142,7 @@ var CONVENIENCE_SETTINGS_NUMERIC = {
 };
 ```
 
-alpha
+.alpha()
 ===============
 
 Restrict the input to alphabetic characters
@@ -159,7 +159,7 @@ Blacklist
 ===============
 jquery.alphanum works by maintaining a blacklist of non-alphanumeric characters. There is no whitelist. It is assumed that all unicode characters are permissable unless there is a specific rule that disallows them.
 
-These are the blacklisted characters that can be encodable using 7-bit ascii
+These are the blacklisted characters that are encodable using 7-bit ascii
 ```bash
 var blacklist = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
 ```
@@ -176,7 +176,7 @@ var blacklist =
 The blacklist may be extended or reduced using the 'allow' and 'disallow' settings
 ```bash
 $("#password").alphanumeric({
-	allow :    '&,;', // Removed from the blacklist
-	disallow : 'xyz'  // Added to the blacklist
+	allow :    '&,;', // Specify characters to allow
+	disallow : 'xyz'  // Specify characters to disallow
 });
 ```
