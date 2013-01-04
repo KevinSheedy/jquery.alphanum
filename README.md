@@ -100,13 +100,14 @@ $("#weight").numeric({
 Available settings plus their default values
 ```bash
 var DEFAULT_SETTINGS_NUM = {
-	allowPlus          : false, // Allow the + sign
-	allowMinus         : true,  // Allow the - sign
-	allowThouSep       : true,  // Allow the thousands separator, default is the comma eg 12,000
-	allowDecSep        : true,  // Allow the decimal separator, default is the fullstop eg 3.141
-	allowLeadingSpaces : false,
-	maxDigits          : '',     // No max
-	maxDecimalPlaces   : ''      // No max
+	allowPlus           : false, // Allow the + sign
+	allowMinus          : true,  // Allow the - sign
+	allowThouSep        : true,  // Allow the thousands separator, default is the comma eg 12,000
+	allowDecSep         : true,  // Allow the decimal separator, default is the fullstop eg 3.141
+	allowLeadingSpaces  : false,
+	maxDigits           : '',    // The max number of digits or '' for no max
+	maxDecimalPlaces    : '',    // The max number of decimal places or '' for no max
+	maxPreDecimalPlaces : ''     // The max number digits before the decimal point or '' for no max
 }
 ```
 

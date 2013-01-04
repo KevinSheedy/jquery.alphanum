@@ -69,13 +69,14 @@
 	}
 	
 	var DEFAULT_SETTINGS_NUM = {
-		allowPlus          : false, // Allow the + sign
-		allowMinus         : true,  // Allow the - sign
-		allowThouSep       : true,  // Allow the thousands separator, default is the comma eg 12,000
-		allowDecSep        : true,  // Allow the decimal separator, default is the fullstop eg 3.141
-		allowLeadingSpaces : false,
-		maxDigits          : '',    // The max number of digits or '' for no max
-		maxDecimalPlaces   : ''     // The max number of decimal places or '' for no max
+		allowPlus           : false, // Allow the + sign
+		allowMinus          : true,  // Allow the - sign
+		allowThouSep        : true,  // Allow the thousands separator, default is the comma eg 12,000
+		allowDecSep         : true,  // Allow the decimal separator, default is the fullstop eg 3.141
+		allowLeadingSpaces  : false,
+		maxDigits           : '',    // The max number of digits or '' for no max
+		maxDecimalPlaces    : '',    // The max number of decimal places or '' for no max
+		maxPreDecimalPlaces : ''     // The max number digits before the decimal point or '' for no max
 	}
 	
 	// Some pre-defined groups of settings for convenience
@@ -244,6 +245,9 @@
 			if(isMaxDigitsReached(validatedStringFragment, settings))
 				return false;
 
+			if(isMaxPreDecimalsReached(validatedStringFragment, settings))
+				return false;
+
 			if(isMaxDecimalsReached(validatedStringFragment, settings))
 				return false;
 
@@ -305,6 +309,26 @@
 		var numDecimals = countDigits(decimalSubstring);
 
 		if(numDecimals >= maxDecimalPlaces)
+			return true;
+
+		return false;
+	}
+
+	function isMaxPreDecimalsReached(string, settings) {
+
+		var maxPreDecimalPlaces = settings.maxPreDecimalPlaces;
+
+		if(maxPreDecimalPlaces == "" || isNaN(maxPreDecimalPlaces))
+			return false; // In this case, there is no maximum
+
+		var indexOfDecimalPoint = string.indexOf(DEC_SEP);
+
+		if(indexOfDecimalPoint >= 0)
+			return false;
+
+		var numPreDecimalDigits = countDigits(string);
+
+		if(numPreDecimalDigits >= maxPreDecimalPlaces)
 			return true;
 
 		return false;

@@ -146,6 +146,19 @@ var getTestData = function(){
 		},
 		
 		{
+			name: "Max pre-decimal places",
+			type    : "numeric",
+			options:  {
+				maxPreDecimalPlaces: 2,
+				maxDecimalPlaces: 2
+			},
+			data : [
+				[ "123",  "12" ],
+				[ "123.123",   "12.12"  ]
+			]
+		},
+		
+		{
 			name: "Disallow Plus & Minus signs",
 			type    : "numeric",
 			options:  {
