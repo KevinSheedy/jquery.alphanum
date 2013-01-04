@@ -13,13 +13,7 @@
 
 		var $collection = this;
 
-		$collection.each(function(){
-			var $textbox = $(this);
-			$textbox.bind("keyup change", function(){
-				handleKeyup($textbox, trimAlphaNum, combinedSettings);
-			});
-		});
-		
+		setupEventHandlers($collection, trimAlphaNum, combinedSettings);
 	};
 	
 	$.fn.alpha = function(settings) {
@@ -29,12 +23,7 @@
 
 		var $collection = this;
 
-		$collection.each(function(){
-			var $textbox = $(this);
-			$textbox.bind("keyup change", function(){
-				handleKeyup($textbox, trimAlphaNum, combinedSettings);
-			});
-		});
+		setupEventHandlers($collection, trimAlphaNum, combinedSettings);
 	};
 	
 	$.fn.numeric = function(settings) {
@@ -42,12 +31,7 @@
 		var combinedSettings = getCombinedSettingsNum(settings);
 		var $collection = this;
 
-		$collection.each(function(){
-			var $textbox = $(this);
-			$textbox.bind("keyup change", function(){
-				handleKeyup($textbox, trimNum, combinedSettings);
-			});
-		});
+		setupEventHandlers($collection, trimNum, combinedSettings);
 		
 	};
 	
@@ -144,13 +128,30 @@
 	
 	
 	// Implementation details go here ////////////////////////////////////////////////////////
+
+	function setupEventHandlers($textboxes, trimFunction, settings) {
+
+		$textboxes.each(function(){
+
+			var $textbox = $(this);
+
+			$textbox.bind("keyup change paste", function(){
+
+				// setTimeout is necessary for handling the 'paste' event
+				setTimeout(function(){
+					trimTextbox($textbox, trimFunction, settings);
+				}, 0);
+			});
+		});
+
+	}
 	
 	// One way to prevent a character being entered is to cancel the keypress event.
 	// However, this gets messy when you have to deal with things like copy paste which isn't a keypress.
 	// Which event gets fired first, keypress or keyup? What about IE6 etc etc?
 	// Instead, it's easier to allow the 'bad' character to be entered and then to delete it immediately after.
 	
-	function handleKeyup($textBox, trimFunction, settings){
+	function trimTextbox($textBox, trimFunction, settings){
 		
 		var inputString = $textBox.val();
 		var outputString = trimFunction(inputString, settings);
