@@ -142,6 +142,32 @@
 					trimTextbox($textbox, trimFunction, settings);
 				}, 0);
 			});
+
+			$textbox.bind("keypress", function(e){
+
+				var start = $textbox.prop("selectionStart");
+				var end   = $textbox.prop("selectionEnd");
+
+				var textBeforeKeypress         = $textbox.val();
+				var newChar                    = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+				
+				// The new char may be inserted:
+				//  1) At the start
+				//  2) In the middle
+				//  3) At the end
+				//  4) User highlights some text and then presses a key which would replace the highlighted text
+				//
+				// Here we build the string that would result after the keypress.
+				// If the resulting string is invalid, we cancel the event.
+				// Unfortunately, it isn't enough to just check if the new char is valid because some chars
+				// are position sensitive eg the decimal point '.'' or the minus sign '-'' are only valid in certain positions.
+				var potentialTextAfterKeypress = textBeforeKeypress.substring(0, start) + newChar + textBeforeKeypress.substring(end);
+				var validatedText              = trimFunction(potentialTextAfterKeypress, settings);
+
+				// If the keypress would cause the textbox to contain invalid characters, then cancel the keypress event
+				if(validatedText != potentialTextAfterKeypress)
+					e.preventDefault();
+			});
 		});
 
 	}
