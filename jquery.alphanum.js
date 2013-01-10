@@ -149,7 +149,11 @@
 				var end   = $textbox.prop("selectionEnd");
 
 				var textBeforeKeypress         = $textbox.val();
-				var newChar                    = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+				var charCode                   = !e.charCode ? e.which : e.charCode;
+				var newChar                    = String.fromCharCode(charCode);
+
+				if(isControlKey(charCode))
+					return;
 				
 				// The new char may be inserted:
 				//  1) At the start
@@ -170,6 +174,18 @@
 			});
 		});
 
+	}
+
+	function isControlKey(charCode) {
+
+		if(charCode >= 32)
+			return false;
+		if(charCode == 10)
+			return false;
+		if(charCode == 13)
+			return false;
+
+		return true;
 	}
 	
 	// One way to prevent a character being entered is to cancel the keypress event.
