@@ -31,7 +31,10 @@
 
 
 	$('#firstName')     .alphanum();
-	$('#accountBalance').numeric();
+	$('#accountBalance').numeric({
+		maxPreDecimalPlaces : 10,
+		maxDecimalPlaces    : 2
+	});
 
 
 	</script>
