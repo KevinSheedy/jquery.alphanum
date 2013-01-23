@@ -308,10 +308,10 @@
 		if(settings.allowMinus && Char == '-' && validatedStringFragment == '')
 			return true;
 
-		if(Char == THOU_SEP)
+		if(Char == THOU_SEP && settings.allowThouSep)
 			return true;
 
-		if(Char == DEC_SEP)
+		if(Char == DEC_SEP && settings.allowDecSep)
 			return true;
 		
 		return false;

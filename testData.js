@@ -199,6 +199,28 @@ var getTestData = function(){
 				[ "+123", "123" ],
 				[ "-123", "-123"]
 			]
+		},
+		
+		{
+			name: "Integer",
+			type    : "numeric",
+			options:  "integer",
+			data : [
+				[ "+123",     "123"  ],
+				[ "-123",     "-123" ],
+				[ "1,234.56", "123456"]
+			]
+		},
+		
+		{
+			name: "Positive Integer",
+			type    : "numeric",
+			options:  "positiveInteger",
+			data : [
+				[ "+123",     "123"  ],
+				[ "-123",     "123" ],
+				[ "1,234.56", "123456"]
+			]
 		}
 	];
 	
