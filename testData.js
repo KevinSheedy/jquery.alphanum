@@ -221,6 +221,15 @@ var getTestData = function(){
 				[ "-123",     "123" ],
 				[ "1,234.56", "123456"]
 			]
+		},
+		
+		{
+			name: "Decimal Point",
+			type    : "numeric",
+			data : [
+				[ "1..23",     "1.23"  ],
+				[ "1.2.3",     "1.23" ]
+			]
 		}
 	];
 	

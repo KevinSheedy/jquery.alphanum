@@ -311,8 +311,13 @@
 		if(Char == THOU_SEP && settings.allowThouSep)
 			return true;
 
-		if(Char == DEC_SEP && settings.allowDecSep)
-			return true;
+		if(Char == DEC_SEP) {
+			// Only one decimal separator allowed
+			if(validatedStringFragment.indexOf(DEC_SEP) >= 0)
+				return false;
+			if(settings.allowDecSep)
+				return true;
+		}
 		
 		return false;
 	}
