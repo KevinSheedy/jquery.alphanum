@@ -1,17 +1,20 @@
-jquery.alphanum
+jQuery Alphanum
 ===============
+```bash
+$("#my_input").alphanum();
+```
 Restricts the characters that may be entered into a text field.
 
 ```bash
-.alphanum([optional] settings)
+$(selector).alphanum([optional] settings);
 ```
 
 ```bash
-.alpha([optional] settings)
+$(selector).alpha([optional] settings);
 ```
 
 ```bash
-.numeric([optional] settings)
+$(selector).numeric([optional] settings);
 ```
 
 
