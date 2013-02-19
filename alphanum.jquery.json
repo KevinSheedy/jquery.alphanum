@@ -1,0 +1,38 @@
+{
+	"name": "alphanum",
+	"title": "jQuery Alphanum",
+	"description": "jQuery plugin for restricting the text allowing in an text field.",
+	"keywords": [
+		"alphanumeric",
+		"alphanun",
+        "alphabetic",
+        "numeric",
+        "input",
+        "text",
+        "restrict"
+	],
+	"version": "1.0.0",
+	"author": {
+		"name": "Kevin Sheedy",
+		"url": ""
+	},
+	"maintainers": [
+		{
+			"name": "Kevin Sheedy",
+			"email": "jquery.alphanum@gmail.com",
+			"url": "https://github.com/KevinSheedy/jquery.alphanum"
+		}
+	],
+	"licenses": [
+		{
+			"type": "GPLv2",
+			"url": "http://www.example.com/licenses/gpl.html"
+		}
+	],
+	"bugs": "https://github.com/KevinSheedy/jquery.alphanum",
+	"homepage": "https://github.com/KevinSheedy/jquery.alphanum",
+	"docs": "https://github.com/KevinSheedy/jquery.alphanum",
+	"dependencies": {
+		"jquery": ">=1.5"
+	}
+}
