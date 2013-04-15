@@ -32,6 +32,8 @@
 		var $collection = this;
 
 		setupEventHandlers($collection, trimNum, combinedSettings);
+
+		$collection.blur(numericField_Blur)
 		
 	};
 	
@@ -60,7 +62,9 @@
 		allowLeadingSpaces  : false,
 		maxDigits           : '',    // The max number of digits or '' for no max
 		maxDecimalPlaces    : '',    // The max number of decimal places or '' for no max
-		maxPreDecimalPlaces : ''     // The max number digits before the decimal point or '' for no max
+		maxPreDecimalPlaces : '',    // The max number digits before the decimal point or '' for no max
+		max                 : '',    // The max numeric value allowed
+		min                 : ''     // The min numeric value allowed
 	}
 	
 	// Some pre-defined groups of settings for convenience
@@ -181,6 +185,15 @@
 
 	}
 
+	// Ensure the text is a valid number when focus leaves the textbox
+	// This catches the case where a user enters '-' or '.' without entering any digits
+	function numericField_Blur() {
+		var fieldValueNumeric = parseFloat($(this).val());
+
+		if(isNaN(fieldValueNumeric))
+			$(this).val("");
+	}
+
 	function isControlKey(charCode) {
 
 		if(charCode >= 32)
@@ -299,6 +312,12 @@
 			if(isMaxDecimalsReached(validatedStringFragment, settings))
 				return false;
 
+			if(isGreaterThanMax(validatedStringFragment + Char, settings))
+				return false;
+
+			if(isLessThanMin(validatedStringFragment + Char, settings))
+				return false;
+
 			return true;
 		}
 
@@ -382,6 +401,30 @@
 		var numPreDecimalDigits = countDigits(string);
 
 		if(numPreDecimalDigits >= maxPreDecimalPlaces)
+			return true;
+
+		return false;
+	}
+
+	function isGreaterThanMax(numericString, settings) {
+
+		if(!settings.max)
+			return false;
+
+		var outputNumber = parseFloat(numericString);
+		if(outputNumber > settings.max)
+			return true;
+
+		return false;
+	}
+
+	function isLessThanMin(numericString, settings) {
+
+		if(!settings.min)
+			return false;
+
+		var outputNumber = parseFloat(numericString);
+		if(outputNumber < settings.min)
 			return true;
 
 		return false;

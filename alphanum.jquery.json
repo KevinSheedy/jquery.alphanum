@@ -1,7 +1,7 @@
 {
 	"name": "alphanum",
 	"title": "jQuery Alphanum",
-	"description": "Restrict text fields to alphanumeric or alphabetic or numeric or whatever.",
+	"description": "Restrict what characters that may be entered into text fields. Supports alphanumeric, alphabetic or numeric. Easy to use. Fully customisable. Cross Browser compatible.",
 	"keywords": [
 		"alphanumeric",
 		"alphanun",
@@ -12,7 +12,7 @@
 		"text",
 		"restrict"
 	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"author": {
 		"name": "Kevin Sheedy",
 		"url": ""

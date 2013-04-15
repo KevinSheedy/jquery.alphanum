@@ -5,18 +5,28 @@
 
 .testSuiteTitle{
 	font-size: 26px;
+	margin-left: 42px;
 }
 
-th{
-	font-size: 20px;
-}
+
 
 table{
 	text-align: left;
 }
 
-td {
-	width: 200px;
+table.testResultsTable {
+	th{
+		font-size: 20px;
+	}
+
+	td {
+		width: 200px;	
+	}
+
+	td.testNumber {
+		width: 50px;
+		background-color: white;
+	}
 }
 
 .testSuiteContainer{
@@ -40,6 +50,7 @@ div#resultsCounterContainer{
 
 div#leftPanel{
 	float: left;
+	position: fixed;
 }
 
 #resultsContainer{

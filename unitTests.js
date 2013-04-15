@@ -35,12 +35,13 @@ jQuery(document).ready(function(){
 		
 		for(i=0; i<testGroup.data.length; i++){
 			testCase = testGroup.data[i];
-			runTestCase(testGroup.options, testCase, $table, testGroup.type);
+			var testResult = runTestCase(++testCounter, testGroup.options, testCase, testGroup.type);
+			var $row = testResult.createTableRow();
+			$row.appendTo($table);
 		}
 	}
 	
-	function runTestCase(options, testCase, $table, testType){
-		
+	function runTestCase(testNumber, options, testCase, testType){
 		
 		var input    = testCase[0];
 		var expected = testCase[1];
@@ -50,14 +51,52 @@ jQuery(document).ready(function(){
 			actual = runTestAlphaNum(input, options);
 		else if (testType == "numeric")
 			actual = runTestNumeric(input, options);
-		
-		
-		var $row     = createResultsRow(input, expected, actual);
-		
-		$row.appendTo($table);
-		
-		
+
+		return new TestResult(testNumber, input, expected, actual);
 	}
+
+	function TestResult(testNumber, input, expected, actual) {
+		this.testNumber = testNumber;
+		this.input      = input;
+		this.expected   = expected;
+		this.actual     = actual;
+	}
+
+	TestResult.prototype = {
+		createTableRow : function() {
+			var $row = $("#rowTemplate").clone();
+			$row.attr("id", "result_row_" + this.testNumber);
+			
+			var result;
+			
+			if(this.expected == this.actual){
+				result = "Pass";
+				passCounter++;
+			}
+			else {
+				result = "Fail";
+				failCounter++
+			}
+			
+			$row.children(".testNumber").html(this.testNumber).click(runTestCase_Click);
+			$row.children(".input")     .html("[" + this.input    + "]");
+			$row.children(".expected")  .html("[" + this.expected + "]");
+			$row.children(".actual")    .html("[" + this.actual   + "]");
+			$row.children(".result")    .html(result);
+			
+			$row.addClass(result);
+			
+			return $row;
+		},
+
+		updateTableRow : function() {
+			var $existingRow = $("#result_row_" + this.testNumber);
+			var $updatedRow  = this.createTableRow();
+
+			$updatedRow.insertAfter($existingRow);
+			$existingRow.remove();
+		}
+	};
 	
 	function createResultsDiv(){
 		var $div = $("#testResultsTemplate").clone();
@@ -75,12 +114,11 @@ jQuery(document).ready(function(){
 	var passCounter = 0;
 	var failCounter = 0;
 	
-	function createResultsRow(input, expected, actual){
+	function createResultsRow(testNumber, input, expected, actual){
 		var $row = $("#rowTemplate").clone();
 		$row.removeAttr("id");
 		
 		var result;
-		testCounter++;
 		
 		if(expected == actual){
 			result = "Pass";
@@ -91,10 +129,11 @@ jQuery(document).ready(function(){
 			failCounter++
 		}
 		
-		$row.children(".input")   .html("[" + input    + "]");
-		$row.children(".expected").html("[" + expected + "]");
-		$row.children(".actual")  .html("[" + actual   + "]");
-		$row.children(".result")  .html(result);
+		$row.children(".testNumber").html(testNumber).click(runTestCase_Click);
+		$row.children(".input")     .html("[" + input    + "]");
+		$row.children(".expected")  .html("[" + expected + "]");
+		$row.children(".actual")    .html("[" + actual   + "]");
+		$row.children(".result")    .html(result);
 		
 		$row.addClass(result);
 		
@@ -110,6 +149,36 @@ jQuery(document).ready(function(){
 	}
 	
 	runTestSuite();
+
+	function runTestCase_Click() {
+		var testNumber = parseInt($(this).html());
+		runSingleTestCase(testNumber);
+	}
+
+	function runSingleTestCase(testNumber) {
+		var i = 0, j = 0;
+		var testGroup;
+		var testCounter = 0;
+
+		for(i=0; i<MASTER_TEST_DATA.length; i++){
+			testGroup = MASTER_TEST_DATA[i];
+			
+			for(j=0; j<testGroup.data.length; j++){
+
+				testCounter++;
+
+				if(testCounter == testNumber) {
+					testCase = testGroup.data[j];
+					var testResult = runTestCase(testNumber, testGroup.options, testCase, testGroup.type);
+					testResult.updateTableRow();
+				}
+			}
+		}
+
+		var testCase;
+		
+		
+	}
 	
 
 });
