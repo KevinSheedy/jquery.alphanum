@@ -3,7 +3,7 @@
 <html>
 
 <head>
-	<title>Welcome to Play 2.1</title>
+	<title>Alphanum Demo</title>
 
 	<!--ViewPort-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,13 +40,6 @@
 
 	<legend>numeric()</legend>
 
-	<div class="control-group">
-		<!-- <label class="control-label" for="first_name">numeric()</label> -->
-		<div class="controls">
-			<button id="apply_numeric_settings" type="button" class="btn btn-primary">Apply Settings</button>
-			<input id="numeric_input" name="numeric_input" class="span2" type="text" placeholder="5467.95" value="" required>
-			<textarea id="numeric_settings" rows="8" cols="100" style="width: 320px"></textarea>
-		</div>
 		<pre id="code_block" style="width: 800px">
 var DEFAULT_SETTINGS_NUM = {
 	allowPlus           : false, // Allow the + sign
@@ -61,6 +54,39 @@ var DEFAULT_SETTINGS_NUM = {
 	min                 : ''     // The min numeric value allowed
 }
 		</pre>
+
+	<div class="row-fluid">
+
+		<div class="span8">
+			<div style="font-size: 22px; font-weight: bold; padding: 10px;">$("#my_input").numeric(</div>
+			<div style="padding-left: 60px;">
+				<textarea id="numeric_settings" rows="8" cols="100" style="width: 320px"></textarea>
+				<button id="apply_numeric_settings" type="button" class="btn btn-primary">Apply Settings</button>
+				<i class="icon-arrow-right"></i>
+				<input id="numeric_input" name="numeric_input" class="span3" type="text" placeholder="5467.95" value="" required>
+			</div>
+			<div style="font-size: 22px; font-weight: bold; padding: 10px;">);</div>
+		</div>
+		<div class="span6">
+			
+		</div>
+	</div>
+
+	<div>
+
+		
+		<div class="span4">
+			
+		</div>
+		
+	</div>
+
+	<div class="control-group">
+		<!-- <label class="control-label" for="first_name">numeric()</label> -->
+		<div class="controls">
+			
+		</div>
+
 	</div>
 	
 </form>
