@@ -1,11 +1,14 @@
 jQuery(document).ready(function(){
 
-	var MASTER_TEST_DATA = getTestData();
+	var ARRAY_OF_TEST_GROUPS = getTestData();
 	
-	function runTestSuite(){
+	runAllTests();
+	
+	function runAllTests(){
 		
-		jQuery.each(MASTER_TEST_DATA, function(index, testGroup){
+		jQuery.each(ARRAY_OF_TEST_GROUPS, function(index, testGroup){
 			
+			// Add a QUnit test to the test queue
 			test(testGroup.name, function(){
 				runTestGroup(testGroup);
 			});
@@ -14,14 +17,11 @@ jQuery(document).ready(function(){
 	}
 	
 	function runTestGroup(testGroup){
-
-		var i = 0;
-		var testCase;
 		
-		for(i=0; i<testGroup.data.length; i++){
-			testCase = testGroup.data[i];
+		jQuery.each(testGroup.data, function(index, testCase){
+			
 			runTestCase(testGroup.options, testCase, testGroup.type);
-		}
+		});
 	}
 	
 	function runTestCase(options, testCase, testType){
@@ -39,24 +39,17 @@ jQuery(document).ready(function(){
 	
 	
 	function runTestAlphaNum(inputString, expectedString, options){
+
 		var actual = $.fn.alphanum.backdoorAlphaNum(inputString, options);
 
 		equal(actual, expectedString);
 	}
 	
 	function runTestNumeric(inputString, expectedString, options){
+
 		var actual = $.fn.alphanum.backdoorNumeric(inputString, options);
 
 		equal(actual, expectedString);
 	}
-	
-	runTestSuite();
 
-	
-	
-
-});
-
-test( "hello test", function() {
-	ok( 1 == "1", "Passed!" );
 });
