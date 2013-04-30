@@ -559,7 +559,7 @@
 	
 		var newSet = this.clone();
 		
-		for(key in set.map)
+		for(var key in set.map)
 			newSet.map[key] = true;
 		
 		return newSet;
@@ -569,7 +569,7 @@
 		
 		var newSet = this.clone();
 		
-		for(key in set.map)
+		for(var key in set.map)
 			delete newSet.map[key];
 			
 		return newSet;
@@ -585,7 +585,7 @@
 	Set.prototype.clone = function(){
 		var newSet = new Set();
 		
-		for(key in this.map)
+		for(var key in this.map)
 			newSet.map[key] = true;
 		
 		return newSet;
