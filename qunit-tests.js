@@ -1,21 +1,16 @@
 jQuery(document).ready(function(){
 
-	var testSuiteCounter = 0;
-
 	var MASTER_TEST_DATA = getTestData();
 	
-	
 	function runTestSuite(){
-		var i = 0;
-		var testGroup;
-		for(i=0; i<MASTER_TEST_DATA.length; i++){
-			testGroup = MASTER_TEST_DATA[i];
-
+		
+		jQuery.each(MASTER_TEST_DATA, function(index, testGroup){
+			
 			test(testGroup.name, function(){
 				runTestGroup(testGroup);
 			});
 			
-		}
+		});
 	}
 	
 	function runTestGroup(testGroup){
