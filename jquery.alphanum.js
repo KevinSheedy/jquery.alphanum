@@ -618,6 +618,19 @@
 		
 		return trimNum(inputString, combinedSettings);
 	};
+
+	$.fn.alphanum.setNumericSeparators = function(thousandsSeparator, decimalSeparator) {
+
+		if(thousandsSeparator.length != 1)
+			return;
+
+		if(decimalSeparator.length != 1)
+			return;
+
+		THOU_SEP = thousandsSeparator;
+		DEC_SEP = decimalSeparator;
+	}
+
 })( jQuery );
 
 
