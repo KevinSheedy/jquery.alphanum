@@ -327,7 +327,7 @@
 		if(settings.allowMinus && Char == '-' && validatedStringFragment == '')
 			return true;
 
-		if(Char == THOU_SEP && settings.allowThouSep)
+		if(Char == THOU_SEP && settings.allowThouSep && allowThouSep(validatedStringFragment, Char))
 			return true;
 
 		if(Char == DEC_SEP) {
@@ -544,6 +544,39 @@
 		
 		return azAZ;
 	}
+
+	function allowThouSep(currentString, Char) {
+
+		// Can't start with a THOU_SEP
+		if(currentString.length == 0)
+			return false;
+
+		// Can't have a THOU_SEP anywhere after a DEC_SEP
+		var posOfDecSep = currentString.indexOf(DEC_SEP);
+		if(posOfDecSep >= 0)
+			return false;
+
+		var posOfFirstThouSep       = currentString.indexOf(THOU_SEP);
+
+		// Check if this is the first occurrence of a THOU_SEP
+		if(posOfFirstThouSep < 0)
+			return true;
+
+		var posOfLastThouSep        = currentString.lastIndexOf(THOU_SEP);
+		var charsSinceLastThouSep   = currentString.length - posOfLastThouSep - 1;
+
+		// Check if there has been 3 digits since the last THOU_SEP
+		if(charsSinceLastThouSep < 3)
+			return false;
+
+		var digitsSinceFirstThouSep = countDigits(currentString.substring(posOfFirstThouSep));
+
+		// Check if there has been a multiple of 3 digits since the first THOU_SEP
+		if((digitsSinceFirstThouSep % 3) > 0)
+			return false;
+
+		return true;
+	}
 	
 	////////////////////////////////////////////////////////////////////////////////////
 	// Implementation of a Set
@@ -619,12 +652,12 @@
 		return trimNum(inputString, combinedSettings);
 	};
 
-	$.fn.alphanum.setNumericSeparators = function(thousandsSeparator, decimalSeparator) {
+	$.fn.alphanum.setNumericSeparators = function(settings) {
 
-		if(thousandsSeparator.length != 1)
+		if(settings.thousandsSeparator.length != 1)
 			return;
 
-		if(decimalSeparator.length != 1)
+		if(settings.decimalSeparator.length != 1)
 			return;
 
 		THOU_SEP = thousandsSeparator;
