@@ -14,6 +14,8 @@
 		var $collection = this;
 
 		setupEventHandlers($collection, trimAlphaNum, combinedSettings);
+
+		return this;
 	};
 	
 	$.fn.alpha = function(settings) {
@@ -24,6 +26,8 @@
 		var $collection = this;
 
 		setupEventHandlers($collection, trimAlphaNum, combinedSettings);
+
+		return this;
 	};
 	
 	$.fn.numeric = function(settings) {
@@ -34,7 +38,8 @@
 		setupEventHandlers($collection, trimNum, combinedSettings);
 
 		$collection.blur(numericField_Blur)
-		
+
+		return this;
 	};
 	
 	// End of API /////////////////////////////////////////////////////////////

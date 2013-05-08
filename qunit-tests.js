@@ -2,6 +2,7 @@ jQuery(document).ready(function(){
 
 	var ARRAY_OF_TEST_GROUPS = getTestData();
 	
+	chainingTests();
 	runAllTests();
 	
 	function runAllTests(){
@@ -50,6 +51,12 @@ jQuery(document).ready(function(){
 		var actual = $.fn.alphanum.backdoorNumeric(inputString, options);
 
 		equal(actual, expectedString);
+	}
+
+	function chainingTests() {
+		test("jQuery Chaining", function(){
+			ok(jQuery("#dbg").alphanum().alpha().numeric().hide());
+		});
 	}
 
 });
