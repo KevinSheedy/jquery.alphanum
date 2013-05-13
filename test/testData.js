@@ -300,6 +300,42 @@ var getTestData = function(){
 				[ '1,23,456,',  '1,23456'    ],
 				[ '1,23,4567,', '1,234567,'  ]
 			]
+		},
+		
+		{
+			name: "Precedence of Rules",
+			type    : "alphanum",
+			options : {
+				allow : "/",
+				disallow : "/"
+			},
+			data : [
+				[ '/',          '/'          ]
+			]
+		},
+		
+		{
+			name: "Precedence of Rules",
+			type    : "alphanum",
+			options : {
+				allow : "/",
+				allowCaseless : false
+			},
+			data : [
+				[ '/',          '/'          ]
+			]
+		},
+		
+		{
+			name: "Precedence of Rules",
+			type    : "alphanum",
+			options : {
+				disallow : "a",
+				allowLatin : true
+			},
+			data : [
+				[ 'a',          ''          ]
+			]
 		}
 	];
 	

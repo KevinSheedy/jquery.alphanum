@@ -144,7 +144,7 @@
 
 			var $textbox = $(this);
 
-			$textbox.bind("keyup change paste", function(){
+			$textbox.bind("keyup change paste", function(e){
 
 				// setTimeout is necessary for handling the 'paste' event
 				setTimeout(function(){
@@ -271,6 +271,9 @@
 	
 	// This is the heart of the algorithm
 	function alphanum_allowChar(Char, settings){
+
+		if(settings.allow.indexOf(Char) >=0 )
+			return true;
 		
 		if(settings.allowSpace && (Char == " "))
 			return true;
