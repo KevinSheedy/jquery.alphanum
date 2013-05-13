@@ -146,9 +146,14 @@
 
 			$textbox.bind("keyup change paste", function(e){
 
+				var pastedText = "";
+
+				if(e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData)
+					pastedText = e.originalEvent.clipboardData.getData("text/plain")
+
 				// setTimeout is necessary for handling the 'paste' event
 				setTimeout(function(){
-					trimTextbox($textbox, trimFunction, settings);
+					trimTextbox($textbox, trimFunction, settings, pastedText);
 				}, 0);
 			});
 
@@ -216,9 +221,13 @@
 	// Which event gets fired first, keypress or keyup? What about IE6 etc etc?
 	// Instead, it's easier to allow the 'bad' character to be entered and then to delete it immediately after.
 	
-	function trimTextbox($textBox, trimFunction, settings){
+	function trimTextbox($textBox, trimFunction, settings, pastedText){
 		
 		var inputString = $textBox.val();
+
+		if(inputString == "" && pastedText.length > 0)
+			inputString = pastedText;
+		
 		var outputString = trimFunction(inputString, settings);
 		
 		if(inputString == outputString)
