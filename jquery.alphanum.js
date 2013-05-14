@@ -162,7 +162,9 @@
 				// Determine which key is pressed.
 				// If it's a control key, then allow the event's default action to occur eg backspace, tab
 				var charCode = !e.charCode ? e.which : e.charCode;
-				if(isControlKey(charCode) || e.ctrlKey)
+				if(isControlKey(charCode)
+					|| e.ctrlKey
+					|| e.metaKey ) // cmd on MacOS
 					return;
 
 				var newChar         = String.fromCharCode(charCode);
