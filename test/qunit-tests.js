@@ -3,9 +3,10 @@ jQuery(document).ready(function(){
 	var ARRAY_OF_TEST_GROUPS = getTestData();
 	
 	chainingTests();
-	runAllTests();
+	onblurTests();
+	runValidationTests();
 	
-	function runAllTests(){
+	function runValidationTests(){
 		
 		jQuery.each(ARRAY_OF_TEST_GROUPS, function(index, testGroup){
 			
@@ -56,6 +57,64 @@ jQuery(document).ready(function(){
 	function chainingTests() {
 		test("jQuery Chaining", function(){
 			ok(jQuery("#dbg").alphanum().alpha().numeric().hide());
+		});
+	}
+
+	function onblurTests() {
+		test("settings.min > 0", function(){
+
+			var $numericInput = $("#numericInput");
+
+			$numericInput
+				.numeric({
+					min: 10
+				})
+				.val("1")
+				.focus();
+
+			equal($numericInput.val(), "1");
+
+			$("#alphanumInput").focus();
+
+			equal($numericInput.val(), "");
+
+		});
+
+		test("settings.max < 0", function(){
+
+			var $numericInput = $("#numericInput");
+
+			$numericInput
+				.numeric({
+					max: -10,
+					allowMinus: true
+				})
+				.val("-1")
+				.focus();
+
+			equal($numericInput.val(), "-1");
+
+			$("#alphanumInput").focus();
+
+			equal($numericInput.val(), "");
+
+		});
+
+		test("numeric() NaN", function(){
+
+			var $numericInput = $("#numericInput");
+
+			$numericInput
+				.numeric()
+				.val(".")
+				.focus();
+
+			equal($numericInput.val(), ".");
+
+			$("#alphanumInput").focus();
+
+			equal($numericInput.val(), "");
+
 		});
 	}
 

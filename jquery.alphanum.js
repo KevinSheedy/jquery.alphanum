@@ -37,7 +37,9 @@
 
 		setupEventHandlers($collection, trimNum, combinedSettings);
 
-		$collection.blur(numericField_Blur)
+		$collection.blur(function(){
+			numericField_Blur(this, settings);
+		});
 
 		return this;
 	};
@@ -199,11 +201,24 @@
 
 	// Ensure the text is a valid number when focus leaves the textbox
 	// This catches the case where a user enters '-' or '.' without entering any digits
-	function numericField_Blur() {
-		var fieldValueNumeric = parseFloat($(this).val());
+	function numericField_Blur(inputBox, settings) {
+		var fieldValueNumeric = parseFloat($(inputBox).val());
+		var $inputBox = $(inputBox);
 
-		if(isNaN(fieldValueNumeric))
-			$(this).val("");
+		if(isNaN(fieldValueNumeric)) {
+			$inputBox.val("");
+			return;
+		}
+
+		if(isNumeric(settings.min) && fieldValueNumeric < settings.min)
+			$inputBox.val("");
+
+		if(isNumeric(settings.max) && fieldValueNumeric > settings.max)
+			$inputBox.val("");
+	}
+
+	function isNumeric(value) {
+		return !isNaN(value);
 	}
 
 	function isControlKey(charCode) {
@@ -427,7 +442,7 @@
 
 	function isGreaterThanMax(numericString, settings) {
 
-		if(!settings.max)
+		if(!settings.max || settings.max < 0)
 			return false;
 
 		var outputNumber = parseFloat(numericString);
@@ -439,7 +454,7 @@
 
 	function isLessThanMin(numericString, settings) {
 
-		if(!settings.min)
+		if(!settings.min || settings.min > 0)
 			return false;
 
 		var outputNumber = parseFloat(numericString);

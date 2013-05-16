@@ -277,6 +277,33 @@ var getTestData = function(){
 		},
 		
 		{
+			name: "Max: < 0",
+			type    : "numeric",
+			options : {
+				max : -15
+			},
+			data : [
+				[ '-',     '-'    ],
+				[ '-1',    '-1'   ],
+				[ '-12',   '-12'  ],
+				[ '-123',  '-123' ]
+			]
+		},
+		
+		{
+			name: "Min: > 0",
+			type    : "numeric",
+			options : {
+				min : 15
+			},
+			data : [
+				[ '1',    '1'   ],
+				[ '12',   '12'  ],
+				[ '123',  '123' ]
+			]
+		},
+		
+		{
 			name: "Multiple Thousands Separators",
 			type    : "numeric",
 			options : {
