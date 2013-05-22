@@ -250,15 +250,15 @@
 		if(inputString == outputString)
 			return;
 		
-		var caretPos = $textBox.caret();
+		var caretPos = $textBox.alphanum_caret();
 		
 		$textBox.val(outputString);
 		
 		//Reset the caret position
 		if(inputString.length ==(outputString.length + 1))
-			$textBox.caret(caretPos - 1);
+			$textBox.alphanum_caret(caretPos - 1);
 		else
-			$textBox.caret(caretPos);
+			$textBox.alphanum_caret(caretPos);
 	}
 	
 	function getCombinedSettingsAlphaNum(settings, defaultSettings){
@@ -710,7 +710,7 @@
 (function ($) {
 	// Behind the scenes method deals with browser
 	// idiosyncrasies and such
-	$.caretTo = function (el, index) {
+	function caretTo(el, index) {
 		if (el.createTextRange) { 
 			var range = el.createTextRange(); 
 			range.move("character", index); 
@@ -725,7 +725,7 @@
 	// current caret position for an element
 	
 	// TODO: Get working with Opera
-	$.caretPos = function (el) {
+	function caretPos(el) {
 		if ("selection" in document) {
 			var range = el.createTextRange();
 			try {
@@ -746,9 +746,9 @@
 	// jQuery effects.
 
 	// Set caret to a particular index
-	$.fn.caret = function (index, offset) {
+	$.fn.alphanum_caret = function (index, offset) {
 		if (typeof(index) === "undefined") {
-			return $.caretPos(this.get(0));
+			return caretPos(this.get(0));
 		}
 		
 		return this.queue(function (next) {
@@ -761,24 +761,11 @@
 					i += offset;
 				}
 				
-				$.caretTo(this, i);
+				caretTo(this, i);
 			} else {
-				$.caretTo(this, index);
+				caretTo(this, index);
 			}
 			
-			next();
-		});
-	};
-
-	// Set caret to beginning of an element
-	$.fn.caretToStart = function () {
-		return this.caret(0);
-	};
-
-	// Set caret to the end of an element
-	$.fn.caretToEnd = function () {
-		return this.queue(function (next) {
-			$.caretTo(this, $(this).val().length);
 			next();
 		});
 	};
