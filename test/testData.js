@@ -330,6 +330,33 @@ var getTestData = function(){
 		},
 		
 		{
+			name: "Blacklist Ascii Chars",
+			type    : "alphanum",
+			options : {
+
+			},
+			data : [
+				[ '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.-_', '']
+			]
+		},
+		
+		{
+			name: "Blacklist Unicode Chars",
+			type    : "alphanum",
+			options : {
+
+			},
+			data : [
+				[ "\xAC"     // ¬
+				+ "\u20AC"   // €
+				+ "\xA3"     // £
+				+ "\xA6"     // ¦
+
+				, '']
+			]
+		},
+		
+		{
 			name: "Precedence of Rules",
 			type    : "alphanum",
 			options : {
