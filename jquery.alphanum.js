@@ -118,7 +118,8 @@
 	
 	// Return the blacklisted special chars that are encodable using 7-bit ascii
 	function getBlacklistAscii(){
-		var blacklist = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.- _';
+		var blacklist = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.-_';
+		blacklist += " "; // 'Space' is on the blacklist but can be enabled using the 'allowSpace' config entry
 		return blacklist;
 	}
 	
@@ -131,6 +132,7 @@
 			  "\xAC"     // ¬
 			+ "\u20AC"   // €
 			+ "\xA3"     // £
+			+ "\xA6"     // ¦
 			;
 		return blacklist;
 	}
