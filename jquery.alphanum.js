@@ -58,7 +58,8 @@
 		allowLower         : true, // Allow lower case characters
 		allowCaseless      : true, // Allow characters that don't have both upper & lower variants - eg Arabic or Chinese
 		allowLatin         : true, // a-z A-Z
-		allowOtherCharSets : true  // eg é, Á, Arabic, Chinese etc
+		allowOtherCharSets : true, // eg é, Á, Arabic, Chinese etc
+		maxLength          : ''    // eg Max Length
 	}
 	
 	var DEFAULT_SETTINGS_NUM = {
@@ -298,7 +299,7 @@
 	
 	
 	// This is the heart of the algorithm
-	function alphanum_allowChar(Char, settings){
+	function alphanum_allowChar(validatedStringFragment, Char, settings){
 
 		if(settings.allow.indexOf(Char) >=0 )
 			return true;
@@ -323,7 +324,9 @@
 		
 		if(!settings.allowLatin && LATIN_CHARS.contains(Char))
 			return false;
-		
+
+		if(settings.maxLength && validatedStringFragment.length >= settings.maxLength)
+			return false;
 		
 		if(!settings.allowOtherCharSets){
 			if(DIGITS[Char] || LATIN_CHARS.contains(Char))
@@ -481,7 +484,8 @@
 		
 		for(i=0; i<inChars.length; i++){
 			Char = inChars[i];
-			if(alphanum_allowChar(Char, settings))
+			var validatedStringFragment = outChars.join("");
+			if(alphanum_allowChar(validatedStringFragment, Char, settings))
 				outChars.push(Char);
 		}
 		

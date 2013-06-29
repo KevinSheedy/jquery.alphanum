@@ -45,7 +45,8 @@ var DEFAULT_SETTINGS_ALPHANUM = {
 	allowLower         : true, // Allow lower case characters
 	allowCaseless      : true, // Allow characters that don't have both upper & lower variants - eg Arabic or Chinese
 	allowLatin         : true, // a-z A-Z
-	allowOtherCharSets : true  // eg é, Á, Arabic, Chinese etc
+	allowOtherCharSets : true, // eg é, Á, Arabic, Chinese etc
+	maxLength          : ''    // eg Max Length
 }
 ```
 

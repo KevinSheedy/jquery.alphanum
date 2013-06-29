@@ -390,6 +390,18 @@ var getTestData = function(){
 			data : [
 				[ 'a',          ''          ]
 			]
+		},
+		
+		{
+			name: "maxLength 5",
+			type    : "alphanum",
+			options : {
+				maxLength : 5
+			},
+			data : [
+				[ 'abcde',          'abcde'          ],
+				[ 'abcdef',         'abcde'          ]
+			]
 		}
 	];
 	
