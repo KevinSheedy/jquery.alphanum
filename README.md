@@ -6,15 +6,15 @@ $("#my_input").alphanum();
 Restricts the characters that may be entered into a text field.
 
 ```bash
-$(selector).alphanum([optional] settings);
+.alphanum();
 ```
 
 ```bash
-$(selector).alpha([optional] settings);
+.alpha();
 ```
 
 ```bash
-$(selector).numeric([optional] settings);
+.numeric();
 ```
 
 
@@ -186,5 +186,16 @@ The blacklist may be extended or reduced using the 'allow' and 'disallow' settin
 $("#password").alphanumeric({
 	allow :    '&,;', // Specify characters to allow
 	disallow : 'xyz'  // Specify characters to disallow
+});
+```
+
+Internationalization
+====================
+To change the characters that are used as numeric separators, use the following global method:
+
+```bash
+$.fn.alphanum.setNumericSeparators({
+	thousandsSeparator: " ",
+	decimalSeparator: ","
 });
 ```
