@@ -700,8 +700,8 @@
 		if(settings.decimalSeparator.length != 1)
 			return;
 
-		THOU_SEP = thousandsSeparator;
-		DEC_SEP = decimalSeparator;
+		THOU_SEP = settings.thousandsSeparator;
+		DEC_SEP = settings.decimalSeparator;
 	}
 
 })( jQuery );
