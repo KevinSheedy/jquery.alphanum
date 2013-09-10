@@ -59,7 +59,7 @@
 		allowCaseless      : true, // Allow characters that don't have both upper & lower variants - eg Arabic or Chinese
 		allowLatin         : true, // a-z A-Z
 		allowOtherCharSets : true, // eg é, Á, Arabic, Chinese etc
-		maxLength          : ''    // eg Max Length
+		maxLength          : NaN   // eg Max Length
 	}
 	
 	var DEFAULT_SETTINGS_NUM = {
@@ -68,11 +68,11 @@
 		allowThouSep        : true,  // Allow the thousands separator, default is the comma eg 12,000
 		allowDecSep         : true,  // Allow the decimal separator, default is the fullstop eg 3.141
 		allowLeadingSpaces  : false,
-		maxDigits           : '',    // The max number of digits or '' for no max
-		maxDecimalPlaces    : '',    // The max number of decimal places or '' for no max
-		maxPreDecimalPlaces : '',    // The max number digits before the decimal point or '' for no max
-		max                 : '',    // The max numeric value allowed
-		min                 : ''     // The min numeric value allowed
+		maxDigits           : NaN,   // The max number of digits
+		maxDecimalPlaces    : NaN,   // The max number of decimal places
+		maxPreDecimalPlaces : NaN,   // The max number digits before the decimal point
+		max                 : NaN,   // The max numeric value allowed
+		min                 : NaN    // The min numeric value allowed
 	}
 	
 	// Some pre-defined groups of settings for convenience
