@@ -402,6 +402,18 @@ var getTestData = function(){
 				[ 'abcde',          'abcde'          ],
 				[ 'abcdef',         'abcde'          ]
 			]
+		},
+		
+		{
+			name: "allow characters combined with maxLength",
+			type    : "alphanum",
+			options : {
+				allow : '@',
+				maxLength : 3
+			},
+			data : [
+				[ '123@@@',          '123'          ]
+			]
 		}
 	];
 	

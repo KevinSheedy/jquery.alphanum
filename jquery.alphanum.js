@@ -301,6 +301,9 @@
 	// This is the heart of the algorithm
 	function alphanum_allowChar(validatedStringFragment, Char, settings){
 
+		if(settings.maxLength && validatedStringFragment.length >= settings.maxLength)
+			return false;
+
 		if(settings.allow.indexOf(Char) >=0 )
 			return true;
 		
@@ -323,9 +326,6 @@
 			return false;
 		
 		if(!settings.allowLatin && LATIN_CHARS.contains(Char))
-			return false;
-
-		if(settings.maxLength && validatedStringFragment.length >= settings.maxLength)
 			return false;
 		
 		if(!settings.allowOtherCharSets){
