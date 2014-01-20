@@ -55,7 +55,9 @@
 		allowSpace         : true, // Allow the space character
 		allowNumeric       : true, // Allow digits 0-9
 		allowUpper         : true, // Allow upper case characters
+		forceUpper         : false,// Convert lower case characters to upper case
 		allowLower         : true, // Allow lower case characters
+		forceLower         : false,// Convert upper case characters to lower case
 		allowCaseless      : true, // Allow characters that don't have both upper & lower variants - eg Arabic or Chinese
 		allowLatin         : true, // a-z A-Z
 		allowOtherCharSets : true, // eg é, Á, Arabic, Chinese etc
@@ -192,7 +194,7 @@
 				// Unfortunately, it isn't enough to just check if the new char is valid because some chars
 				// are position sensitive eg the decimal point '.'' or the minus sign '-'' are only valid in certain positions.
 				var potentialTextAfterKeypress = textBeforeKeypress.substring(0, start) + newChar + textBeforeKeypress.substring(end);
-				var validatedText              = trimFunction(potentialTextAfterKeypress, settings);
+				var validatedText              = trimFunction(potentialTextAfterKeypress, settings, true);
 
 				// If the keypress would cause the textbox to contain invalid characters, then cancel the keypress event
 				if(validatedText != potentialTextAfterKeypress)
@@ -472,7 +474,7 @@
 	/********************************
 	 * Trims a string according to the settings provided
 	 ********************************/
-	function trimAlphaNum(inputString, settings){
+	function trimAlphaNum(inputString, settings, noForceCase){
 		
 		if(typeof inputString != "string")
 			return inputString;
@@ -488,8 +490,19 @@
 			if(alphanum_allowChar(validatedStringFragment, Char, settings))
 				outChars.push(Char);
 		}
+
+		var outputString = outChars.join("");
+
+		if(!noForceCase) {
+			if(settings.forceLower) {
+				outputString = outputString.toLowerCase();
+			}
+			else if(settings.forceUpper) {
+				outputString = outputString.toUpperCase();
+			}
+		}
 		
-		return outChars.join("");
+		return outputString;
 	}
 	
 	function trimNum(inputString, settings){
