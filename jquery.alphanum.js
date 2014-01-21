@@ -194,7 +194,7 @@
 				// Unfortunately, it isn't enough to just check if the new char is valid because some chars
 				// are position sensitive eg the decimal point '.'' or the minus sign '-'' are only valid in certain positions.
 				var potentialTextAfterKeypress = textBeforeKeypress.substring(0, start) + newChar + textBeforeKeypress.substring(end);
-				var validatedText              = trimFunction(potentialTextAfterKeypress, settings, true);
+				var validatedText              = trimFunction(potentialTextAfterKeypress, settings);
 
 				// If the keypress would cause the textbox to contain invalid characters, then cancel the keypress event
 				if(validatedText != potentialTextAfterKeypress)
@@ -474,7 +474,7 @@
 	/********************************
 	 * Trims a string according to the settings provided
 	 ********************************/
-	function trimAlphaNum(inputString, settings, noForceCase){
+	function trimAlphaNum(inputString, settings){
 		
 		if(typeof inputString != "string")
 			return inputString;
@@ -493,14 +493,10 @@
 
 		var outputString = outChars.join("");
 
-		if(!noForceCase) {
-			if(settings.forceLower) {
-				outputString = outputString.toLowerCase();
-			}
-			else if(settings.forceUpper) {
-				outputString = outputString.toUpperCase();
-			}
-		}
+		if(settings.forceLower) 
+			outputString = outputString.toLowerCase();
+		else if(settings.forceUpper)
+			outputString = outputString.toUpperCase();
 		
 		return outputString;
 	}

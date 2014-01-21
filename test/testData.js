@@ -414,6 +414,28 @@ var getTestData = function(){
 			data : [
 				[ '123@@@',          '123'          ]
 			]
+		},
+		
+		{
+			name: "forceUpper",
+			type    : "alphanum",
+			options : {
+				forceUpper : true
+			},
+			data : [
+				[ 'lorem ipsum 123',          'LOREM IPSUM 123'          ]
+			]
+		},
+		
+		{
+			name: "forceLower",
+			type    : "alphanum",
+			options : {
+				forceLower : true
+			},
+			data : [
+				[ 'LOREM IPSUM 123',          'lorem ipsum 123'          ]
+			]
 		}
 	];
 	
