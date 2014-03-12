@@ -375,6 +375,9 @@
 			// Only one decimal separator allowed
 			if(validatedStringFragment.indexOf(DEC_SEP) >= 0)
 				return false;
+			// Don't allow decimal separator when maxDecimalPlaces is set to 0
+			if(settings.allowDecSep && settings.maxDecimalPlaces === 0)
+				return false;
 			if(settings.allowDecSep)
 				return true;
 		}
