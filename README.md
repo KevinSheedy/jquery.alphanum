@@ -185,7 +185,7 @@ var blacklist =
 
 The blacklist may be extended or reduced using the 'allow' and 'disallow' settings
 ```bash
-$("#password").alphanumeric({
+$("#password").alphanum({
 	allow :    '&,;', // Specify characters to allow
 	disallow : 'xyz'  // Specify characters to disallow
 });
