@@ -1,1 +1,1 @@
-nightwatch --test nightwatch/test1.js
+nightwatch --test nightwatch/*
