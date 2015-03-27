@@ -1,6 +1,6 @@
 {
 	"name": "jquery-alphanum",
-	"version": "1.0.16",
+	"version": "1.0.17",
 	"main": ["jquery.alphanum.js"],
 	"ignore": [
 		".editorconfig",
