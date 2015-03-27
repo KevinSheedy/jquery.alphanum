@@ -13,6 +13,9 @@ module.exports = function(grunt) {
 		},
 		watch: {
 
+		},
+		nightwatch: {
+
 		}
 	});
 
@@ -21,5 +24,6 @@ module.exports = function(grunt) {
 
 	// Default task(s).
 	grunt.registerTask('default', ['connect', 'watch']);
+	grunt.registerTask('nw', ['connect', 'nightwatch:chrome']);
 
 };
