@@ -43,7 +43,8 @@ var DEFAULT_SETTINGS_ALPHANUM = {
 	allowNumeric       : true,  // Allow digits 0-9
 	allowUpper         : true,  // Allow upper case characters
 	allowLower         : true,  // Allow lower case characters
-	allowCaseless      : true,  // Allow characters that don't have both upper & lower variants - eg Arabic or Chinese
+	allowCaseless      : true,  // Allow characters that do not have both upper & lower variants
+	                            // eg Arabic or Chinese
 	allowLatin         : true,  // a-z A-Z
 	allowOtherCharSets : true,  // eg é, Á, Arabic, Chinese etc
 	forceUpper         : false, // Convert lower case characters to upper case
