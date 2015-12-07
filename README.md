@@ -1,7 +1,10 @@
 jQuery Alphanum
 ===============
+
+[jsfiddle demo](http://jsfiddle.net/KevinSheedy/fb0zgxaj/)
+
 ```bash
-$("#my_input").alphanum();
+$(input).alphanum();
 ```
 Restricts the characters that may be entered into a text field.
 
