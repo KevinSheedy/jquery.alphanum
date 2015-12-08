@@ -33,6 +33,8 @@
     "grunt": "^0.4.5",
     "grunt-contrib-connect": "^0.9.0",
     "grunt-contrib-watch": "^0.6.1",
-    "jit-grunt": "^0.9.1"
+    "jit-grunt": "^0.9.1",
+    "karma": "^0.13.15",
+    "karma-qunit": "^0.1.8"
   }
 }
