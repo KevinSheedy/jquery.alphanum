@@ -35,6 +35,9 @@
     "grunt-contrib-watch": "^0.6.1",
     "jit-grunt": "^0.9.1",
     "karma": "^0.13.15",
-    "karma-qunit": "^0.1.8"
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-qunit": "^0.1.8",
+    "phantomjs": "^1.9.19"
   }
 }

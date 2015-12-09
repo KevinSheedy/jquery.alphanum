@@ -3,7 +3,7 @@ jQuery(document).ready(function(){
 	var ARRAY_OF_TEST_GROUPS = getTestData();
 	
 	chainingTests();
-	onblurTests();
+	//onblurTests();
 	runValidationTests();
 	
 	function runValidationTests(){
