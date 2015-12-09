@@ -18,8 +18,9 @@ module.exports = function(grunt) {
 
 	// Load the plugin that provides the "uglify" task.
 	require('jit-grunt')(grunt);
+	grunt.loadNpmTasks('grunt-selenium-webdriver');
 
 	// Default task(s).
-	grunt.registerTask('default', ['connect', 'watch']);
+	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
 
 };

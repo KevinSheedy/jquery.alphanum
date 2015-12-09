@@ -1,8 +1,16 @@
 var webdriver      = require('selenium-webdriver'),
+	SeleniumServer = require('selenium-webdriver/remote').SeleniumServer
 	By             = require('selenium-webdriver').By,
 	until          = require('selenium-webdriver').until,
 	assert         = require('assert');
 
+
+var pathToSeleniumJar = 'C:/apps/selenium/selenium-server-standalone-2.45.0.jar';
+var server = new SeleniumServer(pathToSeleniumJar, {
+	port: 4444
+});
+
+server.start();
 
 var driver = new webdriver.Builder().
 	usingServer(server.address()).
