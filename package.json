@@ -38,6 +38,7 @@
     "karma-chrome-launcher": "^0.2.2",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-qunit": "^0.1.8",
-    "phantomjs": "^1.9.19"
+    "phantomjs": "^1.9.19",
+    "selenium-webdriver": "^2.48.2"
   }
 }
