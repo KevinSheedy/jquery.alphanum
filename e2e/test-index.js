@@ -1,3 +1,4 @@
+console.log('foo');
 var webdriver = require('selenium-webdriver'),
     SeleniumServer = require('selenium-webdriver/remote').SeleniumServer
     By = require('selenium-webdriver').By,
@@ -15,8 +16,13 @@ var driver = new webdriver.Builder().
     withCapabilities(webdriver.Capabilities.chrome()).
     build();
 
-driver.get('http://www.google.com/ncr');
-driver.findElement(By.name('q')).sendKeys('webdriver');
-driver.findElement(By.name('btnG')).click();
-driver.wait(until.titleIs('webdriver - Google Search'), 2000);
-driver.quit();
+driver.get('http://localhost:08080/e2e/index.html');
+driver.findElement(By.id('textbox')).sendKeys('lorem.ipsum');
+
+var promise = driver.findElement(webdriver.By.id("textbox")).getAttribute('value');
+
+
+promise.then(function(text) {
+    console.log(text);
+	driver.quit();
+});
