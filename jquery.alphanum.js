@@ -53,6 +53,7 @@
 		allow              : '',    // Allow extra characters
 		disallow           : '',    // Disallow extra characters
 		allowSpace         : true,  // Allow the space character
+		allowNewline       : true,  // Allow the newline character \n ascii 10
 		allowNumeric       : true,  // Allow digits 0-9
 		allowUpper         : true,  // Allow upper case characters
 		allowLower         : true,  // Allow lower case characters
@@ -311,6 +312,9 @@
 		
 		if(settings.allowSpace && (Char == " "))
 			return true;
+		
+		if(!settings.allowNewline && (Char == '\n' || Char == '\r'))
+			return false;
 			
 		if(settings.blacklistSet.contains(Char))
 			return false;

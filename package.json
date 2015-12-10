@@ -1,6 +1,6 @@
 {
   "name": "jquery.alphanum",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "Restrict what characters that may be entered into text fields. Supports alphanumeric, alphabetic or numeric. Easy to use. Fully customisable. Cross Browser compatible.",
   "main": "jquery.alphanum.js",
   "directories": {

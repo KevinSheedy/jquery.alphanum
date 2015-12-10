@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jquery.alphanum e2e tests</title>
+	<link rel="stylesheet" href="vendor/qunit.css" type="text/css" media="screen">
+	<link rel="icon" href="../favicon.ico">
+</head>
+<body>
+	<div>
+		<textarea type="text" id="allowNewline"></textarea>
+		<textarea type="text" id="disallowNewline"></textarea>
+	</div>
+	<script src="../lib/jquery.js"></script>
+	<script src="../jquery.alphanum.js"></script>
+
+	<script>
+		$('#allowNewline').alphanum();
+		$('#disallowNewline').alphanum({
+			allowNewline: false
+		});
+	</script>
+</body>
+</html>
