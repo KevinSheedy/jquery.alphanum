@@ -153,22 +153,22 @@
 			var $textbox = $(this);
 
 			$textbox
-				.off("keyup.alphanum change.alphanum paste.alphanum")
+				// Unbind existing alphanum event handlers
+				.off(".alphanum")
+
 				.on("keyup.alphanum change.alphanum paste.alphanum", function(e){
 
-				var pastedText = "";
+					var pastedText = "";
 
-				if(e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData)
-					pastedText = e.originalEvent.clipboardData.getData("text/plain")
+					if(e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData)
+						pastedText = e.originalEvent.clipboardData.getData("text/plain")
 
-				// setTimeout is necessary for handling the 'paste' event
-				setTimeout(function(){
-					trimTextbox($textbox, trimFunction, settings, pastedText);
-				}, 0);
-			});
+					// setTimeout is necessary for handling the 'paste' event
+					setTimeout(function(){
+						trimTextbox($textbox, trimFunction, settings, pastedText);
+					}, 0);
+				})
 
-			$textbox
-				.off("keypress.alphanum")
 				.on("keypress.alphanum", function(e){
 				
 				// Determine which key is pressed.
