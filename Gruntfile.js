@@ -12,9 +12,15 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
+			grunt: { files: ['Gruntfile.js'] },
+			
 			mocha: {
-				files: ['e2e/**/*.js', 'e2e/**/*.html'],
+				files: ['jquery.alphanum.js', 'lib/**/*.js', 'e2e/**/*.js', 'e2e/**/*.html'],
 				tasks: ['mochaTest']
+			},
+			karma: {
+				files: ['jquery.alphanum.js', 'lib/**/*.js', 'unit/*'],
+				tasks: ['karma']
 			}
 		},
 		mochaTest: {
@@ -27,14 +33,24 @@ module.exports = function(grunt) {
 				},
 				src: ['e2e/tests.js']
 			}
-		}
+		},
+		karma: {
+			unit: {
+				configFile: 'karma.conf.js',
+				singleRun: true,
+				reporters: ['junit', 'dots'],
+				background: false
+			}
+		},
 	});
 
 	// Load the plugin that provides the "uglify" task.
 	require('jit-grunt')(grunt);
 	grunt.loadNpmTasks('grunt-selenium-webdriver');
+	grunt.loadNpmTasks('grunt-karma');
 
 	// Default task(s).
 	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
+	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
 
 };

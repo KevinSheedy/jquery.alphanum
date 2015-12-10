@@ -4,7 +4,7 @@ var webdriver = require('selenium-webdriver'),
 		until     = webdriver.until;
 
 var driver = new webdriver.Builder().
-	 withCapabilities(webdriver.Capabilities.chrome()).
+	 withCapabilities(webdriver.Capabilities.phantomjs()).
 	 build();
 
 var e2eroot = 'http://localhost:9001/e2e';

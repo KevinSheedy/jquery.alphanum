@@ -14,10 +14,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/vendor/jquery.js',
+      'lib/jquery.js',
       'jquery.alphanum.js',
-      'test/vendor/qunit-extras.js',
-      'test/*.js'
+      'lib/qunit-extras.js',
+      'unit/*.js'
     ],
 
     // Test results reporter to use
@@ -26,7 +26,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
