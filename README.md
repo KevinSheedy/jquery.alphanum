@@ -169,6 +169,11 @@ Equivalent to the convenience option
 $("#first_name").alphanum("alpha");
 ```
 
+# Unbind jquery.alphanum
+To unbind jquery.alphaum from an element
+
+    $('input').off('.alphanum');
+
 Blacklist
 ===============
 jquery.alphanum works by maintaining a blacklist of non-alphanumeric characters. There is no whitelist. It is assumed that all unicode characters are permissable unless there is a specific rule that disallows them.

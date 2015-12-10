@@ -80,6 +80,18 @@ test.describe('e2e tests', function() {
 
 	});
 
+	test.it('unbind', function() {
+
+		driver.get(e2eroot + '/unbind.html');
+
+		var textbox = driver.findElement(webdriver.By.id('textbox'));
+		textbox.sendKeys('abcdefg');
+		textbox.getAttribute('value').then(function(value) {
+			assert.equal(value, 'abcdefg');
+		});
+
+	});
+
 	test.after(function() {
 		driver.quit();
 	})
