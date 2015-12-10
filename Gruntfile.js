@@ -12,17 +12,20 @@ module.exports = function(grunt) {
 			}
 		},
 		watch: {
-
+			mocha: {
+				files: ['e2e/**/*.js', 'e2e/**/*.html'],
+				tasks: ['mochaTest']
+			}
 		},
 		mochaTest: {
 			test: {
 				options: {
 					reporter: 'spec',
-					captureFile: 'results.txt', // Optionally capture the reporter output to a file 
+					captureFile: 'log/results.txt', // Optionally capture the reporter output to a file 
 					quiet: false, // Optionally suppress output to standard out (defaults to false) 
 					clearRequireCache: false // Optionally clear the require cache before running tests (defaults to false) 
 				},
-				src: ['e2e/test-textarea.js']
+				src: ['e2e/tests.js']
 			}
 		}
 	});
