@@ -152,7 +152,9 @@
 
 			var $textbox = $(this);
 
-			$textbox.bind("keyup change paste", function(e){
+			$textbox
+				.off("keyup.alphanum change.alphanum paste.alphanum")
+				.on("keyup.alphanum change.alphanum paste.alphanum", function(e){
 
 				var pastedText = "";
 
@@ -165,7 +167,9 @@
 				}, 0);
 			});
 
-			$textbox.bind("keypress", function(e){
+			$textbox
+				.off("keypress.alphanum")
+				.on("keypress.alphanum", function(e){
 				
 				// Determine which key is pressed.
 				// If it's a control key, then allow the event's default action to occur eg backspace, tab
