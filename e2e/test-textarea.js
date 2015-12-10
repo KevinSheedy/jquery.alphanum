@@ -1,39 +1,56 @@
 var webdriver = require('selenium-webdriver'),
-test = require('selenium-webdriver/testing'),
-assert = require('assert');
+		test      = require('selenium-webdriver/testing'),
+		assert    = require('assert'),
+		until     = webdriver.until;
 
 var driver = new webdriver.Builder().
-   withCapabilities(webdriver.Capabilities.chrome()).
-   build();
+	 withCapabilities(webdriver.Capabilities.chrome()).
+	 build();
 
-test.describe('Google Search', function() {
-  test.it('should work', function() {
+var e2eroot = 'http://localhost:9001/e2e';
 
-    driver.get('http://localhost:9001/e2e/');
 
-    var textbox = driver.findElement(webdriver.By.id('textbox'));
-    textbox.sendKeys('lorem.ipsum');
-    textbox.getAttribute('value').then(function(value) {
-      assert.equal(value, 'loremipsum');
-    });
+test.describe('jquery.alphanum e2e tests', function() {
 
-  });
+	test.it('Open Browser', function() {
 
-  test.it('should work', function() {
+		this.timeout(5000);
 
-    driver.get('http://localhost:9001/e2e/textarea.html');
+		driver.get(e2eroot);
 
-    var textbox = driver.findElement(webdriver.By.id('textareabox'));
-    textbox.sendKeys('foo#bar');
-    textbox.getAttribute('value').then(function(value) {
-      assert.equal(value, 'foobar');
-    });
+		driver.wait(function() {
+			return driver.getTitle().then(function(title) {
+				return title === 'jquery.alphanum e2e tests';
+			});
+		}, 5000);
 
-  });
+	});
 
-  test.after(function() {
-  	driver.quit();
-  })
+	test.it('input[text]', function() {
+
+		driver.get(e2eroot);
+
+		var textbox = driver.findElement(webdriver.By.id('textbox'));
+		textbox.sendKeys('lorem.ipsum');
+		textbox.getAttribute('value').then(function(value) {
+			assert.equal(value, 'loremipsum');
+		});
+
+	});
+
+	test.it('textarea', function() {
+
+		driver.get(e2eroot + '/textarea.html');
+
+		var textbox = driver.findElement(webdriver.By.id('textareabox'));
+		textbox.sendKeys('foo#bar');
+		textbox.getAttribute('value').then(function(value) {
+			assert.equal(value, 'foobar');
+		});
+
+	});
+
+	test.after(function() {
+		driver.quit();
+	})
 });
-
-//driver.quit();
