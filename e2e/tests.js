@@ -3,9 +3,10 @@ var webdriver = require('selenium-webdriver'),
 		assert    = require('assert'),
 		until     = webdriver.until;
 
-var driver = new webdriver.Builder().
-	 withCapabilities(webdriver.Capabilities.phantomjs()).
-	 build();
+console.log(webdriver.Capabilities);
+var driver = new webdriver.Builder()
+	.withCapabilities(webdriver.Capabilities.phantomjs())
+	.build();
 
 var e2eroot = 'http://localhost:9001/e2e';
 

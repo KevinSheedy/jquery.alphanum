@@ -1,6 +1,6 @@
 # jQuery Alphanum
 
-[jsfiddle demo](http://jsfiddle.net/KevinSheedy/fb0zgxaj/)
+[jsfiddle demo](http://jsfiddle.net/fb0zgxaj/2/)
 
 	$(input).alphanum();
 
