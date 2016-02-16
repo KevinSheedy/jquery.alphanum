@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 				tasks: ['karma']
 			},
 			eslint: {
-				files: ['.eslintrc.json'],
+				files: ['jquery.alphanum.js', '.eslintrc.json', 'Gruntfile.js'],
 				tasks: ['eslint:dev']
 			}
 		},
@@ -52,7 +52,7 @@ module.exports = function(grunt) {
 				//cache: false
 			},
 			dev: {
-				src: ['jquery.alphanum.js']
+				src: ['jquery.alphanum.js', 'Gruntfile.js']
 			}
 		}
 	});

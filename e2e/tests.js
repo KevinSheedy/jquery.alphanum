@@ -3,7 +3,7 @@ var webdriver = require('selenium-webdriver'),
 		assert    = require('assert'),
 		until     = webdriver.until;
 
-console.log(webdriver.Capabilities);
+
 var driver = new webdriver.Builder()
 	.withCapabilities(webdriver.Capabilities.phantomjs())
 	.build();
