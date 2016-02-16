@@ -12,6 +12,6 @@
 	},
 	
 	"rules": {
-
+		"no-mixed-spaces-and-tabs": [2, "smart-tabs"]
 	}
 }
