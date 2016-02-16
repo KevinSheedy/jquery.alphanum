@@ -376,7 +376,7 @@
 		if(settings.allowMinus && Char == '-' && validatedStringFragment == '')
 			return true;
 
-		if(Char == THOU_SEP && settings.allowThouSep && allowThouSep(validatedStringFragment, Char))
+		if(Char == THOU_SEP && settings.allowThouSep && allowThouSep(validatedStringFragment))
 			return true;
 
 		if(Char == DEC_SEP) {
@@ -528,21 +528,6 @@
 		return outChars.join("");
 	}
 	
-	function removeUpperCase(inputString){
-		var charArray = inputString.split('');
-		var i = 0;
-		var outputArray = [];
-		var Char;
-		
-		for(i=0; i<charArray.length; i++){
-			Char = charArray[i];
-		}
-	}
-	
-	function removeLowerCase(inputString){
-		
-	}
-	
 	function isUpper(Char){
 		var upper = Char.toUpperCase();
 		var lower = Char.toLowerCase();
@@ -602,7 +587,7 @@
 		return azAZ;
 	}
 
-	function allowThouSep(currentString, Char) {
+	function allowThouSep(currentString) {
 
 		// Can't start with a THOU_SEP
 		if(currentString.length == 0)
