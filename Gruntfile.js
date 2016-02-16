@@ -21,6 +21,10 @@ module.exports = function(grunt) {
 			karma: {
 				files: ['jquery.alphanum.js', 'lib/**/*.js', 'unit/*'],
 				tasks: ['karma']
+			},
+			eslint: {
+				files: ['.eslintrc.json'],
+				tasks: ['eslint:dev']
 			}
 		},
 		mochaTest: {
@@ -42,9 +46,19 @@ module.exports = function(grunt) {
 				background: false
 			}
 		},
+		eslint: {
+			options: {
+				//outputFile: 'reports/eslint.report'
+				//cache: false
+			},
+			dev: {
+				src: ['jquery.alphanum.js']
+			}
+		}
 	});
 
 	// Load the plugin that provides the "uglify" task.
+	grunt.loadNpmTasks("gruntify-eslint");
 	require('jit-grunt')(grunt);
 	grunt.loadNpmTasks('grunt-selenium-webdriver');
 	grunt.loadNpmTasks('grunt-karma');
