@@ -38,7 +38,7 @@
 		setupEventHandlers($collection, trimNum, combinedSettings);
 
 		$collection.blur(function(){
-			numericField_Blur(this, settings);
+			numericField_Blur(this, combinedSettings);
 		});
 
 		return this;
