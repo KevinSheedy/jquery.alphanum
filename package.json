@@ -45,6 +45,7 @@
     "karma-qunit": "^0.1.8",
     "mocha": "^2.3.4",
     "phantomjs": "^1.9.19",
+    "qunitjs": "^1.21.0",
     "selenium-webdriver": "^2.48.2"
   }
 }
