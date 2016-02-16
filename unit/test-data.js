@@ -176,7 +176,7 @@ var getTestData = function(){
 				maxDecimalPlaces: 0
 			},
 			data : [
-				[ "1.1234",   "1."  ]
+				[ "1.1234",   "11234"  ]
 			]
 		},
 		
