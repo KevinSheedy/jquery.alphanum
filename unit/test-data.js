@@ -159,6 +159,28 @@ var getTestData = function(){
 		},
 		
 		{
+			name: "maxPreDecimalPlaces 0",
+			type    : "numeric",
+			options:  {
+				maxPreDecimalPlaces: 0
+			},
+			data : [
+				[ "1.1234",   ".1234"  ]
+			]
+		},
+		
+		{
+			name: "maxDecimalPlaces 0",
+			type    : "numeric",
+			options:  {
+				maxDecimalPlaces: 0
+			},
+			data : [
+				[ "1.1234",   "1."  ]
+			]
+		},
+		
+		{
 			name: "Disallow Plus & Minus signs",
 			type    : "numeric",
 			options:  {

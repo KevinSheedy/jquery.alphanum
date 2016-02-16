@@ -403,7 +403,7 @@
 
 		var maxDigits = settings.maxDigits;
 
-		if(maxDigits == "" || isNaN(maxDigits))
+		if(maxDigits === "" || isNaN(maxDigits))
 			return false; // In this case, there is no maximum
 
 		var numDigits = countDigits(string);
@@ -418,7 +418,7 @@
 
 		var maxDecimalPlaces = settings.maxDecimalPlaces;
 
-		if(maxDecimalPlaces == "" || isNaN(maxDecimalPlaces))
+		if(maxDecimalPlaces === "" || isNaN(maxDecimalPlaces))
 			return false; // In this case, there is no maximum
 
 		var indexOfDecimalPoint = string.indexOf(DEC_SEP);
@@ -439,7 +439,7 @@
 
 		var maxPreDecimalPlaces = settings.maxPreDecimalPlaces;
 
-		if(maxPreDecimalPlaces == "" || isNaN(maxPreDecimalPlaces))
+		if(maxPreDecimalPlaces === "" || isNaN(maxPreDecimalPlaces))
 			return false; // In this case, there is no maximum
 
 		var indexOfDecimalPoint = string.indexOf(DEC_SEP);
