@@ -46,7 +46,7 @@ test.describe('e2e tests', function() {
 		var textbox = driver.findElement(webdriver.By.id('textareabox'));
 		textbox.sendKeys('foo#bar');
 		textbox.getAttribute('value').then(function(value) {
-			assert.equal(value, 'foobar');
+			assert.equal(value, 'foobarrrr');
 		});
 
 	});
