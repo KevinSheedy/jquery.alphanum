@@ -2,9 +2,9 @@
 * This file is encoded in UTF-8
 ***************************************************************/
 
-var getTestData = function(){
+window.getTestData = function(){
 	var testData = [
-		
+
 		{
 		    name    : "Alpha Numeric",
 			type    : "alphanum",
@@ -15,7 +15,7 @@ var getTestData = function(){
 				[ "",          ""      ]
 			]
 		},
-		
+
 		{
 		    name    : "allow = '*+'     \t disallow = 'xy'",
 			type    : "alphanum",
@@ -29,7 +29,7 @@ var getTestData = function(){
 				[ "",          ""      ]
 			]
 		},
-		
+
 		{
 		    name    : "allowSpace = false",
 			type    : "alphanum",
@@ -40,7 +40,7 @@ var getTestData = function(){
 				[ "   ", "" ]
 			]
 		},
-		
+
 		{
 		    name    : "allowNumeric = false",
 			type    : "alphanum",
@@ -51,7 +51,7 @@ var getTestData = function(){
 				[ "a123z", "az" ]
 			]
 		},
-		
+
 		{
 		    name    : "allowUpper = false",
 			type    : "alphanum",
@@ -62,7 +62,7 @@ var getTestData = function(){
 				[ "abcABC", "abc" ]
 			]
 		},
-		
+
 		{
 		    name    : "allowLower = false",
 			type    : "alphanum",
@@ -73,7 +73,7 @@ var getTestData = function(){
 				[ "abcABC", "ABC" ]
 			]
 		},
-		
+
 		{
 		    name    : "allowCaseless = false",
 			type    : "alphanum",
@@ -84,7 +84,7 @@ var getTestData = function(){
 				[ "الصغرى", "" ]
 			]
 		},
-		
+
 		{
 		    name    : "allowLatin = false",
 			type    : "alphanum",
@@ -95,7 +95,7 @@ var getTestData = function(){
 				[ "abcABCáéó", "áéó" ]
 			]
 		},
-		
+
 		{
 		    name    : "allowOtherCharSets = false",
 			type    : "alphanum",
@@ -108,9 +108,9 @@ var getTestData = function(){
 				[ "维基百科关于中文维基百科", "" ]
 			]
 		},
-		
-		
-		
+
+
+
 		{
 			name: "Alphabetic",
 			type    : "alphanum",
@@ -120,7 +120,7 @@ var getTestData = function(){
 				[ " ",         " "    ]
 			]
 		},
-		
+
 		{
 			name: "Numeric",
 			type    : "numeric",
@@ -130,7 +130,7 @@ var getTestData = function(){
 				[ ".",         "."    ]
 			]
 		},
-		
+
 		{
 			name: "Numeric Max Digits / Decimals",
 			type    : "numeric",
@@ -144,7 +144,7 @@ var getTestData = function(){
 				[ "1234.567", "1234.5"]
 			]
 		},
-		
+
 		{
 			name: "Max pre-decimal places",
 			type    : "numeric",
@@ -157,7 +157,7 @@ var getTestData = function(){
 				[ "123.123",   "12.12"  ]
 			]
 		},
-		
+
 		{
 			name: "maxPreDecimalPlaces 0",
 			type    : "numeric",
@@ -168,7 +168,7 @@ var getTestData = function(){
 				[ "1.1234",   ".1234"  ]
 			]
 		},
-		
+
 		{
 			name: "maxDecimalPlaces 0",
 			type    : "numeric",
@@ -179,7 +179,7 @@ var getTestData = function(){
 				[ "1.1234",   "11234"  ]
 			]
 		},
-		
+
 		{
 			name: "Disallow Plus & Minus signs",
 			type    : "numeric",
@@ -193,7 +193,7 @@ var getTestData = function(){
 				[ "-123", "123"]
 			]
 		},
-		
+
 		{
 			name: "Allow Plus & Minus signs",
 			type    : "numeric",
@@ -208,7 +208,7 @@ var getTestData = function(){
 				[ "-123", "-123"]
 			]
 		},
-		
+
 		{
 			name: "Allow Minus, Disallow Plus",
 			type    : "numeric",
@@ -222,7 +222,7 @@ var getTestData = function(){
 				[ "-123", "-123"]
 			]
 		},
-		
+
 		{
 			name: "Integer",
 			type    : "numeric",
@@ -233,7 +233,7 @@ var getTestData = function(){
 				[ "1,234.56", "123456"]
 			]
 		},
-		
+
 		{
 			name: "Positive Integer",
 			type    : "numeric",
@@ -244,7 +244,7 @@ var getTestData = function(){
 				[ "1,234.56", "123456"]
 			]
 		},
-		
+
 		{
 			name: "Decimal Point",
 			type    : "numeric",
@@ -253,7 +253,7 @@ var getTestData = function(){
 				[ "1.2.3",     "1.23" ]
 			]
 		},
-		
+
 		{
 			name: "Max & Min: -5 to 5",
 			type    : "numeric",
@@ -273,7 +273,7 @@ var getTestData = function(){
 				[ '-10', '-1' ]
 			]
 		},
-		
+
 		{
 			name: "Max & Min: -5.8 to 5.8",
 			type    : "numeric",
@@ -297,7 +297,7 @@ var getTestData = function(){
 				[ '-6',    '-'     ]
 			]
 		},
-		
+
 		{
 			name: "Max: < 0",
 			type    : "numeric",
@@ -311,7 +311,7 @@ var getTestData = function(){
 				[ '-123',  '-123' ]
 			]
 		},
-		
+
 		{
 			name: "Min: > 0",
 			type    : "numeric",
@@ -324,7 +324,7 @@ var getTestData = function(){
 				[ '123',  '123' ]
 			]
 		},
-		
+
 		{
 			name: "Multiple Thousands Separators",
 			type    : "numeric",
@@ -350,7 +350,7 @@ var getTestData = function(){
 				[ '1,23,4567,', '1,234567,'  ]
 			]
 		},
-		
+
 		{
 			name: "Blacklist Ascii Chars",
 			type    : "alphanum",
@@ -361,7 +361,7 @@ var getTestData = function(){
 				[ '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.-_', '']
 			]
 		},
-		
+
 		{
 			name: "Blacklist Unicode Chars",
 			type    : "alphanum",
@@ -377,7 +377,7 @@ var getTestData = function(){
 				, '']
 			]
 		},
-		
+
 		{
 			name: "Precedence of Rules",
 			type    : "alphanum",
@@ -389,7 +389,7 @@ var getTestData = function(){
 				[ '/',          '/'          ]
 			]
 		},
-		
+
 		{
 			name: "Precedence of Rules",
 			type    : "alphanum",
@@ -401,7 +401,7 @@ var getTestData = function(){
 				[ '/',          '/'          ]
 			]
 		},
-		
+
 		{
 			name: "Precedence of Rules",
 			type    : "alphanum",
@@ -413,7 +413,7 @@ var getTestData = function(){
 				[ 'a',          ''          ]
 			]
 		},
-		
+
 		{
 			name: "maxLength 5",
 			type    : "alphanum",
@@ -425,7 +425,7 @@ var getTestData = function(){
 				[ 'abcdef',         'abcde'          ]
 			]
 		},
-		
+
 		{
 			name: "allow characters combined with maxLength",
 			type    : "alphanum",
@@ -437,7 +437,7 @@ var getTestData = function(){
 				[ '123@@@',          '123'          ]
 			]
 		},
-		
+
 		{
 			name: "forceUpper",
 			type    : "alphanum",
@@ -448,7 +448,7 @@ var getTestData = function(){
 				[ 'lorem ipsum 123',          'LOREM IPSUM 123'          ]
 			]
 		},
-		
+
 		{
 			name: "forceLower",
 			type    : "alphanum",
@@ -460,6 +460,6 @@ var getTestData = function(){
 			]
 		}
 	];
-	
+
 	return testData;
 }

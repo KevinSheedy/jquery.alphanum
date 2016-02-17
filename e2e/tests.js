@@ -1,7 +1,6 @@
 var webdriver = require('selenium-webdriver'),
 		test      = require('selenium-webdriver/testing'),
-		assert    = require('assert'),
-		until     = webdriver.until;
+		assert    = require('assert');
 
 
 var driver = new webdriver.Builder()
