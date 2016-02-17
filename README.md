@@ -15,7 +15,7 @@ Restricts the characters that may be entered into a text field.
 ## .alphanum()
 
 Restrict the input to alphanumeric characters
-	
+
 	$("#username").alphanum();
 
 Override some of the default settings
@@ -182,3 +182,20 @@ To change the characters that are used as numeric separators, use the following 
 		thousandsSeparator: " ",
 		decimalSeparator: ","
 	});
+
+# Contributing
+
+## Developer Setup
+
+Install [node.js](https://nodejs.org/en/)
+
+    # Install grunt
+    npm install -g grunt-cli
+
+    # Install dependencies
+    npm install
+	
+    # Start the development server:
+    grunt
+
+The server scans the source code for changes and automatically runs eslint, unit tests and e2e tests.
