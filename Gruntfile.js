@@ -66,5 +66,6 @@ module.exports = function(grunt) {
 	// Default task(s).
 	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
 	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
+	grunt.registerTask('travis', ['eslint', 'karma']);
 
 };
