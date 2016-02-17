@@ -14,17 +14,19 @@ module.exports = function(grunt) {
 		watch: {
 			grunt: { files: ['Gruntfile.js'] },
 
-			mocha: {
-				files: ['jquery.alphanum.js', 'lib/**/*.js', 'e2e/**/*.js', 'e2e/**/*.html'],
-				tasks: ['mochaTest']
+			eslint: {
+				files: ['jquery.alphanum.js', '.eslintrc.json', 'Gruntfile.js'],
+				tasks: ['eslint:dev']
 			},
+
 			karma: {
 				files: ['jquery.alphanum.js', 'lib/**/*.js', 'unit/*'],
 				tasks: ['karma']
 			},
-			eslint: {
-				files: ['jquery.alphanum.js', '.eslintrc.json', 'Gruntfile.js'],
-				tasks: ['eslint:dev']
+
+			mocha: {
+				files: ['jquery.alphanum.js', 'lib/**/*.js', 'e2e/**/*.js', 'e2e/**/*.html'],
+				tasks: ['mochaTest']
 			}
 		},
 		mochaTest: {
@@ -66,6 +68,7 @@ module.exports = function(grunt) {
 	// Default task(s).
 	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
 	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
-	grunt.registerTask('travis', ['eslint', 'karma']);
+	grunt.registerTask('travis', ['eslint', 'karma', 'e2e']);
+	grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
 
 };
