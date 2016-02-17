@@ -92,6 +92,46 @@ test.describe('e2e tests', function() {
 
 	});
 
+	test.it('copy-paste simple', function() {
+
+		driver.get(e2eroot + '/copy-paste.html');
+
+		var from = driver.findElement(webdriver.By.id('from'));
+		from.sendKeys('a123b');
+		from.sendKeys(webdriver.Key.CONTROL, "a");
+		from.sendKeys(webdriver.Key.CONTROL, "c");
+
+		var to = driver.findElement(webdriver.By.id('to'));
+		to.sendKeys(webdriver.Key.CONTROL, "v");
+
+
+		to.getAttribute('value').then(function(value) {
+			assert.equal(value, 'ab');
+		});
+
+	});
+
+	test.it('copy-paste mid string', function() {
+
+		driver.get(e2eroot + '/copy-paste.html');
+
+		var from = driver.findElement(webdriver.By.id('from'));
+		from.sendKeys('a123b');
+		from.sendKeys(webdriver.Key.CONTROL, "a");
+		from.sendKeys(webdriver.Key.CONTROL, "c");
+
+		var to = driver.findElement(webdriver.By.id('to'));
+		to.sendKeys('xy')
+		to.sendKeys(webdriver.Key.ARROW_LEFT);
+		to.sendKeys(webdriver.Key.CONTROL, "v");
+
+
+		to.getAttribute('value').then(function(value) {
+			assert.equal(value, 'xaby');
+		});
+
+	});
+
 	test.after(function() {
 		driver.quit();
 	})
