@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 			grunt: { files: ['Gruntfile.js'] },
 
 			eslint: {
-				files: ['jquery.alphanum.js', '.eslintrc.json', 'Gruntfile.js'],
+				files: ['.eslintrc.json', '*.js', 'unit/**/*.js', 'e2e/**/*.js'],
 				tasks: ['eslint:dev']
 			},
 
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
 				//cache: false
 			},
 			dev: {
-				src: ['jquery.alphanum.js', 'Gruntfile.js']
+				src: ['*.js', 'unit/**/*.js', 'e2e/**/*.js']
 			}
 		}
 	});
