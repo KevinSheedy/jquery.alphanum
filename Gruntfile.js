@@ -14,17 +14,19 @@ module.exports = function(grunt) {
 		watch: {
 			grunt: { files: ['Gruntfile.js'] },
 
-			mocha: {
-				files: ['jquery.alphanum.js', 'lib/**/*.js', 'e2e/**/*.js', 'e2e/**/*.html'],
-				tasks: ['mochaTest']
+			eslint: {
+				files: ['jquery.alphanum.js', '.eslintrc.json', 'Gruntfile.js'],
+				tasks: ['eslint:dev']
 			},
+
 			karma: {
 				files: ['jquery.alphanum.js', 'lib/**/*.js', 'unit/*'],
 				tasks: ['karma']
 			},
-			eslint: {
-				files: ['jquery.alphanum.js', '.eslintrc.json', 'Gruntfile.js'],
-				tasks: ['eslint:dev']
+
+			mocha: {
+				files: ['jquery.alphanum.js', 'lib/**/*.js', 'e2e/**/*.js', 'e2e/**/*.html'],
+				tasks: ['mochaTest']
 			}
 		},
 		mochaTest: {
