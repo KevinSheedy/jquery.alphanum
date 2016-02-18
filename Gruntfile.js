@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+	//var request = require('request');
 
 	// Project configuration.
 	grunt.initConfig({
@@ -56,6 +57,22 @@ module.exports = function(grunt) {
 			dev: {
 				src: ['*.js', 'unit/**/*.js', 'e2e/**/*.js']
 			}
+		},
+		'saucelabs-qunit': {
+			all: {
+				options: {
+					username: process.env.SAUCE_USERNAME, // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
+					key: process.env.SAUCE_ACCESS_KEY, // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
+					urls: ['http://localhost:9001/unit' /*, 'www.example.com/mochaTests'*/],
+					build: process.env.CI_BUILD_NUMBER,
+					testname: 'Sauce Unit Test for example.com',
+					browsers: [
+						["XP", "chrome", 31]
+					]
+					// optionally, he `browsers` param can be a flattened array:
+					// [["XP", "firefox", 19], ["XP", "chrome", 31]]
+				}
+			}
 		}
 	});
 
@@ -64,11 +81,13 @@ module.exports = function(grunt) {
 	require('jit-grunt')(grunt);
 	grunt.loadNpmTasks('grunt-selenium-webdriver');
 	grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-saucelabs');
 
 	// Default task(s).
 	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
 	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
-	grunt.registerTask('travis', ['eslint', 'karma', 'e2e']);
+	grunt.registerTask('travis', ['eslint', 'karma', 'connect', 'selenium_start', 'mochaTest', 'saucelabs-qunit']);
 	grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
+	grunt.registerTask('sauce', ['connect', 'saucelabs-qunit']);
 
 };

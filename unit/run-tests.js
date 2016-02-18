@@ -5,6 +5,7 @@ jQuery(document).ready(function(){
 	var equal = window.equal;
 	var ok = window.ok;
 
+	initSauce();
 	chainingTests();
 	runValidationTests();
 
@@ -58,6 +59,35 @@ jQuery(document).ready(function(){
 	function chainingTests() {
 		test("jQuery Chaining", function(){
 			ok(jQuery("#dbg").alphanum().alpha().numeric().hide());
+		});
+	}
+
+	function initSauce() {
+		var log = [];
+
+		QUnit.done(function (test_results) {
+			var tests = [];
+			for(var i = 0, len = log.length; i < len; i++) {
+				var details = log[i];
+				tests.push({
+					name: details.name,
+					result: details.result,
+					expected: details.expected,
+					actual: details.actual,
+					source: details.source
+				});
+			}
+			test_results.tests = tests;
+
+			window.global_test_results = test_results;
+		});
+		QUnit.testStart(function(testDetails){
+			QUnit.log(function(details){
+				if (!details.result) {
+					details.name = testDetails.name;
+					log.push(details);
+				}
+			});
 		});
 	}
 
