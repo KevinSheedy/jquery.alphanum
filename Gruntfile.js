@@ -61,16 +61,14 @@ module.exports = function(grunt) {
 		'saucelabs-qunit': {
 			all: {
 				options: {
-					username: 'user', // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
-					key: 'key', // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
+					username: process.env.SAUCE_USERNAME, // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
+					key: process.env.SAUCE_ACCESS_KEY, // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
 					urls: ['http://localhost:9001/unit' /*, 'www.example.com/mochaTests'*/],
 					build: process.env.CI_BUILD_NUMBER,
 					testname: 'Sauce Unit Test for example.com',
-					browsers: [{
-						browserName: 'firefox',
-						version: '19',
-						platform: 'XP'
-					}]
+					browsers: [
+						["XP", "chrome", 31]
+					]
 					// optionally, he `browsers` param can be a flattened array:
 					// [["XP", "firefox", 19], ["XP", "chrome", 31]]
 				}
@@ -90,5 +88,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
 	grunt.registerTask('travis', ['eslint', 'karma', 'e2e']);
 	grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
+	grunt.registerTask('sauce', ['connect', 'saucelabs-qunit']);
 
 };
