@@ -64,7 +64,6 @@ jQuery(document).ready(function(){
 
 	function initSauce() {
 		var log = [];
-		var testName;
 
 		QUnit.done(function (test_results) {
 			var tests = [];
