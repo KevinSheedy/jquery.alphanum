@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+	//var request = require('request');
 
 	// Project configuration.
 	grunt.initConfig({
@@ -56,6 +57,24 @@ module.exports = function(grunt) {
 			dev: {
 				src: ['*.js', 'unit/**/*.js', 'e2e/**/*.js']
 			}
+		},
+		'saucelabs-qunit': {
+			all: {
+				options: {
+					username: 'user', // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
+					key: 'key', // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
+					urls: ['http://localhost:9001/unit' /*, 'www.example.com/mochaTests'*/],
+					build: process.env.CI_BUILD_NUMBER,
+					testname: 'Sauce Unit Test for example.com',
+					browsers: [{
+						browserName: 'firefox',
+						version: '19',
+						platform: 'XP'
+					}]
+					// optionally, he `browsers` param can be a flattened array:
+					// [["XP", "firefox", 19], ["XP", "chrome", 31]]
+				}
+			}
 		}
 	});
 
@@ -64,6 +83,7 @@ module.exports = function(grunt) {
 	require('jit-grunt')(grunt);
 	grunt.loadNpmTasks('grunt-selenium-webdriver');
 	grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-saucelabs');
 
 	// Default task(s).
 	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
