@@ -67,7 +67,10 @@ module.exports = function(grunt) {
 					build: process.env.CI_BUILD_NUMBER,
 					testname: 'Unit Tests for jquery.alphanum',
 					browsers: [
-						["XP", "chrome", 31]
+						["XP", "chrome", '33'],
+						["XP", "firefox", '31.0'],
+						["XP", "internet explorer", '8'],
+						["vista", "internet explorer", '9']
 					]
 					// optionally, he `browsers` param can be a flattened array:
 					// [["XP", "firefox", 19], ["XP", "chrome", 31]]
@@ -98,7 +101,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
 	grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'sauce_connect:dev', 'mochaTest', 'sauce-connect-close']);
 	grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
-	grunt.registerTask('sauce-e2e', ['sauce_connect:dev', 'connect', 'mochaTest']);
+	grunt.registerTask('sauce-e2e', ['sauce_connect:dev', 'connect', 'mochaTest', 'sauce-connect-close']);
 	grunt.registerTask('sauce-unit', ['connect', 'saucelabs-qunit']);
 
 };
