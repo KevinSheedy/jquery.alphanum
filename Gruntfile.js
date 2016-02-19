@@ -67,13 +67,35 @@ module.exports = function(grunt) {
 					build: process.env.CI_BUILD_NUMBER,
 					testname: 'Unit Tests for jquery.alphanum',
 					browsers: [
-						["XP", "chrome", '33'],
-						["XP", "firefox", '31.0'],
-						["XP", "internet explorer", '8'],
-						["vista", "internet explorer", '9']
+						['', 'chrome', '40'],
+						['', 'chrome', '39'],
+						['', 'chrome', '31'],
+						['', 'chrome', '26'],
+
+						//['', 'firefox', '35'],
+						//['', 'firefox', '30'],
+						//['', 'firefox', '21'],
+						//['', 'firefox', '11'],
+						//['', 'firefox', '4'],
+
+						['Windows 10', 'microsoftedge', '20.10240'],
+						['Windows 10', 'internet explorer', '11'],
+						['Windows 8', 'internet explorer', '10'],
+						['Windows 7', 'internet explorer', '9'],
+						['XP', 'internet explorer', '8'],
+
+						['', 'opera', '12'],
+						['', 'opera', '11'],
+
+						['', 'android', '5'],
+						['', 'android', '4.4'],
+						['', 'android', '4.3'],
+
+						['OS X 10.11', 'safari', '9'],
+						['', 'safari', '8'],
+						['', 'safari', '7'],
+						['', 'safari', '6']
 					]
-					// optionally, he `browsers` param can be a flattened array:
-					// [["XP", "firefox", 19], ["XP", "chrome", 31]]
 				}
 			}
 		},
