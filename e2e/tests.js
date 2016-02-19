@@ -2,9 +2,22 @@ var webdriver = require('selenium-webdriver'),
 		test      = require('selenium-webdriver/testing'),
 		assert    = require('assert');
 
+var seleniumUrl = "http://" + process.env.SAUCE_USERNAME + ":" + process.env.SAUCE_ACCESS_KEY
+	+ "@ondemand.saucelabs.com:80/wd/hub";
+
+//seleniumUrl = "http://localhost:4444/wd/hub";
 
 var driver = new webdriver.Builder()
-	.withCapabilities(webdriver.Capabilities.phantomjs())
+	.withCapabilities({
+		'browserName': 'chrome',
+		'platform': 'Windows XP',
+		'version': '48.0',
+		'username': process.env.SAUCE_USERNAME,
+		'accessKey': process.env.SAUCE_ACCESS_KEY,
+		'tunnelIdentifier': 'tunnel-jquery-alphanum',
+		'name': 'e2e Tests for jquery.alphanum'
+	})
+	.usingServer(seleniumUrl)
 	.build();
 
 var e2eroot = 'http://localhost:9001/e2e';
@@ -12,9 +25,11 @@ var e2eroot = 'http://localhost:9001/e2e';
 
 test.describe('e2e tests', function() {
 
+	this.timeout(10000);
+
 	test.it('Open Browser', function() {
 
-		this.timeout(5000);
+		//this.timeout(10000);
 
 		driver.get(e2eroot);
 
@@ -22,7 +37,7 @@ test.describe('e2e tests', function() {
 			return driver.getTitle().then(function(title) {
 				return title === 'jquery.alphanum e2e tests';
 			});
-		}, 5000);
+		}, 10000);
 
 	});
 
