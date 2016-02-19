@@ -9,9 +9,9 @@ var seleniumUrl = "http://" + process.env.SAUCE_USERNAME + ":" + process.env.SAU
 
 var driver = new webdriver.Builder()
 	.withCapabilities({
-		'browserName': 'chrome',
+		'browserName': 'firefox',
 		'platform': 'Windows XP',
-		'version': '48.0',
+		'version': '44.0',
 		'username': process.env.SAUCE_USERNAME,
 		'accessKey': process.env.SAUCE_ACCESS_KEY,
 		'tunnelIdentifier': 'tunnel-jquery-alphanum',
@@ -25,7 +25,7 @@ var e2eroot = 'http://localhost:9001/e2e';
 
 test.describe('e2e tests', function() {
 
-	this.timeout(10000);
+	this.timeout(12000);
 
 	test.it('Open Browser', function() {
 
