@@ -65,12 +65,21 @@ module.exports = function(grunt) {
 					key: process.env.SAUCE_ACCESS_KEY, // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
 					urls: ['http://localhost:9001/unit' /*, 'www.example.com/mochaTests'*/],
 					build: process.env.CI_BUILD_NUMBER,
-					testname: 'Sauce Unit Test for example.com',
+					testname: 'Sauce Unit Test for jquery.alphanum',
 					browsers: [
 						["XP", "chrome", 31]
 					]
 					// optionally, he `browsers` param can be a flattened array:
 					// [["XP", "firefox", 19], ["XP", "chrome", 31]]
+				}
+			}
+		},
+		sauce_connect: {
+			dev: {
+				options: {
+					username: process.env.SAUCE_USERNAME,
+					accessKey: process.env.SAUCE_ACCESS_KEY,
+					tunnelIdentifier: 'tunnel-jquery-alphanum'
 				}
 			}
 		}
@@ -82,12 +91,14 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-selenium-webdriver');
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-saucelabs');
+	grunt.loadNpmTasks('grunt-sauce-connect-launcher');
 
 	// Default task(s).
 	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
 	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
-	grunt.registerTask('travis', ['eslint', 'karma', 'connect', 'selenium_start', 'mochaTest', 'saucelabs-qunit']);
+	grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'sauce_connect:dev', 'mochaTest', 'sauce-connect-close']);
 	grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
-	grunt.registerTask('sauce', ['connect', 'saucelabs-qunit']);
+	grunt.registerTask('sauce-e2e', ['sauce_connect:dev', 'connect', 'mochaTest']);
+	grunt.registerTask('sauce-unit', ['connect', 'saucelabs-qunit']);
 
 };
