@@ -104,7 +104,7 @@ module.exports = function(grunt) {
 				options: {
 					username: process.env.SAUCE_USERNAME,
 					accessKey: process.env.SAUCE_ACCESS_KEY,
-					tunnelIdentifier: 'tunnel-jquery-alphanum'
+					tunnelIdentifier: 'tunnel-jquery-alphanum-' + process.pid
 				}
 			}
 		}
