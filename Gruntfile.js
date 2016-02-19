@@ -72,11 +72,11 @@ module.exports = function(grunt) {
 						['', 'chrome', '31'],
 						['', 'chrome', '26'],
 
-						//['', 'firefox', '35'],
-						//['', 'firefox', '30'],
-						//['', 'firefox', '21'],
-						//['', 'firefox', '11'],
-						//['', 'firefox', '4'],
+						['', 'firefox', '35'],
+						['', 'firefox', '30'],
+						['', 'firefox', '21'],
+						['', 'firefox', '11'],
+						['', 'firefox', '4'],
 
 						['Windows 10', 'microsoftedge', '20.10240'],
 						['Windows 10', 'internet explorer', '11'],
