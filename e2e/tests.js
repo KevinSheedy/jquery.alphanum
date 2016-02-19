@@ -14,7 +14,8 @@ var driver = new webdriver.Builder()
 		'version': '48.0',
 		'username': process.env.SAUCE_USERNAME,
 		'accessKey': process.env.SAUCE_ACCESS_KEY,
-		'tunnelIdentifier': 'tunnel-jquery-alphanum'
+		'tunnelIdentifier': 'tunnel-jquery-alphanum',
+		'name': 'e2e Tests for jquery.alphanum'
 	})
 	.usingServer(seleniumUrl)
 	.build();

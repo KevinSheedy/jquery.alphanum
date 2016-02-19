@@ -65,7 +65,7 @@ module.exports = function(grunt) {
 					key: process.env.SAUCE_ACCESS_KEY, // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
 					urls: ['http://localhost:9001/unit' /*, 'www.example.com/mochaTests'*/],
 					build: process.env.CI_BUILD_NUMBER,
-					testname: 'Sauce Unit Test for jquery.alphanum',
+					testname: 'Unit Tests for jquery.alphanum',
 					browsers: [
 						["XP", "chrome", 31]
 					]
