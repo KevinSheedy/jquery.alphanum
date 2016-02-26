@@ -107,6 +107,25 @@ module.exports = function(grunt) {
 					tunnelIdentifier: 'tunnel-jquery-alphanum-' + process.pid
 				}
 			}
+		},
+
+		mochaWebdriver: {
+			options: {
+				timeout: 1000 * 60 * 3
+			},
+			sauce: {
+				src: ['e2e/promiseAPI.js'],
+				options: {
+					testName: 'sauce test',
+					concurrency: 2,
+					usePromises: true,
+					browsers: [
+						{browserName: 'internet explorer', platform: 'Windows 7', version: '9'},
+						{browserName: 'internet explorer', platform: 'Windows 7', version: '8'},
+						{browserName: 'chrome', platform: 'Windows 7', version: ''}
+					]
+				}
+			}
 		}
 	});
 
@@ -117,6 +136,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-saucelabs');
 	grunt.loadNpmTasks('grunt-sauce-connect-launcher');
+	grunt.loadNpmTasks('grunt-mocha-webdriver');
 
 	// Default task(s).
 	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
