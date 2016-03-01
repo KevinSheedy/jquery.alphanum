@@ -116,5 +116,37 @@ describe('e2e tests for jquery.alphanum', function () {
 				})
 				.then(done, done);
 		});
+
+		/*
+		it('copy-paste simple', function (done) {
+			var browser = this.browser;
+			var wd = this.wd;
+			var from, to;
+			browser.get(e2eroot + '/copy-paste.html')
+				.elementById('from')
+				.then(function (el) {
+					from = el;
+					return from.type('a123b');
+				})
+				.then(function () {
+					return from.keys([wd.SPECIAL_KEYS.Control, 'a']);
+				})
+				.then(function () {
+					return from.keys([wd.SPECIAL_KEYS.Control, 'c']);
+				})
+				.elementById('to')
+				.then(function (el) {
+					to = el;
+					return to.keys([wd.SPECIAL_KEYS.Control, 'v']);
+				})
+				.then(function () {
+					return to.getAttribute('value');
+				})
+				.then(function (val) {
+					return assert.equal(val, 'a123b');
+				})
+				.then(done, done);
+		});
+		*/
 	});
 });
