@@ -67,6 +67,17 @@ describe('e2e tests for jquery.alphanum', function () {
 				.then(function (val) {
 					return assert.equal(val, 'foo\nbar');
 				})
+				.elementById('disallowNewline')
+				.then(function (el) {
+					textbox = el;
+					return textbox.type('foo\nbar');
+				})
+				.then(function () {
+					return textbox.getAttribute('value');
+				})
+				.then(function (val) {
+					return assert.equal(val, 'foobar');
+				})
 				.then(done, done);
 		});
 	});
