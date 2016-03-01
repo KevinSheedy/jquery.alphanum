@@ -11,7 +11,9 @@
 	"globals": {
 		"jQuery": true,
 		"$": true,
-		"QUnit": true
+		"QUnit": true,
+		"describe": true,
+		"it": true
 	},
 	
 	"rules": {
