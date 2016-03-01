@@ -98,5 +98,23 @@ describe('e2e tests for jquery.alphanum', function () {
 				})
 				.then(done, done);
 		});
+
+		it('unbind', function (done) {
+			var browser = this.browser;
+			var textbox;
+			browser.get(e2eroot + '/unbind.html')
+				.elementById('textbox')
+				.then(function (el) {
+					textbox = el;
+					return textbox.type('abcdefg');
+				})
+				.then(function () {
+					return textbox.getAttribute('value');
+				})
+				.then(function (val) {
+					return assert.equal(val, 'abcdefg');
+				})
+				.then(done, done);
+		});
 	});
 });
