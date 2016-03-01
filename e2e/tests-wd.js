@@ -16,7 +16,7 @@ describe('e2e tests for jquery.alphanum', function () {
 				.then(done, done);
 		});
 
-		it('should have correct page title', function (done) {
+		it('input[text]', function (done) {
 			var browser = this.browser;
 			var textbox;
 			browser.get(e2eroot)
@@ -30,6 +30,24 @@ describe('e2e tests for jquery.alphanum', function () {
 				})
 				.then(function (val) {
 					return assert.equal(val, 'loremipsum');
+				})
+				.then(done, done);
+		});
+
+		it('textarea', function (done) {
+			var browser = this.browser;
+			var textbox;
+			browser.get(e2eroot + '/textarea.html')
+				.elementById('textareabox')
+				.then(function (el) {
+					textbox = el;
+					return textbox.type('foo#bar');
+				})
+				.then(function () {
+					return textbox.getAttribute('value');
+				})
+				.then(function (val) {
+					return assert.equal(val, 'foobar');
 				})
 				.then(done, done);
 		});
