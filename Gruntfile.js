@@ -148,7 +148,8 @@ module.exports = function(grunt) {
 
 	// Default task(s).
 	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
-	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
+	//grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
+	grunt.registerTask('test', ['unit', 'e2e']);
 	grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'mochaWebdriver']);
 	//grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'sauce_connect:dev', 'mochaTest', 'sauce-connect-close']);
 	//grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
@@ -156,5 +157,6 @@ module.exports = function(grunt) {
 	grunt.registerTask('sauce-unit', ['connect', 'saucelabs-qunit']);
 	grunt.registerTask('e2e', ['connect', 'mochaWebdriver:phantom']);
 	grunt.registerTask('e2e-sauce', ['connect', 'mochaWebdriver:sauce']);
+	grunt.registerTask('unit', ['karma']);
 
 };
