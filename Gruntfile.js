@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 
 			mocha: {
 				files: ['jquery.alphanum.js', 'lib/**/*.js', 'e2e/**/*.js', 'e2e/**/*.html'],
-				tasks: ['mochaTest']
+				tasks: ['mochaWebdriver:phantom']
 			}
 		},
 		mochaTest: {
@@ -147,7 +147,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-mocha-webdriver');
 
 	// Default task(s).
-	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
+	grunt.registerTask('default', ['connect', 'watch']);
 	//grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
 	grunt.registerTask('test', ['unit', 'e2e']);
 	grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'mochaWebdriver']);
