@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-describe('Promise-enabled WebDriver', function () {
+describe('e2e tests for jquery.alphanum', function () {
 
 	describe('simple e2e tests', function () {
 

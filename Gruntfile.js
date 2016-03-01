@@ -120,8 +120,8 @@ module.exports = function(grunt) {
 					concurrency: 2,
 					usePromises: true,
 					browsers: [
-						//{browserName: 'internet explorer', platform: 'Windows 7', version: '9'},
-						//{browserName: 'internet explorer', platform: 'Windows 7', version: '8'},
+						{browserName: 'internet explorer', platform: 'Windows 7', version: '9'},
+						{browserName: 'internet explorer', platform: 'Windows 7', version: '8'},
 						{browserName: 'chrome', platform: 'Windows 7', version: ''}
 					]
 				}
