@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 
 			mocha: {
 				files: ['jquery.alphanum.js', 'lib/**/*.js', 'e2e/**/*.js', 'e2e/**/*.html'],
-				tasks: ['mochaTest']
+				tasks: ['mochaWebdriver:phantom']
 			}
 		},
 		mochaTest: {
@@ -121,9 +121,17 @@ module.exports = function(grunt) {
 					usePromises: true,
 					browsers: [
 						{browserName: 'internet explorer', platform: 'Windows 7', version: '9'},
-						{browserName: 'internet explorer', platform: 'Windows 7', version: '8'},
+						//{browserName: 'internet explorer', platform: 'Windows 7', version: '8'},
 						{browserName: 'chrome', platform: 'Windows 7', version: ''}
 					]
+				}
+			},
+			phantom: {
+				src: ['e2e/tests-wd.js'],
+				options: {
+					testName: 'e2e Tests for jquery.alphanum',
+					usePhantom: true,
+					usePromises: true
 				}
 			}
 		}
@@ -139,13 +147,16 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-mocha-webdriver');
 
 	// Default task(s).
-	grunt.registerTask('default', ['selenium_start', 'connect', 'watch']);
-	grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
+	grunt.registerTask('default', ['connect', 'watch']);
+	//grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
+	grunt.registerTask('test', ['unit', 'e2e']);
 	grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'mochaWebdriver']);
 	//grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'sauce_connect:dev', 'mochaTest', 'sauce-connect-close']);
 	//grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
 	grunt.registerTask('sauce-e2e', ['sauce_connect:dev', 'connect', 'mochaTest', 'sauce-connect-close']);
 	grunt.registerTask('sauce-unit', ['connect', 'saucelabs-qunit']);
-	grunt.registerTask('e2e', ['connect', 'mochaWebdriver']);
+	grunt.registerTask('e2e', ['connect', 'mochaWebdriver:phantom']);
+	grunt.registerTask('e2e-sauce', ['connect', 'mochaWebdriver:sauce']);
+	grunt.registerTask('unit', ['karma']);
 
 };
