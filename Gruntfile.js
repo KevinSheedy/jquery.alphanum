@@ -121,6 +121,8 @@ module.exports = function(grunt) {
 					usePromises: true,
 					browsers: [
 						{browserName: 'internet explorer', platform: 'Windows 7', version: '9'},
+						{browserName: 'opera', platform: '', version: '12'},
+						//{browserName: 'android', platform: 'Linux', version: '5'},
 						//{browserName: 'internet explorer', platform: 'Windows 7', version: '8'},
 						{browserName: 'chrome', platform: 'Windows 7', version: ''}
 					]
