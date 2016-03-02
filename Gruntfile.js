@@ -133,6 +133,18 @@ module.exports = function(grunt) {
 					usePhantom: true,
 					usePromises: true
 				}
+			},
+			chrome: {
+				src: ['e2e/tests-wd.js'],
+				options: {
+					testName: 'e2e Tests for jquery.alphanum',
+					hostname: '127.0.0.1',
+					port: '4444',
+					usePromises: true,
+					browsers: [
+						{browserName: 'chrome'}
+					]
+				}
 			}
 		}
 	});
@@ -157,6 +169,7 @@ module.exports = function(grunt) {
 	grunt.registerTask('sauce-unit', ['connect', 'saucelabs-qunit']);
 	grunt.registerTask('e2e', ['connect', 'mochaWebdriver:phantom']);
 	grunt.registerTask('e2e-sauce', ['connect', 'mochaWebdriver:sauce']);
+	grunt.registerTask('e2e-chrome', ['selenium_start', 'connect', 'mochaWebdriver:chrome']);
 	grunt.registerTask('unit', ['karma']);
 
 };
