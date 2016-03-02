@@ -117,6 +117,25 @@ describe('e2e tests for jquery.alphanum', function () {
 				.then(done, done);
 		});
 
+		it('callbacks', function (done) {
+			var browser = this.browser;
+			var textbox;
+			browser.get(e2eroot + '/callbacks.html')
+				.elementById('textbox')
+				.then(function (el) {
+					textbox = el;
+					return textbox.type(';:');
+				})
+				.elementById('output')
+				.then(function (output) {
+					return output.getAttribute('value');
+				})
+				.then(function (val) {
+					return assert.equal(val, '2');
+				})
+				.then(done, done);
+		});
+
 		/*
 		it('copy-paste simple', function (done) {
 			var browser = this.browser;

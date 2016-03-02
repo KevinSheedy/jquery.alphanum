@@ -19,7 +19,7 @@
 		return alphanum('numeric', this, settings, callback);
 	};
 
-	function alphanum(type, $collection, settings) {
+	function alphanum(type, $collection, settings, callback) {
 
 		var trimFunction, combinedSettings;
 
@@ -39,7 +39,7 @@
 				break;
 		}
 
-		setupEventHandlers($collection, trimFunction, combinedSettings);
+		setupEventHandlers($collection, trimFunction, combinedSettings, callback);
 
 		if(type == 'numeric') {
 			$collection.blur(function(){
@@ -152,7 +152,7 @@
 
 	// Implementation details go here ////////////////////////////////////////////////////////
 
-	function setupEventHandlers($textboxes, trimFunction, settings) {
+	function setupEventHandlers($textboxes, trimFunction, settings, callback) {
 
 		$textboxes.each(function(){
 
@@ -208,8 +208,10 @@
 				var validatedText              = trimFunction(potentialTextAfterKeypress, settings);
 
 				// If the keypress would cause the textbox to contain invalid characters, then cancel the keypress event
-				if(validatedText != potentialTextAfterKeypress)
+				if(validatedText != potentialTextAfterKeypress) {
 					e.preventDefault();
+					callback();
+				}
 			});
 		});
 
