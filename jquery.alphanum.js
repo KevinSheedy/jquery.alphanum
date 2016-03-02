@@ -7,42 +7,48 @@
 (function( $ ){
 
 	// API ///////////////////////////////////////////////////////////////////
-	$.fn.alphanum = function(settings) {
-
-		var combinedSettings = getCombinedSettingsAlphaNum(settings);
-
-		var $collection = this;
-
-		setupEventHandlers($collection, trimAlphaNum, combinedSettings);
-
-		return this;
+	$.fn.alphanum = function(settings, callback) {
+		return alphanum('alpha', this, settings, callback);
 	};
 
-	$.fn.alpha = function(settings) {
-
-		var defaultAlphaSettings = getCombinedSettingsAlphaNum("alpha");
-		var combinedSettings = getCombinedSettingsAlphaNum(settings, defaultAlphaSettings);
-
-		var $collection = this;
-
-		setupEventHandlers($collection, trimAlphaNum, combinedSettings);
-
-		return this;
+	$.fn.alpha = function(settings, callback) {
+		return alphanum('alpha', this, settings, callback);
 	};
 
-	$.fn.numeric = function(settings) {
-
-		var combinedSettings = getCombinedSettingsNum(settings);
-		var $collection = this;
-
-		setupEventHandlers($collection, trimNum, combinedSettings);
-
-		$collection.blur(function(){
-			numericField_Blur(this, combinedSettings);
-		});
-
-		return this;
+	$.fn.numeric = function(settings, callback) {
+		return alphanum('numeric', this, settings, callback);
 	};
+
+	function alphanum(type, $collection, settings) {
+
+		var trimFunction, combinedSettings;
+
+		switch(type) {
+			case 'alphanum':
+				trimFunction = trimAlphaNum;
+				combinedSettings = getCombinedSettingsAlphaNum(settings);
+				break;
+			case 'alpha':
+				trimFunction = trimAlphaNum;
+				var defaultAlphaSettings = getCombinedSettingsAlphaNum("alpha");
+				combinedSettings = getCombinedSettingsAlphaNum(settings, defaultAlphaSettings);
+				break;
+			case 'numeric':
+				trimFunction = trimNum;
+				combinedSettings = getCombinedSettingsNum(settings);
+				break;
+		}
+
+		setupEventHandlers($collection, trimFunction, combinedSettings);
+
+		if(type == 'numeric') {
+			$collection.blur(function(){
+				numericField_Blur(this, combinedSettings);
+			});
+		}
+
+		return $collection;
+	}
 
 	// End of API /////////////////////////////////////////////////////////////
 
