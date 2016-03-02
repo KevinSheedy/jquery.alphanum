@@ -174,13 +174,13 @@ module.exports = function(grunt) {
 	//grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
 	//grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'sauce_connect:dev', 'mochaTest', 'sauce-connect-close']);
 	//grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
-	
+
 	grunt.registerTask('default', ['connect', 'watch']);
-	grunt.registerTask('test', ['unit', 'e2e']);
+	grunt.registerTask('test', ['eslint', 'unit', 'e2e']);
 	grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'mochaWebdriver']);
 
-	grunt.registerTask('sauce-unit', ['connect', 'saucelabs-qunit']);
 	grunt.registerTask('unit', ['karma']);
+	grunt.registerTask('unit-sauce', ['connect', 'saucelabs-qunit']);
 
 	grunt.registerTask('e2e', ['e2e-phantom']);
 	grunt.registerTask('e2e-phantom', ['connect', 'mochaWebdriver:phantom']);
