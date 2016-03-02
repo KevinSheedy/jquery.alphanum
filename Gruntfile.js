@@ -145,6 +145,18 @@ module.exports = function(grunt) {
 						{browserName: 'chrome'}
 					]
 				}
+			},
+			firefox: {
+				src: ['e2e/tests-wd.js'],
+				options: {
+					testName: 'e2e Tests for jquery.alphanum',
+					hostname: '127.0.0.1',
+					port: '4444',
+					usePromises: true,
+					browsers: [
+						{browserName: 'firefox'}
+					]
+				}
 			}
 		}
 	});
@@ -159,17 +171,22 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-mocha-webdriver');
 
 	// Default task(s).
-	grunt.registerTask('default', ['connect', 'watch']);
 	//grunt.registerTask('test', ['selenium_start', 'connect', 'karma', 'mochaTest']);
-	grunt.registerTask('test', ['unit', 'e2e']);
-	grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'mochaWebdriver']);
 	//grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'sauce_connect:dev', 'mochaTest', 'sauce-connect-close']);
 	//grunt.registerTask('e2e', ['selenium_start', 'connect', 'mochaTest']);
-	grunt.registerTask('sauce-e2e', ['sauce_connect:dev', 'connect', 'mochaTest', 'sauce-connect-close']);
+	
+	grunt.registerTask('default', ['connect', 'watch']);
+	grunt.registerTask('test', ['unit', 'e2e']);
+	grunt.registerTask('travis', ['eslint', 'connect', 'saucelabs-qunit', 'mochaWebdriver']);
+
 	grunt.registerTask('sauce-unit', ['connect', 'saucelabs-qunit']);
-	grunt.registerTask('e2e', ['connect', 'mochaWebdriver:phantom']);
+	grunt.registerTask('unit', ['karma']);
+
+	grunt.registerTask('e2e', ['e2e-phantom']);
+	grunt.registerTask('e2e-phantom', ['connect', 'mochaWebdriver:phantom']);
 	grunt.registerTask('e2e-sauce', ['connect', 'mochaWebdriver:sauce']);
 	grunt.registerTask('e2e-chrome', ['selenium_start', 'connect', 'mochaWebdriver:chrome']);
-	grunt.registerTask('unit', ['karma']);
+	grunt.registerTask('e2e-firefox', ['selenium_start', 'connect', 'mochaWebdriver:firefox']);
+	grunt.registerTask('e2e-sauce-old', ['sauce_connect:dev', 'connect', 'mochaTest', 'sauce-connect-close']);
 
 };
