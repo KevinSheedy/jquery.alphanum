@@ -20,7 +20,7 @@
 
   $.fn.alpha = function(settings) {
 
-    var defaultAlphaSettings = getCombinedSettingsAlphaNum("alpha");
+    var defaultAlphaSettings = getCombinedSettingsAlphaNum('alpha');
     var combinedSettings = getCombinedSettingsAlphaNum(settings, defaultAlphaSettings);
 
     var $collection = this;
@@ -50,8 +50,8 @@
   // Start Settings ////////////////////////////////////////////////////////
 
   var DEFAULT_SETTINGS_ALPHANUM = {
-    allow              : "",    // Allow extra characters
-    disallow           : "",    // Disallow extra characters
+    allow              : '',    // Allow extra characters
+    disallow           : '',    // Disallow extra characters
     allowSpace         : true,  // Allow the space character
     allowNewline       : true,  // Allow the newline character \n ascii 10
     allowNumeric       : true,  // Allow digits 0-9
@@ -80,16 +80,16 @@
 
   // Some pre-defined groups of settings for convenience
   var CONVENIENCE_SETTINGS_ALPHANUM = {
-    "alpha" : {
+    'alpha' : {
       allowNumeric  : false
     },
-    "upper" : {
+    'upper' : {
       allowNumeric  : false,
       allowUpper    : true,
       allowLower    : false,
       allowCaseless : true
     },
-    "lower" : {
+    'lower' : {
       allowNumeric  : false,
       allowUpper    : false,
       allowLower    : true,
@@ -99,13 +99,13 @@
 
   // Some pre-defined groups of settings for convenience
   var CONVENIENCE_SETTINGS_NUMERIC = {
-    "integer" : {
+    'integer' : {
       allowPlus    : false,
       allowMinus   : true,
       allowThouSep : false,
       allowDecSep  : false
     },
-    "positiveInteger" : {
+    'positiveInteger' : {
       allowPlus    : false,
       allowMinus   : false,
       allowThouSep : false,
@@ -115,15 +115,15 @@
 
 
   var BLACKLIST   = getBlacklistAscii() + getBlacklistNonAscii();
-  var THOU_SEP    = ",";
-  var DEC_SEP     = ".";
+  var THOU_SEP    = ',';
+  var DEC_SEP     = '.';
   var DIGITS      = getDigitsMap();
   var LATIN_CHARS = getLatinCharsSet();
 
   // Return the blacklisted special chars that are encodable using 7-bit ascii
   function getBlacklistAscii(){
-    var blacklist = "!@#$%^&*()+=[]\\';,/{}|\":<>?~`.-_";
-    blacklist += " "; // 'Space' is on the blacklist but can be enabled using the 'allowSpace' config entry
+    var blacklist = '!@#$%^&*()+=[]\\\';,/{}|":<>?~`.-_';
+    blacklist += ' '; // 'Space' is on the blacklist but can be enabled using the 'allowSpace' config entry
     return blacklist;
   }
 
@@ -133,10 +133,10 @@
   // Not too worried about comments containing higher order characters for now (let's wait and see if it becomes a problem)
   function getBlacklistNonAscii(){
     var blacklist =
-        "\xAC"     // ¬
-      + "\u20AC"   // €
-      + "\xA3"     // £
-      + "\xA6"     // ¦
+        '\xAC'     // ¬
+      + '\u20AC'   // €
+      + '\xA3'     // £
+      + '\xA6'     // ¦
       ;
     return blacklist;
   }
@@ -154,14 +154,14 @@
 
       $textbox
         // Unbind existing alphanum event handlers
-        .off(".alphanum")
+        .off('.alphanum')
 
-        .on("keyup.alphanum change.alphanum paste.alphanum", function(e){
+        .on('keyup.alphanum change.alphanum paste.alphanum', function(e){
 
-          var pastedText = "";
+          var pastedText = '';
 
           if(e.originalEvent && e.originalEvent.clipboardData && e.originalEvent.clipboardData.getData)
-            pastedText = e.originalEvent.clipboardData.getData("text/plain");
+            pastedText = e.originalEvent.clipboardData.getData('text/plain');
 
           // setTimeout is necessary for handling the 'paste' event
           setTimeout(function(){
@@ -169,7 +169,7 @@
           }, 0);
         })
 
-        .on("keypress.alphanum", function(e){
+        .on('keypress.alphanum', function(e){
 
         // Determine which key is pressed.
         // If it's a control key, then allow the event's default action to occur eg backspace, tab
@@ -216,15 +216,15 @@
     var $inputBox = $(inputBox);
 
     if(isNaN(fieldValueNumeric)) {
-      $inputBox.val("");
+      $inputBox.val('');
       return;
     }
 
     if(isNumeric(settings.min) && fieldValueNumeric < settings.min)
-      $inputBox.val("");
+      $inputBox.val('');
 
     if(isNumeric(settings.max) && fieldValueNumeric > settings.max)
-      $inputBox.val("");
+      $inputBox.val('');
   }
 
   function isNumeric(value) {
@@ -252,7 +252,7 @@
 
     var inputString = $textBox.val();
 
-    if(inputString == "" && pastedText.length > 0)
+    if(inputString == '' && pastedText.length > 0)
       inputString = pastedText;
 
     var outputString = trimFunction(inputString, settings);
@@ -272,19 +272,19 @@
   }
 
   function getCombinedSettingsAlphaNum(settings, defaultSettings){
-    if(typeof defaultSettings == "undefined")
+    if(typeof defaultSettings == 'undefined')
       defaultSettings = DEFAULT_SETTINGS_ALPHANUM;
     var userSettings, combinedSettings = {};
-    if(typeof settings === "string")
+    if(typeof settings === 'string')
       userSettings = CONVENIENCE_SETTINGS_ALPHANUM[settings];
-    else if(typeof settings == "undefined")
+    else if(typeof settings == 'undefined')
       userSettings = {};
     else
       userSettings = settings;
 
     $.extend(combinedSettings, defaultSettings, userSettings);
 
-    if(typeof combinedSettings.blacklist == "undefined")
+    if(typeof combinedSettings.blacklist == 'undefined')
       combinedSettings.blacklistSet = getBlacklistSet(combinedSettings.allow, combinedSettings.disallow);
 
     return combinedSettings;
@@ -292,9 +292,9 @@
 
   function getCombinedSettingsNum(settings){
     var userSettings, combinedSettings = {};
-    if(typeof settings === "string")
+    if(typeof settings === 'string')
       userSettings = CONVENIENCE_SETTINGS_NUMERIC[settings];
-    else if(typeof settings == "undefined")
+    else if(typeof settings == 'undefined')
       userSettings = {};
     else
       userSettings = settings;
@@ -314,10 +314,10 @@
     if(settings.allow.indexOf(Char) >=0 )
       return true;
 
-    if(settings.allowSpace && (Char == " "))
+    if(settings.allowSpace && (Char == ' '))
       return true;
 
-    if(!settings.allowNewline && (Char == "\n" || Char == "\r"))
+    if(!settings.allowNewline && (Char == '\n' || Char == '\r'))
       return false;
 
     if(settings.blacklistSet.contains(Char))
@@ -370,10 +370,10 @@
       return true;
     }
 
-    if(settings.allowPlus && Char == "+" && validatedStringFragment == "")
+    if(settings.allowPlus && Char == '+' && validatedStringFragment == '')
       return true;
 
-    if(settings.allowMinus && Char == "-" && validatedStringFragment == "")
+    if(settings.allowMinus && Char == '-' && validatedStringFragment == '')
       return true;
 
     if(Char == THOU_SEP && settings.allowThouSep && allowThouSep(validatedStringFragment))
@@ -396,17 +396,17 @@
   function countDigits(string) {
 
     // Error handling, nulls etc
-    string = string + "";
+    string = string + '';
 
     // Count the digits
-    return string.replace(/[^0-9]/g,"").length;
+    return string.replace(/[^0-9]/g,'').length;
   }
 
   function isMaxDigitsReached(string, settings) {
 
     var maxDigits = settings.maxDigits;
 
-    if(maxDigits === "" || isNaN(maxDigits))
+    if(maxDigits === '' || isNaN(maxDigits))
       return false; // In this case, there is no maximum
 
     var numDigits = countDigits(string);
@@ -421,7 +421,7 @@
 
     var maxDecimalPlaces = settings.maxDecimalPlaces;
 
-    if(maxDecimalPlaces === "" || isNaN(maxDecimalPlaces))
+    if(maxDecimalPlaces === '' || isNaN(maxDecimalPlaces))
       return false; // In this case, there is no maximum
 
     var indexOfDecimalPoint = string.indexOf(DEC_SEP);
@@ -442,7 +442,7 @@
 
     var maxPreDecimalPlaces = settings.maxPreDecimalPlaces;
 
-    if(maxPreDecimalPlaces === "" || isNaN(maxPreDecimalPlaces))
+    if(maxPreDecimalPlaces === '' || isNaN(maxPreDecimalPlaces))
       return false; // In this case, there is no maximum
 
     var indexOfDecimalPoint = string.indexOf(DEC_SEP);
@@ -487,22 +487,22 @@
    ********************************/
   function trimAlphaNum(inputString, settings){
 
-    if(typeof inputString != "string")
+    if(typeof inputString != 'string')
       return inputString;
 
-    var inChars = inputString.split("");
+    var inChars = inputString.split('');
     var outChars = [];
     var i = 0;
     var Char;
 
     for(i=0; i<inChars.length; i++){
       Char = inChars[i];
-      var validatedStringFragment = outChars.join("");
+      var validatedStringFragment = outChars.join('');
       if(alphanum_allowChar(validatedStringFragment, Char, settings))
         outChars.push(Char);
     }
 
-    var outputString = outChars.join("");
+    var outputString = outChars.join('');
 
     if(settings.forceLower)
       outputString = outputString.toLowerCase();
@@ -513,22 +513,22 @@
   }
 
   function trimNum(inputString, settings){
-    if(typeof inputString != "string")
+    if(typeof inputString != 'string')
       return inputString;
 
-    var inChars = inputString.split("");
+    var inChars = inputString.split('');
     var outChars = [];
     var i = 0;
     var Char;
 
     for(i=0; i<inChars.length; i++){
       Char = inChars[i];
-      var validatedStringFragment = outChars.join("");
+      var validatedStringFragment = outChars.join('');
       if(numeric_allowChar(validatedStringFragment, Char, settings))
         outChars.push(Char);
     }
 
-    return outChars.join("");
+    return outChars.join('');
   }
 
   function isUpper(Char){
@@ -569,7 +569,7 @@
   }
 
   function getDigitsMap(){
-    var array = "0123456789".split("");
+    var array = '0123456789'.split('');
     var map = {};
     var i = 0;
     var digit;
@@ -583,7 +583,7 @@
   }
 
   function getLatinCharsSet(){
-    var lower = "abcdefghijklmnopqrstuvwxyz";
+    var lower = 'abcdefghijklmnopqrstuvwxyz';
     var upper = lower.toUpperCase();
     var azAZ = new Set(lower + upper);
 
@@ -627,7 +627,7 @@
   // Implementation of a Set
   ////////////////////////////////////////////////////////////////////////////////////
   function Set(elems){
-    if(typeof elems == "string")
+    if(typeof elems == 'string')
       this.map = stringToMap(elems);
     else
       this.map = {};
@@ -672,7 +672,7 @@
 
   function stringToMap(string){
     var map = {};
-    var array = string.split("");
+    var array = string.split('');
     var i=0;
     var Char;
 

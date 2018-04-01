@@ -34,9 +34,9 @@ jQuery(document).ready(function(){
     var input    = testCase[0];
     var expected = testCase[1];
 
-    if(testType == "alphanum")
+    if(testType == 'alphanum')
       runTestAlphaNum(input, expected, options);
-    else if (testType == "numeric")
+    else if (testType == 'numeric')
       runTestNumeric(input, expected, options);
   }
 
@@ -57,8 +57,8 @@ jQuery(document).ready(function(){
   }
 
   function chainingTests() {
-    test("jQuery Chaining", function(){
-      ok(jQuery("#dbg").alphanum().alpha().numeric().hide());
+    test('jQuery Chaining', function(){
+      ok(jQuery('#dbg').alphanum().alpha().numeric().hide());
     });
   }
 

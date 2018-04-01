@@ -1,34 +1,34 @@
 module.exports = {
-  "env": {
-    "browser": true
+  'env': {
+    'browser': true
   },
-  "extends": "eslint:recommended",
-  "rules": {
-    "indent": [
-      "error",
+  'extends': 'eslint:recommended',
+  'rules': {
+    'indent': [
+      'error',
       2
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
+    'linebreak-style': [
+      'error',
+      'unix'
     ],
-    "quotes": [
-      "error",
-      "double"
+    'quotes': [
+      'error',
+      'single'
     ],
-    "semi": [
-      "error",
-      "always"
+    'semi': [
+      'error',
+      'always'
     ]
   },
-  "globals": {
-    "jQuery": true,
-    "$": true,
-    "QUnit": true,
-    "describe": true,
-    "require": true,
-    "process": true,
-    "module": true,
-    "it": true
+  'globals': {
+    'jQuery': true,
+    '$': true,
+    'QUnit': true,
+    'describe': true,
+    'require': true,
+    'process': true,
+    'module': true,
+    'it': true
   }
 };

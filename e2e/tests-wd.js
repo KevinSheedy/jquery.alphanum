@@ -1,118 +1,118 @@
-var assert = require("assert");
+var assert = require('assert');
 
-describe("e2e tests for jquery.alphanum", function () {
+describe('e2e tests for jquery.alphanum', function () {
 
-  var e2eroot = "http://localhost:9001/e2e";
+  var e2eroot = 'http://localhost:9001/e2e';
 
-  describe("simple e2e tests", function () {
+  describe('simple e2e tests', function () {
 
-    it("should have correct page title", function (done) {
+    it('should have correct page title', function (done) {
       var browser = this.browser;
       browser.get(e2eroot)
         .then(function () { return browser.title();})
         .then(function (title) {
-          return assert.equal(title, "jquery.alphanum e2e tests");
+          return assert.equal(title, 'jquery.alphanum e2e tests');
         })
         .then(done, done);
     });
 
-    it("input[text]", function (done) {
+    it('input[text]', function (done) {
       var browser = this.browser;
       var textbox;
       browser.get(e2eroot)
-        .elementById("textbox")
+        .elementById('textbox')
         .then(function (el) {
           textbox = el;
-          return textbox.type("lorem.ipsum");
+          return textbox.type('lorem.ipsum');
         })
         .then(function () {
-          return textbox.getAttribute("value");
+          return textbox.getAttribute('value');
         })
         .then(function (val) {
-          return assert.equal(val, "loremipsum");
+          return assert.equal(val, 'loremipsum');
         })
         .then(done, done);
     });
 
-    it("textarea", function (done) {
+    it('textarea', function (done) {
       var browser = this.browser;
       var textbox;
-      browser.get(e2eroot + "/textarea.html")
-        .elementById("textareabox")
+      browser.get(e2eroot + '/textarea.html')
+        .elementById('textareabox')
         .then(function (el) {
           textbox = el;
-          return textbox.type("foo#bar");
+          return textbox.type('foo#bar');
         })
         .then(function () {
-          return textbox.getAttribute("value");
+          return textbox.getAttribute('value');
         })
         .then(function (val) {
-          return assert.equal(val, "foobar");
+          return assert.equal(val, 'foobar');
         })
         .then(done, done);
     });
 
-    it("newline", function (done) {
+    it('newline', function (done) {
       var browser = this.browser;
       var textbox;
-      browser.get(e2eroot + "/newline.html")
-        .elementById("allowNewline")
+      browser.get(e2eroot + '/newline.html')
+        .elementById('allowNewline')
         .then(function (el) {
           textbox = el;
-          return textbox.type("foo\nbar");
+          return textbox.type('foo\nbar');
         })
         .then(function () {
-          return textbox.getAttribute("value");
+          return textbox.getAttribute('value');
         })
         .then(function (val) {
-          return assert.equal(val, "foo\nbar");
+          return assert.equal(val, 'foo\nbar');
         })
-        .elementById("disallowNewline")
+        .elementById('disallowNewline')
         .then(function (el) {
           textbox = el;
-          return textbox.type("foo\nbar");
+          return textbox.type('foo\nbar');
         })
         .then(function () {
-          return textbox.getAttribute("value");
+          return textbox.getAttribute('value');
         })
         .then(function (val) {
-          return assert.equal(val, "foobar");
+          return assert.equal(val, 'foobar');
         })
         .then(done, done);
     });
 
-    it("rebind", function (done) {
+    it('rebind', function (done) {
       var browser = this.browser;
       var textbox;
-      browser.get(e2eroot + "/rebind.html")
-        .elementById("textbox")
+      browser.get(e2eroot + '/rebind.html')
+        .elementById('textbox')
         .then(function (el) {
           textbox = el;
-          return textbox.type("abcdefg");
+          return textbox.type('abcdefg');
         })
         .then(function () {
-          return textbox.getAttribute("value");
+          return textbox.getAttribute('value');
         })
         .then(function (val) {
-          return assert.equal(val, "aefg");
+          return assert.equal(val, 'aefg');
         })
         .then(done, done);
     });
 
-    it("unbind", function (done) {
+    it('unbind', function (done) {
       var browser = this.browser;
       var textbox;
-      browser.get(e2eroot + "/unbind.html")
-        .elementById("textbox")
+      browser.get(e2eroot + '/unbind.html')
+        .elementById('textbox')
         .then(function (el) {
           textbox = el;
-          return textbox.type("abcdefg");
+          return textbox.type('abcdefg');
         })
         .then(function () {
-          return textbox.getAttribute("value");
+          return textbox.getAttribute('value');
         })
         .then(function (val) {
-          return assert.equal(val, "abcdefg");
+          return assert.equal(val, 'abcdefg');
         })
         .then(done, done);
     });
