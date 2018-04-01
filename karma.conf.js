@@ -7,26 +7,26 @@
 // See http://karma-runner.github.io/0.8/config/configuration-file.html
 module.exports = function(config) {
   config.set({
-    basePath: '',
-    frameworks: ['qunit'],
+    basePath: "",
+    frameworks: ["qunit"],
     logLevel: config.LOG_INFO,
     port: 9876,
 
     // list of files / patterns to load in the browser
     files: [
-      'lib/jquery.js',
-      'jquery.alphanum.js',
-      'lib/qunit-extras.js',
-      'unit/*.js'
+      "lib/jquery.js",
+      "jquery.alphanum.js",
+      "lib/qunit-extras.js",
+      "unit/*.js"
     ],
 
     // Test results reporter to use
     // https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
+    reporters: ["progress"],
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ["PhantomJS"],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
