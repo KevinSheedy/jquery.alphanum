@@ -45,7 +45,7 @@
     "jit-grunt": "^0.9.1",
     "karma": "^0.13.15",
     "karma-chrome-launcher": "^0.2.2",
-    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-qunit": "^0.1.8",
     "mocha": "^2.3.4",
     "phantom": "^4.0.12",
