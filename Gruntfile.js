@@ -67,14 +67,27 @@ module.exports = function(grunt) {
           build: process.env.CI_BUILD_NUMBER,
           testname: 'Unit Tests for jquery.alphanum',
           browsers: [
-            ['', 'chrome', '65'],
-            ['', 'chrome', '40'],
-            ['', 'chrome', '39'],
-            ['', 'chrome', '31'],
+            ['Windows 10', 'chrome', 'beta'],
+            ['Windows 8.1', 'chrome', 'beta'],
+            ['Windows 8', 'chrome', 'beta'],
+            ['Windows 7', 'chrome', 'beta'],
+            ['macOS 10.13', 'chrome', 'beta'],
+            ['OS X 10.9', 'chrome', 'beta'],
+            ['Linux', 'chrome', '48.0'],
 
-            ['', 'firefox', '50'],
 
-            ['Windows 10', 'microsoftedge', '20.10240'],
+            ['Windows 7', 'chrome', '40'],
+
+            ['Windows 10', 'firefox', 'beta'],
+            ['Windows 8.1', 'firefox', 'beta'],
+            ['Windows 8', 'firefox', 'beta'],
+            ['Windows 7', 'firefox', 'beta'],
+            ['macOS 10.13', 'firefox', 'beta'],
+            ['OS X 10.9', 'firefox', 'beta'],
+
+            ['Windows 10', 'microsoftedge', '16.16299'],
+
+
             ['Windows 10', 'internet explorer', '11'],
             ['Windows 8', 'internet explorer', '10'],
             ['Windows 7', 'internet explorer', '9'],
@@ -82,14 +95,12 @@ module.exports = function(grunt) {
             ['', 'opera', '12'],
             ['', 'opera', '11'],
 
-            ['', 'android', '8'],
-            ['', 'android', '7'],
-            ['', 'android', '6'],
-            ['', 'android', '5'],
-
-            ['OS X 10.11', 'safari', '9'],
-            ['', 'safari', '8'],
-            ['', 'safari', '7']
+            ['macOS 10.13', 'safari', '11.0'],
+            ['macOS 10.12', 'safari', '10.1'],
+            ['OS X 10.11', 'safari', '10.0'],
+            ['OS X 10.11', 'safari', '9.0'],
+            ['OS X 10.10', 'safari', '8.0'],
+            ['OS X 10.9', 'safari', '7.0']
           ]
         }
       }
