@@ -62,7 +62,7 @@ module.exports = function(grunt) {
       all: {
         options: {
           username: process.env.SAUCE_USERNAME, // if not provided it'll default to ENV SAUCE_USERNAME (if applicable)
-          key: () => process.env.SAUCE_ACCESS_KEY, // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
+          key: function() {return process.env.SAUCE_ACCESS_KEY;}, // if not provided it'll default to ENV SAUCE_ACCESS_KEY (if applicable)
           urls: ["http://localhost:9001/unit" /*, 'www.example.com/mochaTests'*/],
           build: process.env.CI_BUILD_NUMBER,
           testname: "Unit Tests for jquery.alphanum",
