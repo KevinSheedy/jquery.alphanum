@@ -10,6 +10,7 @@
     "test": "$(\"#firstName\").alphanum();",
     "unit": "karma start karma.conf.js --log-level info --single-run --browsers PhantomJS",
     "unit-sauce": "karma start karma.conf.js --log-level info --single-run",
+    "e2e": "./node_modules/mocha/bin/mocha",
     "lint": "./node_modules/.bin/eslint *.js unit/**/*.js e2e/**/*.js",
     "lint-fix": "./node_modules/.bin/eslint --fix *.js unit/**/*.js e2e/**/*.js"
   },
@@ -46,6 +47,7 @@
     "grunt-selenium-webdriver": "^0.2.482",
     "gruntify-eslint": "^4.0.0",
     "jit-grunt": "^0.10.0",
+    "jquery": "^3.3.1",
     "karma": "^2.0.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-phantomjs-launcher": "^1.0.4",
