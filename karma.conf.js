@@ -1,12 +1,6 @@
-// Note some browser launchers should be installed before using karma start.
-
-// For example:
-//      $ npm install karma-firefox-launcher
-//      $ karma start --browser=Firefox
-
-// See http://karma-runner.github.io/0.8/config/configuration-file.html
 module.exports = function(config) {
-
+  // Example set of browsers to run on Sauce Labs
+  // Check out https://saucelabs.com/platforms for all browser/platform combos
   var customLaunchers = {
     sl_chrome: {
       base: 'SauceLabs',
@@ -14,59 +8,55 @@ module.exports = function(config) {
       platform: 'Windows 7',
       version: '35'
     },
+    sl_chrome_beta: {
+      base: 'SauceLabs',
+      browserName: 'chrome',
+      platform: 'Windows 10',
+      version: 'beta'
+    },
+    sl_firefox_beta: {
+      base: 'SauceLabs',
+      browserName: 'firefox',
+      platform: 'Windows 10',
+      version: 'beta'
+    },
     sl_firefox: {
       base: 'SauceLabs',
       browserName: 'firefox',
+      platform: 'Windows 7',
       version: '30'
     },
     sl_ios_safari: {
       base: 'SauceLabs',
-      browserName: 'iphone',
-      platform: 'OS X 10.11',
-      version: '8'
+      browserName: 'safari',
+      platform: 'OS X 10.9',
+      version: '7.0'
     },
     sl_ie_11: {
       base: 'SauceLabs',
       browserName: 'internet explorer',
       platform: 'Windows 8.1',
       version: '11'
-    },
-    sl_android: {
-      base: 'SauceLabs',
-      browserName: 'Browser',
-      platform: 'Android',
-      version: '4.4',
-      deviceName: 'Samsung Galaxy S3 Emulator',
-      deviceOrientation: 'portrait'
     }
-  }
+  };
 
   config.set({
-    basePath: '',
-    frameworks: ['qunit'],
-    logLevel: config.LOG_INFO,
-    port: 9876,
 
-    // list of files / patterns to load in the browser
+    // The rest of your karma config is here
+    // ...
+    sauceLabs: {
+      testName: 'Web App Unit Tests'
+    },
+    frameworks: ['qunit'],
     files: [
       'lib/jquery.js',
       'jquery.alphanum.js',
       'lib/qunit-extras.js',
       'unit/*.js'
     ],
-
-    // Test results reporter to use
-    // https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['sl_firefox'],
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
-
     customLaunchers: customLaunchers,
+    browsers: Object.keys(customLaunchers),
+    reporters: ['dots', 'saucelabs'],
+    singleRun: true
   });
 };

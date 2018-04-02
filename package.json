@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "$(\"#firstName\").alphanum();",
-    "lint": "./node_modules/.bin/eslint --fix "
+    "unit": "karma start karma.conf.js --log-level info --single-run --browsers PhantomJS",
+    "unit-sauce": "karma start karma.conf.js --log-level info --single-run",
+    "lint": "./node_modules/.bin/eslint *.js unit/**/*.js e2e/**/*.js",
+    "lint-fix": "./node_modules/.bin/eslint --fix *.js unit/**/*.js e2e/**/*.js"
   },
   "repository": {
     "type": "git",
