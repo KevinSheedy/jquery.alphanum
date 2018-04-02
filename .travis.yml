@@ -1,7 +1,7 @@
 language: node_js
 node_js:
-  - "5.5"
+  - '8'
 before_script:
-  - npm install -g grunt-cli
+  - npm run lint
 script:
-  - grunt travis
+  - npm run unit-sauce
