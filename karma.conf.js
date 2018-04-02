@@ -51,7 +51,7 @@ module.exports = function(config) {
     files: [
       'node_modules/jquery/dist/jquery.js',
       'jquery.alphanum.js',
-      'lib/qunit-extras.js',
+      'node_modules/qunit-extras/qunit-extras.js',
       'unit/*.js'
     ],
     customLaunchers: customLaunchers,

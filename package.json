@@ -55,6 +55,8 @@
     "karma-sauce-launcher": "^1.2.0",
     "mocha": "^2.3.4",
     "phantom": "^4.0.12",
+    "qunit": "^2.6.0",
+    "qunit-extras": "^3.0.0",
     "qunitjs": "^1.21.0",
     "selenium-webdriver": "^2.48.2"
   }
